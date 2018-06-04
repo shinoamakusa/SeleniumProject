@@ -1,0 +1,14 @@
+<suite name = "AutoTrader Suite">
+<test name = "AutoTrader Search">
+<classes>
+<class name = "shinoamakusa.selenium.tests.autotrader.SearchTest">
+</class>
+</classes>
+</test>
+<test name = "AutoTrader Search with Filters">
+<classes>
+<class name = "shinoamakusa.selenium.tests.autotrader.SearchTestWithFilters">
+</class>
+</classes>
+</test>
+</suite>
