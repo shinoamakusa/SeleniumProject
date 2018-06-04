@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name = "BestBuy Suite">
+<test name = "BestBuy and Marketplace Search">
+<classes>
+<class name = "test.java.shinoamakusa.selenium.bestbuy.SearchBestBuyAndMarketplace">
+</class>
+</classes>
+</test>
+<test name = "BestBuy Only Search">
+<classes>
+<class name = "test.java.shinoamakusa.selenium.bestbuy.SearchBestBuyOnly">
+</class>
+</classes>
+</test>
+</suite>

@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name = "VPL Suite">
+<test name = "Broaden Search">
+<classes>
+<class name = "test.java.shinoamakusa.selenium.vpl.BroadenSearch">
+</class>
+</classes>
+</test>
+<test name = "Details Info Check">
+<classes>
+<class name = "test.java.shinoamakusa.selenium.vpl.DetailsInfoCheck">
+</class>
+</classes>
+</test>
+<test name = "Details Pagination Check">
+<classes>
+<class name = "test.java.shinoamakusa.selenium.vpl.DetailsPaginationCheck">
+</class>
+</classes>
+</test>
+</suite>

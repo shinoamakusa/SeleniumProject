@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name = "AutoTrader Suite">
+<test name = "AutoTrader Search">
+<classes>
+<class name = "test.java.shinoamakusa.selenium.autotrader.SearchTest">
+</class>
+</classes>
+</test>
+<test name = "AutoTrader Search with Filters">
+<classes>
+<class name = "test.java.shinoamakusa.selenium.autotrader.SearchTestWithFilters">
+</class>
+</classes>
+</test>
+</suite>
