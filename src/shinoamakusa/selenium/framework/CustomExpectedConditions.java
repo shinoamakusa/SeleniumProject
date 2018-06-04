@@ -32,7 +32,7 @@ public class CustomExpectedConditions {
 				List<WebElement> childrenList = parent.findElements(childLocator);
 				for (WebElement element : childrenList)
 				{
-					list.add(new PageElement(element, driver, wait));
+					list.add(new PageElement(element));
 				}
 				return list.isEmpty() ? null : list;
 			}

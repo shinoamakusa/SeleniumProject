@@ -300,5 +300,6 @@ public class BrowserDriver extends PageDriver {
 	private void initialize(final WebDriver webDriver) {
 		driver = webDriver;
 		wait = new WebDriverWait(driver, 30);
+		PageElement.setDriver(driver, wait);
 	}
 }

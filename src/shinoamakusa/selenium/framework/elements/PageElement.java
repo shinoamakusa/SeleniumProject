@@ -88,6 +88,19 @@ public class PageElement {
 	}
 
 	/**
+	 * Sets WebDriver and WebDriverWait fields
+	 * 
+	 * @param driver
+	 *            WebDriver object
+	 * @param wait
+	 *            WebDriverwait object
+	 */
+	public static void setDriver(WebDriver driver, WebDriverWait wait) {
+		PageElement.driver = driver;
+		PageElement.wait = wait;
+	}
+
+	/**
 	 * Checks if page element contains specific text
 	 * 
 	 * @param locator
@@ -120,12 +133,14 @@ public class PageElement {
 	/**
 	 * PageElement class constructor
 	 * 
-	 * @param driver
-	 *            Selenium WebDriver element
+	 * @param element
+	 *            Selenium WebElement object
 	 */
-	public PageElement(final WebDriver driver) {
-		PageElement.driver = driver;
-		PageElement.wait = new WebDriverWait(PageElement.driver, 30);
+	public PageElement(final WebElement element) {
+		this.element = element;
+		if (this.element != null) {
+			this.tag = element.getTagName();
+		}
 	}
 
 	/**
@@ -474,12 +489,21 @@ public class PageElement {
 	}
 
 	/**
-	 * Gets a WebElement object
+	 * Gets options of select tag element
 	 * 
-	 * @return WebElement object
+	 * @return List of options of select tag element if exist
 	 */
-	public WebElement webElement() {
-		return element;
+	public List<PageElement> getSelectOptions() {
+		if (isSelectTagElement()) {
+			List<PageElement> elementList = new ArrayList<PageElement>();
+			List<WebElement> list = new Select(element).getOptions();
+			for (WebElement el : list) {
+				elementList.add(new PageElement(el));
+			}
+			return elementList;
+		} else {
+			return new ArrayList<PageElement>();
+		}
 	}
 
 	/**
@@ -676,6 +700,15 @@ public class PageElement {
 	}
 
 	/**
+	 * Gets a WebElement object
+	 * 
+	 * @return WebElement object
+	 */
+	public WebElement webElement() {
+		return element;
+	}
+
+	/**
 	 * Finds all elements within parent element's scope matched by specified locator
 	 * 
 	 * @param parent
@@ -715,25 +748,7 @@ public class PageElement {
 			PageElement element = elementList.get(num - 1);
 			return element;
 		} else
-			return new PageElement(null, driver, wait);
-	}
-
-	/**
-	 * Gets options of select tag element
-	 * 
-	 * @return List of options of select tag element if exist
-	 */
-	public List<PageElement> getSelectOptions() {
-		if (isSelectTagElement()) {
-			List<PageElement> elementList = new ArrayList<PageElement>();
-			List<WebElement> list = new Select(element).getOptions();
-			for (WebElement el : list) {
-				elementList.add(new PageElement(el, driver, wait));
-			}
-			return elementList;
-		} else {
-			return new ArrayList<PageElement>();
-		}
+			return new PageElement(null);
 	}
 
 }

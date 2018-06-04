@@ -409,7 +409,7 @@ public class PageDriver {
 		if (element.isSelectTagElement()) {
 			Select listElement = new Select(element.webElement());
 			listElement.selectByIndex(num);
-			selectedElement = new PageElement(listElement.getFirstSelectedOption(), driver, wait);
+			selectedElement = new PageElement(listElement.getFirstSelectedOption());
 
 		}
 	}
@@ -426,7 +426,7 @@ public class PageDriver {
 		if (element.isSelectTagElement()) {
 			Select listElement = new Select(element.webElement());
 			listElement.selectByVisibleText(text);
-			selectedElement = new PageElement(listElement.getFirstSelectedOption(), driver, wait);
+			selectedElement = new PageElement(listElement.getFirstSelectedOption());
 
 		}
 	}
@@ -443,7 +443,7 @@ public class PageDriver {
 		if (element.isSelectTagElement()) {
 			Select listElement = new Select(element.webElement());
 			listElement.selectByValue(value);
-			selectedElement = new PageElement(listElement.getFirstSelectedOption(), driver, wait);
+			selectedElement = new PageElement(listElement.getFirstSelectedOption());
 
 		}
 	}
@@ -513,7 +513,7 @@ public class PageDriver {
 				List<PageElement> list = new ArrayList<PageElement>();
 				List<WebElement> webList = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
 				for (WebElement element : webList) {
-					list.add(new PageElement(element, driver, wait));
+					list.add(new PageElement(element));
 
 				}
 
@@ -541,7 +541,7 @@ public class PageDriver {
 			PageElement element = elementList.get(num - 1);
 			return element;
 		} else
-			return new PageElement(null, driver, wait);
+			return new PageElement(null);
 	}
 
 }
