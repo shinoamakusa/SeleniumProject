@@ -3,6 +3,7 @@ package shinoamakusa.selenium.framework.drivers;
 import java.util.HashSet;
 
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -119,7 +120,7 @@ public class BrowserDriver extends PageDriver {
 				selectedElement = null;
 			}
 
-			if (parentElement!= null && parentElement.isStale()) {
+			if (parentElement != null && parentElement.isStale()) {
 				parentElement = null;
 			}
 			return link;
@@ -136,6 +137,31 @@ public class BrowserDriver extends PageDriver {
 		if (driver != null) {
 			driver.quit();
 		}
+	}
+
+	/**
+	 * Executes Javascript code
+	 * 
+	 * @param code
+	 *            JS code
+	 */
+	public void executeJS(final String code) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript(code);
+	}
+
+	/**
+	 * Executes Javascript code
+	 * 
+	 * @param code
+	 *            JS code
+	 * 
+	 * @param element
+	 *            Page element to perform code on
+	 */
+	public void executeJS(final String code, PageElement element) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript(code, element.getElement());
 	}
 
 	/**
