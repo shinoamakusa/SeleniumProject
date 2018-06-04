@@ -11,18 +11,18 @@ public class PageFilter {
 		return filterMenuNumberResults;
 	}
 
+	protected void checkForModal() {
+		driver.click(driver.findByClass("acsCloseButton"));
+	}
+
 	protected int getFilterCount() {
 		return Integer
-				.parseInt(driver.getSelectedElement().findByClass("option-count").getText().replaceAll("[()]", ""));
+				.parseInt(driver.selectedElement().findByClass("option-count").getText().replaceAll("[()]", ""));
 
 	}
 
 	protected void selectFilterElement(final String value) {
-		driver.select(driver.getSelectedElement().findByAttribute("data-dropdownvalue", value));
-	}
-
-	protected void checkForSurvey() {
-		driver.click(driver.findByClass("acsCloseButton"));
+		driver.select(driver.selectedElement().findByAttribute("data-dropdownvalue", value));
 	}
 
 }

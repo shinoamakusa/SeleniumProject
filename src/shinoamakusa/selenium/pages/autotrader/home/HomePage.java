@@ -33,20 +33,20 @@ public class HomePage extends BrowserPage {
 
 	private void selectMake(final String make) {
 		driver.select(driver.findByID("rfMakes"));
-		if (driver.getSelectedElement().isClickable())
-			driver.selectOptionByValue(driver.getSelectedElement(), make);
+		if (driver.selectedElement().isClickable())
+			driver.selectOptionByValue(driver.selectedElement(), make);
 	}
 
 	private void selectModel(final String model) {
 		driver.select(driver.findByID("rfModel"));
-		if (driver.getSelectedElement().isClickable())
-			driver.selectOptionByValue(driver.getSelectedElement(), model);
+		if (driver.selectedElement().isClickable())
+			driver.selectOptionByValue(driver.selectedElement(), model);
 	}
 
 	private void selectPrice(final String price) {
 		driver.select(driver.findByID("rfPriceHigh"));
-		if (driver.getSelectedElement().isClickable())
-			driver.selectOptionByValue(driver.getSelectedElement(), price);
+		if (driver.selectedElement().isClickable())
+			driver.selectOptionByValue(driver.selectedElement(), price);
 	}
 
 	private void submitSearch() {
@@ -55,7 +55,7 @@ public class HomePage extends BrowserPage {
 
 	private void typePostalCode(final String postalCode) {
 		driver.select(driver.findByID("locationAddress"));
-		driver.typeInto(driver.getSelectedElement(), postalCode);
+		driver.typeInto(driver.selectedElement(), postalCode);
 	}
 
 }

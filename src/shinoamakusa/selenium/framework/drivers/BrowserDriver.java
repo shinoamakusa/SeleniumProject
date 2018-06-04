@@ -161,7 +161,7 @@ public class BrowserDriver extends PageDriver {
 	 */
 	public void executeJS(final String code, PageElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript(code, element.getElement());
+		js.executeScript(code, element.webElement());
 	}
 
 	/**
@@ -284,10 +284,10 @@ public class BrowserDriver extends PageDriver {
 	 *            Text string to fill in
 	 */
 	public void typeInto(final PageElement element, final String keys) {
-		if (element.getElement() != null && !StringUtils.isBlank(keys)) {
+		if (element.webElement() != null && !StringUtils.isBlank(keys)) {
 			element.click();
-			element.getElement().clear();
-			element.getElement().sendKeys(keys);
+			element.webElement().clear();
+			element.webElement().sendKeys(keys);
 		}
 	}
 

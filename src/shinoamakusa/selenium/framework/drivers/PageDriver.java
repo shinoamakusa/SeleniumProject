@@ -343,7 +343,7 @@ public class PageDriver {
 	 * 
 	 * @return Selected parent page element
 	 */
-	public PageElement getParentElement() {
+	public PageElement parentElement() {
 		return parentElement;
 	}
 
@@ -352,7 +352,7 @@ public class PageDriver {
 	 * 
 	 * @return Selected page element
 	 */
-	public PageElement getSelectedElement() {
+	public PageElement selectedElement() {
 		return selectedElement;
 	}
 
@@ -407,7 +407,7 @@ public class PageDriver {
 	 */
 	public void selectOptionByIndex(final PageElement element, final int num) {
 		if (element.isSelectTagElement()) {
-			Select listElement = new Select(element.getElement());
+			Select listElement = new Select(element.webElement());
 			listElement.selectByIndex(num);
 			selectedElement = new PageElement(listElement.getFirstSelectedOption(), driver, wait);
 
@@ -424,7 +424,7 @@ public class PageDriver {
 	 */
 	public void selectOptionByText(final PageElement element, final String text) {
 		if (element.isSelectTagElement()) {
-			Select listElement = new Select(element.getElement());
+			Select listElement = new Select(element.webElement());
 			listElement.selectByVisibleText(text);
 			selectedElement = new PageElement(listElement.getFirstSelectedOption(), driver, wait);
 
@@ -441,7 +441,7 @@ public class PageDriver {
 	 */
 	public void selectOptionByValue(final PageElement element, final String value) {
 		if (element.isSelectTagElement()) {
-			Select listElement = new Select(element.getElement());
+			Select listElement = new Select(element.webElement());
 			listElement.selectByValue(value);
 			selectedElement = new PageElement(listElement.getFirstSelectedOption(), driver, wait);
 

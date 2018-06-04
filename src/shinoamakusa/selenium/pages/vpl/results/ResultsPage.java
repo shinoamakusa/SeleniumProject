@@ -29,14 +29,14 @@ public class ResultsPage extends BrowserPage {
 	public void getResultInfo(int num) {
 		driver.setParentElement(driver.findByClass("listItem", num));
 
-		driver.select(driver.getParentElement().findByAttribute("testid", "bib_link"));
-		itemTitle = driver.getSelectedElement().getText().trim();
+		driver.select(driver.parentElement().findByAttribute("testid", "bib_link"));
+		itemTitle = driver.selectedElement().getText().trim();
 
-		driver.select(driver.getParentElement().findByClass("subTitle"));
-		subtitle = driver.getSelectedElement().getText().trim();
+		driver.select(driver.parentElement().findByClass("subTitle"));
+		subtitle = driver.selectedElement().getText().trim();
 
-		driver.select(driver.getParentElement().findByAttribute("testid", "author_search"));
-		author = driver.getSelectedElement().getText().trim();
+		driver.select(driver.parentElement().findByAttribute("testid", "author_search"));
+		author = driver.selectedElement().getText().trim();
 	}
 
 	/**
@@ -46,9 +46,9 @@ public class ResultsPage extends BrowserPage {
 	 */
 	public int getResultsCount() {
 		driver.select(driver.findByClass("items_showing_count", 1));
-		assertTrue(driver.getSelectedElement() != null, "Results count element does not exist");
+		assertTrue(driver.selectedElement() != null, "Results count element does not exist");
 
-		String[] elementParts = driver.getSelectedElement().getText().split(" ");
+		String[] elementParts = driver.selectedElement().getText().split(" ");
 		assertTrue(elementParts.length >= 5, "Results count element format is invalid");
 		assertTrue(StringUtils.isNumeric(elementParts[4]), "Selected results count element part is not numeric");
 		return Integer.parseInt(elementParts[4]);
@@ -67,12 +67,12 @@ public class ResultsPage extends BrowserPage {
 	 * Follows the link of the first search result
 	 */
 	private void goToResult(int num) {
-		if (driver.getParentElement() == null)
+		if (driver.parentElement() == null)
 			driver.setParentElement(driver.findByClass("listItem", num));
 
-		driver.select(driver.getParentElement().findByAttribute("testid", "bib_link"));
+		driver.select(driver.parentElement().findByAttribute("testid", "bib_link"));
 
-		driver.click(driver.getSelectedElement());
+		driver.click(driver.selectedElement());
 	}
 
 }

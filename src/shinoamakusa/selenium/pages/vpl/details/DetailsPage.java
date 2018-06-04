@@ -16,13 +16,13 @@ public class DetailsPage extends BrowserPage {
 
 	public void getDetails() {
 		driver.select(driver.findByAttribute("testid", "text_bibtitle"));
-		itemTitle = driver.getSelectedElement().getText().trim();
+		itemTitle = driver.selectedElement().getText().trim();
 
 		driver.select(driver.findByAttribute("testid", "text_bibsubtitle"));
-		subtitle = driver.getSelectedElement().getText().trim();
+		subtitle = driver.selectedElement().getText().trim();
 
 		driver.select(driver.findByAttribute("testid", "author_search"));
-		author = driver.getSelectedElement().getText().trim();
+		author = driver.selectedElement().getText().trim();
 	}
 
 	/**
@@ -30,9 +30,9 @@ public class DetailsPage extends BrowserPage {
 	 */
 	public DetailsPage goToNextItem() {
 		driver.select(driver.findByAttribute("testid", "link_next"));
-		if (driver.getSelectedElement() == null)
+		if (driver.selectedElement().webElement() == null)
 			return null;
-		driver.click(driver.getSelectedElement());
+		driver.click(driver.selectedElement());
 		return new DetailsPage(driver);
 	}
 
@@ -41,9 +41,9 @@ public class DetailsPage extends BrowserPage {
 	 */
 	public DetailsPage goToPreviousItem() {
 		driver.select(driver.findByAttribute("testid", "link_prev"));
-		if (driver.getSelectedElement() == null)
+		if (driver.selectedElement().webElement() == null)
 			return null;
-		driver.click(driver.getSelectedElement());
+		driver.click(driver.selectedElement());
 		return new DetailsPage(driver);
 	}
 

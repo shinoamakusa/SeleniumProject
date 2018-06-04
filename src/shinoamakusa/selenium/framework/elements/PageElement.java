@@ -107,8 +107,14 @@ public class PageElement {
 		}
 	}
 
+	/**
+	 * Selenium WebElement object
+	 */
 	private WebElement element;
 
+	/**
+	 * WebElement's HTML tag
+	 */
 	private String tag = "";
 
 	/**
@@ -453,6 +459,13 @@ public class PageElement {
 		return findBy(ElementLocator.byText(value), num);
 	}
 
+	/**
+	 * Gets value of specified attribute
+	 * 
+	 * @param name
+	 *            Attribute name
+	 * @return Attribute value on success or empty string on fail
+	 */
 	public String getAttribute(String name) {
 		if (element != null)
 			return element.getAttribute(name);
@@ -460,7 +473,12 @@ public class PageElement {
 			return StringUtils.EMPTY;
 	}
 
-	public WebElement getElement() {
+	/**
+	 * Gets a WebElement object
+	 * 
+	 * @return WebElement object
+	 */
+	public WebElement webElement() {
 		return element;
 	}
 
@@ -713,9 +731,7 @@ public class PageElement {
 				elementList.add(new PageElement(el, driver, wait));
 			}
 			return elementList;
-		}
-		else
-		{
+		} else {
 			return new ArrayList<PageElement>();
 		}
 	}

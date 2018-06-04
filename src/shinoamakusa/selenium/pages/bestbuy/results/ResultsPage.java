@@ -19,7 +19,7 @@ public class ResultsPage extends BrowserPage {
 	 */
 	public boolean itemCountsEqual() {
 		return PageElement.textContains(ElementLocator.byClass("display-total"),
-				driver.getSelectedElement().getText().replaceAll("[()]", ""));
+				driver.selectedElement().getText().replaceAll("[()]", ""));
 	}
 
 	/**

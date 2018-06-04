@@ -28,7 +28,7 @@ public class HomePage extends BrowserPage {
 
 				driver.search(driver.findByClass(searchBoxClass), driver.findByClass(searchBtnClass), searchQuery);
 			} catch (WebDriverException e) {
-				closeFlyout();
+				checkForModal();
 				searchFor(searchQuery);
 			}
 
@@ -39,7 +39,7 @@ public class HomePage extends BrowserPage {
 
 	}
 
-	private void closeFlyout() {
+	private void checkForModal() {
 		driver.click(driver.findByClass("at-close-icon"));
 	}
 
