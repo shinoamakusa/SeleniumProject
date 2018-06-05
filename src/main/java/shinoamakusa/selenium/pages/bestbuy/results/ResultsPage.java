@@ -1,8 +1,8 @@
 package main.java.shinoamakusa.selenium.pages.bestbuy.results;
 
-import main.java.shinoamakusa.selenium.framework.drivers.BrowserDriver;
-import main.java.shinoamakusa.selenium.framework.elements.ElementLocator;
-import main.java.shinoamakusa.selenium.framework.elements.PageElement;
+import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
+import main.java.shinoamakusa.selenium.core.elements.ElementLocator;
+import main.java.shinoamakusa.selenium.core.elements.PageElement;
 import main.java.shinoamakusa.selenium.pages.BrowserPage;
 
 public class ResultsPage extends BrowserPage {

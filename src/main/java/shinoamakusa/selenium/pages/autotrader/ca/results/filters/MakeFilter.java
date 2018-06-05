@@ -2,7 +2,7 @@ package main.java.shinoamakusa.selenium.pages.autotrader.ca.results.filters;
 
 import org.openqa.selenium.WebDriverException;
 
-import main.java.shinoamakusa.selenium.framework.drivers.BrowserDriver;
+import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
 
 public class MakeFilter extends PageFilter {
 

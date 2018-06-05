@@ -1,7 +1,7 @@
 package main.java.shinoamakusa.selenium.pages;
 
-import main.java.shinoamakusa.selenium.framework.drivers.BrowserDriver;
-import main.java.shinoamakusa.selenium.framework.drivers.DriverType;
+import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
+import main.java.shinoamakusa.selenium.core.drivers.DriverType;
 
 public class BrowserPage {
 	protected BrowserDriver driver;

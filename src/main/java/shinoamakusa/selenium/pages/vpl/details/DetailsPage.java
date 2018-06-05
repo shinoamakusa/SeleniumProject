@@ -1,6 +1,6 @@
 package main.java.shinoamakusa.selenium.pages.vpl.details;
 
-import main.java.shinoamakusa.selenium.framework.drivers.BrowserDriver;
+import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
 import main.java.shinoamakusa.selenium.pages.BrowserPage;
 
 public class DetailsPage extends BrowserPage {

@@ -1,4 +1,4 @@
-package main.java.shinoamakusa.selenium.framework.elements;
+package main.java.shinoamakusa.selenium.core.elements;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import main.java.shinoamakusa.selenium.framework.CustomExpectedConditions;
+import main.java.shinoamakusa.selenium.core.CustomExpectedConditions;
 
 /**
  * Class representing a page element ( Selenium WebElement)

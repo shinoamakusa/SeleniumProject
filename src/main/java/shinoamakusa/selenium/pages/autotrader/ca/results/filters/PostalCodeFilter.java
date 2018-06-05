@@ -1,6 +1,6 @@
 package main.java.shinoamakusa.selenium.pages.autotrader.ca.results.filters;
 
-import main.java.shinoamakusa.selenium.framework.drivers.BrowserDriver;
+import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
 
 public class PostalCodeFilter extends PageFilter {
 

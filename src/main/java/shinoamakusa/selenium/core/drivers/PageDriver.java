@@ -1,4 +1,4 @@
-package main.java.shinoamakusa.selenium.framework.drivers;
+package main.java.shinoamakusa.selenium.core.drivers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +12,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import main.java.shinoamakusa.selenium.framework.elements.ElementLocator;
-import main.java.shinoamakusa.selenium.framework.elements.PageElement;
+import main.java.shinoamakusa.selenium.core.elements.ElementLocator;
+import main.java.shinoamakusa.selenium.core.elements.PageElement;
 
 /**
  * Class representing a browser page and its elements Wrapper class for Selenium

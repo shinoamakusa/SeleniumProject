@@ -4,7 +4,7 @@ import static org.testng.Assert.assertTrue;
 
 import org.apache.commons.lang3.StringUtils;
 
-import main.java.shinoamakusa.selenium.framework.drivers.BrowserDriver;
+import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
 import main.java.shinoamakusa.selenium.pages.BrowserPage;
 import main.java.shinoamakusa.selenium.pages.vpl.details.DetailsPage;
 

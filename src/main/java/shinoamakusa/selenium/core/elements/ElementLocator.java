@@ -1,4 +1,4 @@
-package main.java.shinoamakusa.selenium.framework.elements;
+package main.java.shinoamakusa.selenium.core.elements;
 
 import org.openqa.selenium.By;
 
