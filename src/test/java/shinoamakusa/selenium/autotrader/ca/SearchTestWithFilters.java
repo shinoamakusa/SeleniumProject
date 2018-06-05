@@ -27,7 +27,7 @@ public class SearchTestWithFilters extends BaseTest {
 		assertTrue(resultsPage.filters().model().isSelected(model));
 
 		resultsPage.filters().year().changeMax(maxYear);
-		assertTrue(resultsPage.isCountFiltered());
+		assertTrue(resultsPage.isCountLessThanPrevious());
 		assertTrue(resultsPage.filters().year().isSelected(maxYear));
 	}
 

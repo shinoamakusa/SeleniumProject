@@ -8,6 +8,7 @@ public class ResultsPage extends BrowserPage {
 
 	private int lastTotalResults;
 	private ResultsFilters resultsFilters;
+
 	public ResultsPage(final BrowserDriver driver) {
 		this.urlPart = "autotrader.ca/cars";
 		this.driver = driver;
@@ -17,13 +18,13 @@ public class ResultsPage extends BrowserPage {
 
 	public boolean countsEqual() {
 
-			boolean countsEqual = driver.findByID("sbCount")
-					.textContains(String.format("%,d", resultsFilters.getMenuResultsCount()));
+		boolean countsEqual = driver.findByID("sbCount")
+				.textContains(String.format("%,d", resultsFilters.getMenuResultsCount()));
 
-			if (countsEqual) {
-				lastTotalResults = resultsFilters.getMenuResultsCount();
-			}
-			return countsEqual;
+		if (countsEqual) {
+			lastTotalResults = resultsFilters.getMenuResultsCount();
+		}
+		return countsEqual;
 	}
 
 	public ResultsFilters filters() {
@@ -35,15 +36,15 @@ public class ResultsPage extends BrowserPage {
 		return lastTotalResults > 0;
 	}
 
-	public boolean isCountFiltered() {
+	public boolean isCountLessThanPrevious() {
 
-			return driver.findByID("sbCount").textNotEqual(String.format("%,d", lastTotalResults))
-					&& getResultsCount() < lastTotalResults;
+		return driver.findByID("sbCount").textNotEqual(String.format("%,d", lastTotalResults))
+				&& getResultsCount() < lastTotalResults;
 
 	}
 
 	private int getResultsCount() {
-			return Integer.parseInt(driver.findByID("sbCount").getText().replaceAll(",", ""));
+		return Integer.parseInt(driver.findByID("sbCount").getText().replaceAll(",", ""));
 	}
 
 }

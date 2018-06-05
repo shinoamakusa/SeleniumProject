@@ -11,9 +11,9 @@ public class ModelFilter extends PageFilter {
 	}
 
 	public void change(final String model) {
-		select(model);
-		filterMenuNumberResults = getFilterCount();
 		try {
+			select(model);
+			filterMenuNumberResults = getFilterMenuCount();
 			driver.click(driver.selectedElement());
 		} catch (WebDriverException e) {
 			checkForModal();
@@ -30,7 +30,7 @@ public class ModelFilter extends PageFilter {
 
 		driver.select(driver.findByID("faceted-parent-Model"));
 		driver.click(driver.selectedElement());
-		selectFilterElement(model);
+		selectFilterMenuElement(model);
 
 	}
 

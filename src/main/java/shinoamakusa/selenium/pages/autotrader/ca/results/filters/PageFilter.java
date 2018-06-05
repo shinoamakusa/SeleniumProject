@@ -15,14 +15,15 @@ public class PageFilter {
 		driver.click(driver.findByClass("acsCloseButton"));
 	}
 
-	protected int getFilterCount() {
+	protected int getFilterMenuCount() {
 		return Integer
 				.parseInt(driver.selectedElement().findByClass("option-count").getText().replaceAll("[()]", ""));
 
 	}
 
-	protected void selectFilterElement(final String value) {
+	protected void selectFilterMenuElement(final String value) {
 		driver.select(driver.selectedElement().findByAttribute("data-dropdownvalue", value));
+		
 	}
 
 }
