@@ -1,4 +1,4 @@
-package main.java.shinoamakusa.selenium.pages.autotrader.results.filters;
+package main.java.shinoamakusa.selenium.pages.autotrader.ca.results.filters;
 
 import main.java.shinoamakusa.selenium.framework.drivers.BrowserDriver;
 

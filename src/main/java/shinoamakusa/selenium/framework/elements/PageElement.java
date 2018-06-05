@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import main.java.shinoamakusa.selenium.framework.CustomExpectedConditions;
 
 /**
- * Class representing a page element ( SeleniumWebElement)
+ * Class representing a page element ( Selenium WebElement)
  * 
  * @author Oleg Kravenkov
  *

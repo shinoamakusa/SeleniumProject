@@ -1,8 +1,8 @@
-package main.java.shinoamakusa.selenium.pages.autotrader.results;
+package main.java.shinoamakusa.selenium.pages.autotrader.ca.results;
 
 import main.java.shinoamakusa.selenium.framework.drivers.BrowserDriver;
 import main.java.shinoamakusa.selenium.pages.BrowserPage;
-import main.java.shinoamakusa.selenium.pages.autotrader.results.filters.ResultsFilters;
+import main.java.shinoamakusa.selenium.pages.autotrader.ca.results.filters.ResultsFilters;
 
 public class ResultsPage extends BrowserPage {
 

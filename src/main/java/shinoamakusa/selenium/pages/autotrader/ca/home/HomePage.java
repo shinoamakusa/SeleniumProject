@@ -1,7 +1,7 @@
-package main.java.shinoamakusa.selenium.pages.autotrader.home;
+package main.java.shinoamakusa.selenium.pages.autotrader.ca.home;
 
 import main.java.shinoamakusa.selenium.pages.BrowserPage;
-import main.java.shinoamakusa.selenium.pages.autotrader.results.ResultsPage;
+import main.java.shinoamakusa.selenium.pages.autotrader.ca.results.ResultsPage;
 
 public class HomePage extends BrowserPage {
 	public HomePage() {
