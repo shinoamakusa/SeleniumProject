@@ -3,9 +3,9 @@ package main.java.shinoamakusa.selenium.pages.bestbuy.results;
 import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
 import main.java.shinoamakusa.selenium.core.elements.ElementLocator;
 import main.java.shinoamakusa.selenium.core.elements.PageElement;
-import main.java.shinoamakusa.selenium.pages.BrowserPage;
+import main.java.shinoamakusa.selenium.pages.BasePage;
 
-public class ResultsPage extends BrowserPage {
+public class ResultsPage extends BasePage {
 
 	public ResultsPage(final BrowserDriver driver) {
 		this.urlPart = "www.bestbuy.ca/en-CA/Search/SearchResults.aspx";

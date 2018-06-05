@@ -8,12 +8,14 @@ public class ResultsFilters {
 	private ModelFilter model;
 	private PostalCodeFilter postalCode;
 	private YearFilter year;
+	private TotalCountFilter totalCount;
 
 	public ResultsFilters(BrowserDriver driver) {
 		make = new MakeFilter(driver);
 		model = new ModelFilter(driver);
 		year = new YearFilter(driver);
 		postalCode = new PostalCodeFilter(driver);
+		totalCount = new TotalCountFilter(driver);
 	}
 
 	public boolean contain(final String make, final String model, final String postalCode) {
@@ -21,27 +23,30 @@ public class ResultsFilters {
 	}
 
 	public int getMenuResultsCount() {
-		if (model.getMenuResultsCount() != 0)
-			return model.getMenuResultsCount();
+		if (model.getMenuOptionResultsCount() != 0)
+			return model.getMenuOptionResultsCount();
 		else
-			return make.getMenuResultsCount();
+			return make.getMenuOptionResultsCount();
 	}
 
 	public MakeFilter make() {
 		return make;
 	}
-	
+
 	public ModelFilter model() {
 		return model;
 	}
 
-	public PostalCodeFilter postalCode()
-	{
+	public PostalCodeFilter postalCode() {
 		return postalCode;
 	}
 
 	public YearFilter year() {
 		return year;
+	}
+
+	public TotalCountFilter count() {
+		return totalCount;
 	}
 
 }

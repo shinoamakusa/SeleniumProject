@@ -3,34 +3,41 @@ package main.java.shinoamakusa.selenium.pages.autotrader.ca.results.filters;
 import org.openqa.selenium.WebDriverException;
 
 import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
+import main.java.shinoamakusa.selenium.core.elements.PageElement;
 
 public class PageFilter {
 
 	protected BrowserDriver driver;
-	protected int filterMenuNumberResults;
+	protected int menuOptionCount;
+	protected PageFilterMenu menu;
+	protected PageElement filterElement;
 
-	public int getMenuResultsCount() {
-		return filterMenuNumberResults;
+	public PageFilter(PageElement element) {
+		this.filterElement = element;
+	}
+
+	public PageFilter() {
+
+	}
+
+	public int getMenuOptionResultsCount() {
+		return menuOptionCount;
 	}
 
 	protected void checkForModal() {
 		driver.click(driver.findByClass("acsCloseButton"));
 	}
 
-	protected void selectFilterMenuElement(final String value) {
+	protected void chooseMenuOption(final String value) {
 		try {
-			driver.select(driver.parentElement().findByAttribute("data-dropdownvalue", value));
-			filterMenuNumberResults = getFilterMenuCount();
-			driver.click(driver.selectedElement());
+			menu = new PageFilterMenu(filterElement.findByClass("dropdown-menu"));
+			menu.setOption(value);
+			menuOptionCount = menu.getFilterMenuCount();
+			driver.click(menu.getOption());
 		} catch (WebDriverException e) {
 			checkForModal();
-			selectFilterMenuElement(value);
+			chooseMenuOption(value);
 		}
-
-	}
-
-	private int getFilterMenuCount() {
-		return Integer.parseInt(driver.selectedElement().findByClass("option-count").getText().replaceAll("[()]", ""));
 
 	}
 

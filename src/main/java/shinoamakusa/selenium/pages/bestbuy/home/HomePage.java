@@ -2,10 +2,10 @@ package main.java.shinoamakusa.selenium.pages.bestbuy.home;
 
 import org.openqa.selenium.WebDriverException;
 
-import main.java.shinoamakusa.selenium.pages.BrowserPage;
+import main.java.shinoamakusa.selenium.pages.BasePage;
 import main.java.shinoamakusa.selenium.pages.bestbuy.results.ResultsPage;
 
-public class HomePage extends BrowserPage {
+public class HomePage extends BasePage {
 	public HomePage() {
 		this.urlPart = "www.bestbuy.ca";
 	}

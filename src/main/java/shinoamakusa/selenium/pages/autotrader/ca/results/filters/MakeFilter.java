@@ -8,12 +8,13 @@ public class MakeFilter extends PageFilter {
 
 	public MakeFilter(BrowserDriver driver) {
 		this.driver = driver;
+		this.filterElement = driver.findByID("faceted-parent-Make");
 	}
 
 	public void changeTo(final String make) {
 
 		selectMakeFilter();
-		selectFilterMenuElement(make);
+		chooseMenuOption(make);
 
 	}
 
@@ -23,8 +24,7 @@ public class MakeFilter extends PageFilter {
 
 	private void selectMakeFilter() {
 		try {
-			driver.setParentElement(driver.findByID("faceted-parent-Make"));
-			driver.click(driver.parentElement());
+			driver.click(this.filterElement);
 		} catch (WebDriverException e) {
 			checkForModal();
 			selectMakeFilter();

@@ -5,10 +5,10 @@ import static org.testng.Assert.assertTrue;
 import org.apache.commons.lang3.StringUtils;
 
 import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
-import main.java.shinoamakusa.selenium.pages.BrowserPage;
+import main.java.shinoamakusa.selenium.pages.BasePage;
 import main.java.shinoamakusa.selenium.pages.vpl.details.DetailsPage;
 
-public class ResultsPage extends BrowserPage {
+public class ResultsPage extends BasePage {
 
 	public String author;
 	public String itemTitle;
@@ -46,11 +46,11 @@ public class ResultsPage extends BrowserPage {
 	 */
 	public int getResultsCount() {
 		driver.select(driver.findByClass("items_showing_count", 1));
-		assertTrue(driver.selectedElement() != null, "Results count element does not exist");
+		assertTrue(driver.selectedElement() != null, "Results count filterElement does not exist");
 
 		String[] elementParts = driver.selectedElement().getText().split(" ");
-		assertTrue(elementParts.length >= 5, "Results count element format is invalid");
-		assertTrue(StringUtils.isNumeric(elementParts[4]), "Selected results count element part is not numeric");
+		assertTrue(elementParts.length >= 5, "Results count filterElement format is invalid");
+		assertTrue(StringUtils.isNumeric(elementParts[4]), "Selected results count filterElement part is not numeric");
 		return Integer.parseInt(elementParts[4]);
 	}
 

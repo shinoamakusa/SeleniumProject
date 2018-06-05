@@ -1,50 +1,46 @@
 package main.java.shinoamakusa.selenium.pages.autotrader.ca.results;
 
 import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
-import main.java.shinoamakusa.selenium.pages.BrowserPage;
+import main.java.shinoamakusa.selenium.pages.BasePage;
 import main.java.shinoamakusa.selenium.pages.autotrader.ca.results.filters.ResultsFilters;
 
-public class ResultsPage extends BrowserPage {
+public class ResultsPage extends BasePage {
 
 	private int lastTotalResults;
-	private ResultsFilters resultsFilters;
+	private ResultsFilters filters;
 
 	public ResultsPage(final BrowserDriver driver) {
 		this.urlPart = "autotrader.ca/cars";
 		this.driver = driver;
 		this.title = this.driver.getTitle();
-		resultsFilters = new ResultsFilters(driver);
+		filters = new ResultsFilters(driver);
 	}
 
 	public boolean countsEqual() {
 
-		boolean countsEqual = driver.findByID("sbCount")
-				.textContains(String.format("%,d", resultsFilters.getMenuResultsCount()));
+		boolean countsEqual = filters.count()
+				.equalsTo(String.format("%,d", filters.getMenuResultsCount()));
 
 		if (countsEqual) {
-			lastTotalResults = resultsFilters.getMenuResultsCount();
+			lastTotalResults = filters.getMenuResultsCount();
 		}
 		return countsEqual;
 	}
 
 	public ResultsFilters filters() {
-		return this.resultsFilters;
+		return this.filters;
 	}
 
 	public boolean hasResults() {
-		lastTotalResults = getResultsCount();
+		lastTotalResults = filters.count().getValue();
 		return lastTotalResults > 0;
 	}
 
 	public boolean isCountLessThanPrevious() {
 
-		return driver.findByID("sbCount").textNotEqual(String.format("%,d", lastTotalResults))
-				&& getResultsCount() < lastTotalResults;
+		return filters.count().changedFrom(String.format("%,d", lastTotalResults))
+				&& filters.count().getValue() < lastTotalResults;
 
-	}
-
-	private int getResultsCount() {
-		return Integer.parseInt(driver.findByID("sbCount").getText().replaceAll(",", ""));
 	}
 
 }

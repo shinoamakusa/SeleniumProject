@@ -3,14 +3,14 @@ package main.java.shinoamakusa.selenium.pages;
 import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
 import main.java.shinoamakusa.selenium.core.drivers.DriverType;
 
-public class BrowserPage {
+public class BasePage {
 	protected BrowserDriver driver;
 	protected String sourceHTML;
 	protected String title;
 	protected String url;
 	protected String urlPart;
 	
-	public BrowserPage()
+	public BasePage()
 	{
 		driver =  new BrowserDriver(DriverType.Chrome);
 	}

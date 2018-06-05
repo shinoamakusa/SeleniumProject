@@ -8,12 +8,13 @@ public class ModelFilter extends PageFilter {
 
 	public ModelFilter(BrowserDriver driver) {
 		this.driver = driver;
+		this.filterElement = driver.findByID("faceted-parent-Model");
 	}
 
 	public void changeTo(final String model) {
 
 		selectModelFilter();
-		selectFilterMenuElement(model);
+		chooseMenuOption(model);
 
 	}
 
@@ -24,8 +25,7 @@ public class ModelFilter extends PageFilter {
 	private void selectModelFilter() {
 
 		try {
-			driver.select(driver.findByID("faceted-parent-Model"));
-			driver.click(driver.selectedElement());
+			driver.click(this.filterElement);
 		} catch (WebDriverException e) {
 			checkForModal();
 			selectModelFilter();

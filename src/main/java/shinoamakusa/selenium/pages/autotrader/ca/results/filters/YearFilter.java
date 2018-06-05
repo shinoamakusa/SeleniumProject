@@ -8,6 +8,7 @@ public class YearFilter extends PageFilter {
 
 	public YearFilter(BrowserDriver driver) {
 		this.driver = driver;
+		this.filterElement = driver.findByID("faceted-parent-Year");
 	}
 
 	public void changeMaxTo(final String year) {
@@ -22,8 +23,7 @@ public class YearFilter extends PageFilter {
 
 	private void selectYearFilter() {
 		try {
-			driver.setParentElement(driver.findByID("faceted-parent-Year"));
-			driver.click(driver.parentElement());
+			driver.click(this.filterElement);
 		} catch (WebDriverException e) {
 			checkForModal();
 			selectYearFilter();
@@ -33,8 +33,8 @@ public class YearFilter extends PageFilter {
 	private void selectMaxYear(final String year) {
 
 		try {
-			driver.parentElement().findByID("yearHigh").selectOptionByValue(year);
-			driver.click(driver.findByID("applyYear"));
+			filterElement.findByID("yearHigh").selectOptionByValue(year);
+			driver.click(filterElement.findByID("applyYear"));
 		} catch (WebDriverException e) {
 			checkForModal();
 			selectMaxYear(year);

@@ -1,9 +1,9 @@
 package main.java.shinoamakusa.selenium.pages.vpl.details;
 
 import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
-import main.java.shinoamakusa.selenium.pages.BrowserPage;
+import main.java.shinoamakusa.selenium.pages.BasePage;
 
-public class DetailsPage extends BrowserPage {
+public class DetailsPage extends BasePage {
 	public String author;
 	public String itemTitle;
 	public String subtitle;

@@ -1,9 +1,9 @@
 package main.java.shinoamakusa.selenium.pages.autotrader.ca.home;
 
-import main.java.shinoamakusa.selenium.pages.BrowserPage;
+import main.java.shinoamakusa.selenium.pages.BasePage;
 import main.java.shinoamakusa.selenium.pages.autotrader.ca.results.ResultsPage;
 
-public class HomePage extends BrowserPage {
+public class HomePage extends BasePage {
 	public HomePage() {
 		this.urlPart = "autotrader.ca";
 	}

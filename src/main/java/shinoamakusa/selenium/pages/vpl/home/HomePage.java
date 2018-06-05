@@ -1,9 +1,9 @@
 package main.java.shinoamakusa.selenium.pages.vpl.home;
 
-import main.java.shinoamakusa.selenium.pages.BrowserPage;
+import main.java.shinoamakusa.selenium.pages.BasePage;
 import main.java.shinoamakusa.selenium.pages.vpl.results.ResultsPage;
 
-public class HomePage extends BrowserPage {
+public class HomePage extends BasePage {
 	public HomePage()
 	{
 		this.urlPart = "vpl.ca";
