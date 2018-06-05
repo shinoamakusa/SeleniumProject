@@ -646,6 +646,48 @@ public class PageElement {
 	}
 
 	/**
+	 * Selects dropdown list option by id
+	 * 
+	 * @param num
+	 *            Option tag index
+	 */
+	public void selectOptionByIndex( final int num) {
+		if (this.isSelectTagElement()) {
+			Select listElement = new Select(element);
+			listElement.selectByIndex(num);
+
+		}
+	}
+
+	/**
+	 * Selects dropdown list option by visible text
+	 * 
+	 * @param text
+	 *            Option tag visible text
+	 */
+	public void selectOptionByText(final String text) {
+		if (this.isSelectTagElement()) {
+			Select listElement = new Select(element);
+			listElement.selectByVisibleText(text);
+
+		}
+	}
+
+	/**
+	 * Selects dropdown list option by value
+	 * 
+	 * @param value
+	 *            Option tag value
+	 */
+	public void selectOptionByValue( final String value) {
+		if (this.isSelectTagElement()) {
+			Select listElement = new Select(element);
+			listElement.selectByValue(value);
+
+		}
+	}
+
+	/**
 	 * Checks if page element contains specific text
 	 * 
 	 * @param value
@@ -680,7 +722,7 @@ public class PageElement {
 			return false;
 		}
 	}
-
+	
 	/**
 	 * Checks that the text of page element is no longer equal to specified value
 	 * 

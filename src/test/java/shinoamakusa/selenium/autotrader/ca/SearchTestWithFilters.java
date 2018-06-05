@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 public class SearchTestWithFilters extends BaseTest {
 
-	@Test(invocationCount = 1)
+	@Test(invocationCount = 10)
 	public void searchWithFilters() {
 		String postalCode = "V5Y 1V4";
 		String make = "Ford";

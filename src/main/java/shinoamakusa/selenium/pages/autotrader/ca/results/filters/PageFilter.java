@@ -23,6 +23,8 @@ public class PageFilter {
 
 	protected void selectFilterMenuElement(final String value) {
 		driver.select(driver.selectedElement().findByAttribute("data-dropdownvalue", value));
+		filterMenuNumberResults = getFilterMenuCount();
+		driver.click(driver.selectedElement());
 		
 	}
 

@@ -12,9 +12,8 @@ public class MakeFilter extends PageFilter {
 
 	public void change(final String make) {
 		try {
-			select(make);
-			filterMenuNumberResults = getFilterMenuCount();
-			driver.click(driver.selectedElement());
+			selectMakeFilter();
+			selectFilterMenuElement(make);
 		} catch (WebDriverException e) {
 			checkForModal();
 			change(make);
@@ -26,10 +25,9 @@ public class MakeFilter extends PageFilter {
 		return driver.findByID("faceted-Make").getText().equalsIgnoreCase(make);
 	}
 
-	private void select(final String make) {
+	private void selectMakeFilter() {
 		driver.select(driver.findByID("faceted-parent-Make"));
 		driver.click(driver.selectedElement());
-		selectFilterMenuElement(make);
 	}
 
 }

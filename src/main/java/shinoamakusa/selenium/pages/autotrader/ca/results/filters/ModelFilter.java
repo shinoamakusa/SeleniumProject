@@ -12,9 +12,8 @@ public class ModelFilter extends PageFilter {
 
 	public void change(final String model) {
 		try {
-			select(model);
-			filterMenuNumberResults = getFilterMenuCount();
-			driver.click(driver.selectedElement());
+			selectModelFilter();
+			selectFilterMenuElement(model);
 		} catch (WebDriverException e) {
 			checkForModal();
 			change(model);
@@ -26,11 +25,10 @@ public class ModelFilter extends PageFilter {
 		return driver.findByID("faceted-Model").getText().equalsIgnoreCase(model);
 	}
 
-	private void select(final String model) {
+	private void selectModelFilter() {
 
 		driver.select(driver.findByID("faceted-parent-Model"));
 		driver.click(driver.selectedElement());
-		selectFilterMenuElement(model);
 
 	}
 

@@ -409,7 +409,6 @@ public class PageDriver {
 		if (element.isSelectTagElement()) {
 			Select listElement = new Select(element.webElement());
 			listElement.selectByIndex(num);
-			selectedElement = new PageElement(listElement.getFirstSelectedOption());
 
 		}
 	}
@@ -426,7 +425,6 @@ public class PageDriver {
 		if (element.isSelectTagElement()) {
 			Select listElement = new Select(element.webElement());
 			listElement.selectByVisibleText(text);
-			selectedElement = new PageElement(listElement.getFirstSelectedOption());
 
 		}
 	}
@@ -443,7 +441,6 @@ public class PageDriver {
 		if (element.isSelectTagElement()) {
 			Select listElement = new Select(element.webElement());
 			listElement.selectByValue(value);
-			selectedElement = new PageElement(listElement.getFirstSelectedOption());
 
 		}
 	}
