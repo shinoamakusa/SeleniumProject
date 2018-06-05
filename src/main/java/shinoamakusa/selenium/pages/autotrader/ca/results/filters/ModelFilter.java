@@ -10,14 +10,10 @@ public class ModelFilter extends PageFilter {
 		this.driver = driver;
 	}
 
-	public void change(final String model) {
-		try {
-			selectModelFilter();
-			selectFilterMenuElement(model);
-		} catch (WebDriverException e) {
-			checkForModal();
-			change(model);
-		}
+	public void changeTo(final String model) {
+
+		selectModelFilter();
+		selectFilterMenuElement(model);
 
 	}
 
@@ -27,8 +23,13 @@ public class ModelFilter extends PageFilter {
 
 	private void selectModelFilter() {
 
-		driver.select(driver.findByID("faceted-parent-Model"));
-		driver.click(driver.selectedElement());
+		try {
+			driver.select(driver.findByID("faceted-parent-Model"));
+			driver.click(driver.selectedElement());
+		} catch (WebDriverException e) {
+			checkForModal();
+			selectModelFilter();
+		}
 
 	}
 

@@ -1,5 +1,7 @@
 package main.java.shinoamakusa.selenium.pages.autotrader.ca.results.filters;
 
+import org.openqa.selenium.WebDriverException;
+
 import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
 
 public class PageFilter {
@@ -15,17 +17,21 @@ public class PageFilter {
 		driver.click(driver.findByClass("acsCloseButton"));
 	}
 
-	protected int getFilterMenuCount() {
-		return Integer
-				.parseInt(driver.selectedElement().findByClass("option-count").getText().replaceAll("[()]", ""));
+	protected void selectFilterMenuElement(final String value) {
+		try {
+			driver.select(driver.parentElement().findByAttribute("data-dropdownvalue", value));
+			filterMenuNumberResults = getFilterMenuCount();
+			driver.click(driver.selectedElement());
+		} catch (WebDriverException e) {
+			checkForModal();
+			selectFilterMenuElement(value);
+		}
 
 	}
 
-	protected void selectFilterMenuElement(final String value) {
-		driver.select(driver.selectedElement().findByAttribute("data-dropdownvalue", value));
-		filterMenuNumberResults = getFilterMenuCount();
-		driver.click(driver.selectedElement());
-		
+	private int getFilterMenuCount() {
+		return Integer.parseInt(driver.selectedElement().findByClass("option-count").getText().replaceAll("[()]", ""));
+
 	}
 
 }

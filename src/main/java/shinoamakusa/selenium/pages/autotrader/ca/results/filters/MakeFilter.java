@@ -10,14 +10,10 @@ public class MakeFilter extends PageFilter {
 		this.driver = driver;
 	}
 
-	public void change(final String make) {
-		try {
-			selectMakeFilter();
-			selectFilterMenuElement(make);
-		} catch (WebDriverException e) {
-			checkForModal();
-			change(make);
-		}
+	public void changeTo(final String make) {
+
+		selectMakeFilter();
+		selectFilterMenuElement(make);
 
 	}
 
@@ -26,8 +22,13 @@ public class MakeFilter extends PageFilter {
 	}
 
 	private void selectMakeFilter() {
-		driver.select(driver.findByID("faceted-parent-Make"));
-		driver.click(driver.selectedElement());
+		try {
+			driver.setParentElement(driver.findByID("faceted-parent-Make"));
+			driver.click(driver.parentElement());
+		} catch (WebDriverException e) {
+			checkForModal();
+			selectMakeFilter();
+		}
 	}
 
 }
