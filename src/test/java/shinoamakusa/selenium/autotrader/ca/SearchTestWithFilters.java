@@ -19,15 +19,15 @@ public class SearchTestWithFilters extends BaseTest {
 		assertTrue(resultsPage.filters().postalCode().isSelected(postalCode));
 
 		resultsPage.filters().make().changeTo(make);
-		assertTrue(resultsPage.countsEqual());
+		assertTrue(resultsPage.makeCountsEqual());
 		assertTrue(resultsPage.filters().make().isSelected(make));
 
 		resultsPage.filters().model().changeTo(model);
-		assertTrue(resultsPage.countsEqual());
+		assertTrue(resultsPage.modelCountsEqual());
 		assertTrue(resultsPage.filters().model().isSelected(model));
 
 		resultsPage.filters().year().changeMaxTo(maxYear);
-		assertTrue(resultsPage.isCountLessThanPrevious());
+		assertTrue(resultsPage.isYearCountLess());
 		assertTrue(resultsPage.filters().year().isSelected(maxYear));
 	}
 

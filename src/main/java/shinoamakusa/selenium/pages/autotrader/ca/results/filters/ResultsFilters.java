@@ -7,8 +7,8 @@ public class ResultsFilters {
 	private MakeFilter make;
 	private ModelFilter model;
 	private PostalCodeFilter postalCode;
-	private YearFilter year;
 	private TotalCountFilter totalCount;
+	private YearFilter year;
 
 	public ResultsFilters(BrowserDriver driver) {
 		make = new MakeFilter(driver);
@@ -41,12 +41,12 @@ public class ResultsFilters {
 		return postalCode;
 	}
 
-	public YearFilter year() {
-		return year;
+	public TotalCountFilter totalCount() {
+		return totalCount;
 	}
 
-	public TotalCountFilter count() {
-		return totalCount;
+	public YearFilter year() {
+		return year;
 	}
 
 }

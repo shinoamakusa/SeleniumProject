@@ -6,8 +6,8 @@ import main.java.shinoamakusa.selenium.pages.autotrader.ca.results.filters.Resul
 
 public class ResultsPage extends BasePage {
 
-	private int lastTotalResults;
 	private ResultsFilters filters;
+	private int lastTotalResults;
 
 	public ResultsPage(final BrowserDriver driver) {
 		this.urlPart = "autotrader.ca/cars";
@@ -16,31 +16,42 @@ public class ResultsPage extends BasePage {
 		filters = new ResultsFilters(driver);
 	}
 
-	public boolean countsEqual() {
+	public ResultsFilters filters() {
+		return this.filters;
+	}
+	
+	public boolean hasResults() {
+		lastTotalResults = filters.totalCount().getValue();
+		return lastTotalResults > 0;
+	}
 
-		boolean countsEqual = filters.count()
-				.equalsTo(String.format("%,d", filters.getMenuResultsCount()));
+	public boolean isYearCountLess() {
+
+		return filters.totalCount().changedFrom(String.format("%,d", lastTotalResults))
+				&& filters.totalCount().getValue() < lastTotalResults;
+
+	}
+
+	public boolean makeCountsEqual() {
+
+		boolean countsEqual = filters.totalCount()
+				.equalsTo(String.format("%,d", filters.make().getMenuOptionResultsCount()));
 
 		if (countsEqual) {
-			lastTotalResults = filters.getMenuResultsCount();
+			lastTotalResults = filters.make().getMenuOptionResultsCount();
 		}
 		return countsEqual;
 	}
 
-	public ResultsFilters filters() {
-		return this.filters;
-	}
+	public boolean modelCountsEqual() {
 
-	public boolean hasResults() {
-		lastTotalResults = filters.count().getValue();
-		return lastTotalResults > 0;
-	}
+		boolean countsEqual = filters.totalCount()
+				.equalsTo(String.format("%,d", filters.model().getMenuOptionResultsCount()));
 
-	public boolean isCountLessThanPrevious() {
-
-		return filters.count().changedFrom(String.format("%,d", lastTotalResults))
-				&& filters.count().getValue() < lastTotalResults;
-
+		if (countsEqual) {
+			lastTotalResults = filters.model().getMenuOptionResultsCount();
+		}
+		return countsEqual;
 	}
 
 }
