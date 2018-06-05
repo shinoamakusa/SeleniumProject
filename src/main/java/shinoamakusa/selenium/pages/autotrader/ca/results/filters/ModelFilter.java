@@ -4,11 +4,11 @@ import org.openqa.selenium.WebDriverException;
 
 import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
 
-public class ModelFilter extends PageFilter {
+public class ModelFilter extends BaseFilter {
 
 	public ModelFilter(BrowserDriver driver) {
 		this.driver = driver;
-		this.filterElement = driver.findByID("faceted-parent-Model");
+		this.container = driver.findByID("faceted-parent-Model");
 	}
 
 	public void changeTo(final String model) {
@@ -19,13 +19,13 @@ public class ModelFilter extends PageFilter {
 	}
 
 	public boolean isSelected(final String model) {
-		return driver.findByID("faceted-Model").getText().equalsIgnoreCase(model);
+		return container.findByID("faceted-Model").getText().equalsIgnoreCase(model);
 	}
 
 	private void selectModelFilter() {
 
 		try {
-			driver.click(this.filterElement);
+			driver.click(this.container);
 		} catch (WebDriverException e) {
 			checkForModal();
 			selectModelFilter();

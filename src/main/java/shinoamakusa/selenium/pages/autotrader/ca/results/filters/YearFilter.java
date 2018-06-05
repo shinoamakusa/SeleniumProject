@@ -4,11 +4,11 @@ import org.openqa.selenium.WebDriverException;
 
 import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
 
-public class YearFilter extends PageFilter {
+public class YearFilter extends BaseFilter {
 
 	public YearFilter(BrowserDriver driver) {
 		this.driver = driver;
-		this.filterElement = driver.findByID("faceted-parent-Year");
+		this.container = driver.findByID("faceted-parent-Year");
 	}
 
 	public void changeMaxTo(final String year) {
@@ -18,12 +18,12 @@ public class YearFilter extends PageFilter {
 	}
 
 	public boolean isSelected(final String year) {
-		return driver.findByID("faceted-Year").textContains(year);
+		return container.findByID("faceted-Year").textContains(year);
 	}
 
 	private void selectYearFilter() {
 		try {
-			driver.click(this.filterElement);
+			driver.click(this.container);
 		} catch (WebDriverException e) {
 			checkForModal();
 			selectYearFilter();
@@ -33,8 +33,9 @@ public class YearFilter extends PageFilter {
 	private void selectMaxYear(final String year) {
 
 		try {
-			filterElement.findByID("yearHigh").selectOptionByValue(year);
-			driver.click(filterElement.findByID("applyYear"));
+			menu = new BaseFilterMenu(container.findByClass("dropdown-menu"));
+			menu.container().findByID("yearHigh").selectOptionByValue(year);
+			driver.click(menu.container().findByID("applyYear"));
 		} catch (WebDriverException e) {
 			checkForModal();
 			selectMaxYear(year);

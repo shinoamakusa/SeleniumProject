@@ -2,14 +2,15 @@ package main.java.shinoamakusa.selenium.pages.autotrader.ca.results.filters;
 
 import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
 
-public class PostalCodeFilter extends PageFilter {
+public class PostalCodeFilter extends BaseFilter {
 
 	public PostalCodeFilter(BrowserDriver driver) {
 		this.driver = driver;
+		this.container = driver.findByID("faceted-parent-Location");
 	}
 
 	public boolean isSelected(final String postalCode) {
-		return driver.findByID("faceted-Location").getText().equalsIgnoreCase(postalCode);
+		return container.findByID("faceted-Location").getText().equalsIgnoreCase(postalCode);
 	}
 
 }

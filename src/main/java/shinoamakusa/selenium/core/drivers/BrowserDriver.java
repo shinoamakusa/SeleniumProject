@@ -96,11 +96,11 @@ public class BrowserDriver extends PageDriver {
 	}
 
 	/**
-	 * Clicks the filterElement provided
+	 * Clicks the container provided
 	 * 
-	 * @param filterElement
-	 *            Web page filterElement to click
-	 * @return Url string if filterElement is link, empty string otherwise
+	 * @param container
+	 *            Web page container to click
+	 * @return Url string if container is link, empty string otherwise
 	 */
 	public String click(final PageElement element) {
 		if (element != null) {
@@ -155,8 +155,8 @@ public class BrowserDriver extends PageDriver {
 	 * @param code
 	 *            JS code
 	 * 
-	 * @param filterElement
-	 *            Page filterElement to perform code on
+	 * @param container
+	 *            Page container to perform code on
 	 */
 	public void executeJS(final String code, PageElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -244,9 +244,9 @@ public class BrowserDriver extends PageDriver {
 	 * Performs a search action on the page
 	 * 
 	 * @param searchBox
-	 *            Search textarea filterElement to fill in
+	 *            Search textarea container to fill in
 	 * @param searchButton
-	 *            Search submit button filterElement
+	 *            Search submit button container
 	 * @param searchQuery
 	 *            Query to perform search on
 	 */
@@ -275,9 +275,9 @@ public class BrowserDriver extends PageDriver {
 	}
 
 	/**
-	 * Sends/types in keys into the filterElement specified
+	 * Sends/types in keys into the container specified
 	 * 
-	 * @param filterElement
+	 * @param container
 	 *            Element to fill in
 	 * @param keys
 	 *            Text string to fill in

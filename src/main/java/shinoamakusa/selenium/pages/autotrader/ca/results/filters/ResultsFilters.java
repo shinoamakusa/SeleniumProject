@@ -22,12 +22,6 @@ public class ResultsFilters {
 		return this.postalCode.isSelected(postalCode) && this.make.isSelected(make) && this.model.isSelected(model);
 	}
 
-	public int getMenuResultsCount() {
-		if (model.getMenuOptionResultsCount() != 0)
-			return model.getMenuOptionResultsCount();
-		else
-			return make.getMenuOptionResultsCount();
-	}
 
 	public MakeFilter make() {
 		return make;

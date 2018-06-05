@@ -2,19 +2,19 @@ package main.java.shinoamakusa.selenium.pages.autotrader.ca.results.filters;
 
 import main.java.shinoamakusa.selenium.core.elements.PageElement;
 
-public class PageFilterMenu {
-	private PageElement element;
+public class BaseFilterMenu {
+	private PageElement container;
 	private PageElement menuOption;
 	
-	public PageFilterMenu(PageElement element)
+	public BaseFilterMenu(PageElement element)
 	{
-		this.element = element;
+		this.container = element;
 		
 	}
 	
-	public PageElement element()
+	public PageElement container()
 	{
-		return element;
+		return container;
 	}
 	
 	public PageElement getOption()
@@ -24,7 +24,7 @@ public class PageFilterMenu {
 	
 	public void setOption(String value)
 	{
-		menuOption =  element.findByAttribute("data-dropdownvalue", value);
+		menuOption =  container.findByAttribute("data-dropdownvalue", value);
 	}
 	
 	public int getFilterMenuCount() {

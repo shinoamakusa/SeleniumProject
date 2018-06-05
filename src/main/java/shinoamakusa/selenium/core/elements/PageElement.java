@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import main.java.shinoamakusa.selenium.core.CustomExpectedConditions;
 
 /**
- * Class representing a page filterElement ( Selenium WebElement)
+ * Class representing a page container ( Selenium WebElement)
  * 
  * @author Oleg Kravenkov
  *
@@ -101,10 +101,10 @@ public class PageElement {
 	}
 
 	/**
-	 * Checks if page filterElement contains specific text
+	 * Checks if page container contains specific text
 	 * 
 	 * @param locator
-	 *            Page filterElement locator
+	 *            Page container locator
 	 * @param value
 	 *            Text value to check
 	 * @return True on success, false otherwise
@@ -133,7 +133,7 @@ public class PageElement {
 	/**
 	 * PageElement class constructor
 	 * 
-	 * @param filterElement
+	 * @param container
 	 *            Selenium WebElement object
 	 */
 	public PageElement(final WebElement element) {
@@ -146,10 +146,10 @@ public class PageElement {
 	/**
 	 * PageElement class constructor
 	 * 
-	 * @param filterElement
+	 * @param container
 	 *            Selenium WebElement
 	 * @param driver
-	 *            Selenium WebDriver filterElement
+	 *            Selenium WebDriver container
 	 */
 	public PageElement(final WebElement element, final WebDriver driver) {
 		this.element = element;
@@ -163,12 +163,12 @@ public class PageElement {
 	/**
 	 * PageElement class constructor
 	 * 
-	 * @param filterElement
+	 * @param container
 	 *            Selenium WebElement
 	 * @param driver
-	 *            Selenium WebDriver filterElement
+	 *            Selenium WebDriver container
 	 * @param wait
-	 *            Selenium WebDriverWait filterElement
+	 *            Selenium WebDriverWait container
 	 */
 	public PageElement(final WebElement element, final WebDriver driver, final WebDriverWait wait) {
 		this.element = element;
@@ -180,7 +180,7 @@ public class PageElement {
 	}
 
 	/**
-	 * Clicks filterElement
+	 * Clicks container
 	 */
 	public void click() {
 		if (element != null && this.isClickable())
@@ -188,7 +188,7 @@ public class PageElement {
 	}
 
 	/**
-	 * Check if filterElement actually exists
+	 * Check if container actually exists
 	 * 
 	 * @return True if webelement is not null, false otherwise
 	 */
@@ -287,20 +287,20 @@ public class PageElement {
 	}
 
 	/**
-	 * Finds first page filterElement by attribute value
+	 * Finds first page container by attribute value
 	 * 
 	 * @param attributeName
 	 *            Attribute name
 	 * @param attributeValue
 	 *            Attribute value
-	 * @return First page filterElement matched
+	 * @return First page container matched
 	 */
 	public PageElement findByAttribute(final String attributeName, final String attributeValue) {
 		return findByAttribute(attributeName, attributeValue, 1);
 	}
 
 	/**
-	 * Finds a page filterElement by attribute value
+	 * Finds a page container by attribute value
 	 * 
 	 * @param attributeName
 	 *            Attribute name
@@ -308,73 +308,73 @@ public class PageElement {
 	 *            Attribute value
 	 * @param num
 	 *            Number in the list of all elements matched
-	 * @return Page filterElement matched
+	 * @return Page container matched
 	 */
 	public PageElement findByAttribute(final String attributeName, final String attributeValue, final int num) {
 		return findBy(ElementLocator.byAttribute(attributeName, attributeValue), num);
 	}
 
 	/**
-	 * Finds first page filterElement by CSS class name
+	 * Finds first page container by CSS class name
 	 * 
 	 * @param className
 	 *            CSS class name
-	 * @return First page filterElement matched
+	 * @return First page container matched
 	 */
 	public PageElement findByClass(final String className) {
 		return findByClass(className, 1);
 	}
 
 	/**
-	 * Finds a page filterElement by CSS class name
+	 * Finds a page container by CSS class name
 	 * 
 	 * @param className
 	 *            CSS class name
 	 * @param num
 	 *            Number in the list of all elements matched
-	 * @return Page filterElement matched
+	 * @return Page container matched
 	 */
 	public PageElement findByClass(final String className, final int num) {
 		return findBy(ElementLocator.byClass(className), num);
 	}
 
 	/**
-	 * Finds first page filterElement by CSS class name
+	 * Finds first page container by CSS class name
 	 * 
 	 * @param cssSelector
 	 *            CSS class name
-	 * @return First page filterElement matched
+	 * @return First page container matched
 	 */
 	public PageElement findByCssSelector(final String cssSelector) {
 		return findByCssSelector(cssSelector, 1);
 	}
 
 	/**
-	 * Finds a page filterElement by CSS class name
+	 * Finds a page container by CSS class name
 	 * 
 	 * @param cssSekector
 	 *            CSS class name
 	 * @param num
 	 *            Number in the list of all elements matched
-	 * @return Page filterElement matched
+	 * @return Page container matched
 	 */
 	public PageElement findByCssSelector(final String cssSekector, final int num) {
 		return findBy(ElementLocator.byCssSelector(cssSekector), num);
 	}
 
 	/**
-	 * Finds first page filterElement by ID attribute
+	 * Finds first page container by ID attribute
 	 * 
 	 * @param id
 	 *            Value of ID attribute
-	 * @return First page filterElement matched
+	 * @return First page container matched
 	 */
 	public PageElement findByID(final String id) {
 		return findByID(id, 1);
 	}
 
 	/**
-	 * Finds a page filterElement by ID attribute
+	 * Finds a page container by ID attribute
 	 * 
 	 * @param id
 	 *            Value of ID attribute
@@ -388,7 +388,7 @@ public class PageElement {
 	}
 
 	/**
-	 * Finds first page filterElement matched by a locator
+	 * Finds first page container matched by a locator
 	 * 
 	 * @param locator
 	 *            Locator
@@ -399,7 +399,7 @@ public class PageElement {
 	}
 
 	/**
-	 * Finds a page filterElement matched by a locator
+	 * Finds a page container matched by a locator
 	 * 
 	 * @param locator
 	 *            Element locator
@@ -412,18 +412,18 @@ public class PageElement {
 	}
 
 	/**
-	 * Finds first page filterElement by NAME attribute
+	 * Finds first page container by NAME attribute
 	 * 
 	 * @param name
 	 *            Value of NAME attribute
-	 * @return First page filterElement matched
+	 * @return First page container matched
 	 */
 	public PageElement findByName(final String name) {
 		return findByName(name, 1);
 	}
 
 	/**
-	 * Finds a page filterElement by NAME attribute
+	 * Finds a page container by NAME attribute
 	 * 
 	 * @param name
 	 *            Value of NAME attribute
@@ -436,18 +436,18 @@ public class PageElement {
 	}
 
 	/**
-	 * Finds first page filterElement by HTML tag
+	 * Finds first page container by HTML tag
 	 * 
 	 * @param tag
 	 *            HTML tag
-	 * @return First page filterElement matched
+	 * @return First page container matched
 	 */
 	public PageElement findByTag(final String tag) {
 		return findByTag(tag, 1);
 	}
 
 	/**
-	 * Finds a page filterElement by HTML tag
+	 * Finds a page container by HTML tag
 	 * 
 	 * @param tag
 	 *            HTML tag
@@ -460,18 +460,18 @@ public class PageElement {
 	}
 
 	/**
-	 * Finds first page filterElement by text value
+	 * Finds first page container by text value
 	 * 
 	 * @param value
 	 *            Element text value
-	 * @return First page filterElement matched
+	 * @return First page container matched
 	 */
 	public PageElement findByText(final String value) {
 		return findByText(value, 1);
 	}
 
 	/**
-	 * Finds a page filterElement by text value
+	 * Finds a page container by text value
 	 * 
 	 * @param value
 	 *            Element text value
@@ -498,9 +498,9 @@ public class PageElement {
 	}
 
 	/**
-	 * Gets options of select tag filterElement
+	 * Gets options of select tag container
 	 * 
-	 * @return List of options of select tag filterElement if exist
+	 * @return List of options of select tag container if exist
 	 */
 	public List<PageElement> getSelectOptions() {
 		if (isSelectTagElement()) {
@@ -516,31 +516,31 @@ public class PageElement {
 	}
 
 	/**
-	 * Gets a tag of filterElement
+	 * Gets a tag of container
 	 * 
-	 * @return Tag of page filterElement
+	 * @return Tag of page container
 	 */
 	public String getTag() {
 		return tag;
 	}
 
 	/**
-	 * Gets a text value of filterElement
+	 * Gets a text value of container
 	 * 
-	 * @return Element text value if filterElement exists, empty string otherwise
+	 * @return Element text value if container exists, empty string otherwise
 	 */
 	public String getText() {
 		return element != null ? element.getText() : StringUtils.EMPTY;
 	}
 
 	/**
-	 * Checks if filterElement has specific attribute value
+	 * Checks if container has specific attribute value
 	 * 
 	 * @param name
 	 *            Attribute name
 	 * @param value
 	 *            Attribute value
-	 * @return true if attribute with specified value exists in the filterElement, false
+	 * @return true if attribute with specified value exists in the container, false
 	 *         otherwise
 	 */
 	public boolean hasAttribute(final String name, final String value) {
@@ -557,7 +557,7 @@ public class PageElement {
 	}
 
 	/**
-	 * Checks to see if page filterElement located has specific selected state
+	 * Checks to see if page container located has specific selected state
 	 * 
 	 * @param selected
 	 *            Selection state
@@ -577,9 +577,9 @@ public class PageElement {
 	}
 
 	/**
-	 * Checks if page filterElement is clickable
+	 * Checks if page container is clickable
 	 * 
-	 * @return True if filterElement is clickable, false otherwise
+	 * @return True if container is clickable, false otherwise
 	 */
 	public boolean isClickable() {
 		try {
@@ -593,9 +593,9 @@ public class PageElement {
 	}
 
 	/**
-	 * Checks to see if page filterElement is selected
+	 * Checks to see if page container is selected
 	 * 
-	 * @return True if filterElement is selected, false otherwise
+	 * @return True if container is selected, false otherwise
 	 */
 	public boolean isSelected() {
 
@@ -611,10 +611,10 @@ public class PageElement {
 	}
 
 	/**
-	 * Determines if specific filterElement is filterElement of SELECT tag
+	 * Determines if specific container is container of SELECT tag
 	 * 
-	 * @param filterElement
-	 *            Page filterElement
+	 * @param container
+	 *            Page container
 	 * @return True on success, false otherwise
 	 */
 	public boolean isSelectTagElement() {
@@ -622,7 +622,7 @@ public class PageElement {
 	}
 
 	/**
-	 * Checks that given page filterElement is not stale (exists)
+	 * Checks that given page container is not stale (exists)
 	 * 
 	 * @return True if not stale, false otherwise
 	 */
@@ -639,9 +639,9 @@ public class PageElement {
 	}
 
 	/**
-	 * Checks if page filterElement is visible
+	 * Checks if page container is visible
 	 * 
-	 * @return True if the filterElement is visible, false otherwise
+	 * @return True if the container is visible, false otherwise
 	 */
 	public boolean isVisible() {
 		try {
@@ -697,7 +697,7 @@ public class PageElement {
 	}
 
 	/**
-	 * Checks if page filterElement contains specific text
+	 * Checks if page container contains specific text
 	 * 
 	 * @param value
 	 *            Text value to check
@@ -715,7 +715,7 @@ public class PageElement {
 	}
 
 	/**
-	 * Checks that the text of page filterElement is equal to specified value
+	 * Checks that the text of page container is equal to specified value
 	 * 
 	 * @param value
 	 *            Text value
@@ -748,7 +748,7 @@ public class PageElement {
 	}
 
 	/**
-	 * Checks that the text of page filterElement is no longer equal to specified value
+	 * Checks that the text of page container is no longer equal to specified value
 	 * 
 	 * @param value
 	 *            Text value
@@ -775,10 +775,10 @@ public class PageElement {
 	}
 
 	/**
-	 * Finds all elements within parent filterElement's scope matched by specified locator
+	 * Finds all elements within parent container's scope matched by specified locator
 	 * 
 	 * @param parent
-	 *            Parent filterElement
+	 *            Parent container
 	 * @param locator
 	 *            Element matching locator
 	 * @return List of elements matched on success, null otherwise
@@ -797,16 +797,16 @@ public class PageElement {
 	}
 
 	/**
-	 * Finds a specific filterElement within parent filterElement's scope matched by locator and
+	 * Finds a specific container within parent container's scope matched by locator and
 	 * is specific number index in list of all elements matched
 	 * 
 	 * @param parent
-	 *            Parent filterElement
+	 *            Parent container
 	 * @param locator
 	 *            Element locator
 	 * @param num
 	 *            Number index in list of elements
-	 * @return Matched filterElement on success, null otherwise
+	 * @return Matched container on success, null otherwise
 	 */
 	private PageElement findBy(final By locator, final int num) {
 		List<PageElement> elementList = findAll(locator);

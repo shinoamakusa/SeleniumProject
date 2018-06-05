@@ -46,11 +46,11 @@ public class ResultsPage extends BasePage {
 	 */
 	public int getResultsCount() {
 		driver.select(driver.findByClass("items_showing_count", 1));
-		assertTrue(driver.selectedElement() != null, "Results count filterElement does not exist");
+		assertTrue(driver.selectedElement() != null, "Results count container does not exist");
 
 		String[] elementParts = driver.selectedElement().getText().split(" ");
-		assertTrue(elementParts.length >= 5, "Results count filterElement format is invalid");
-		assertTrue(StringUtils.isNumeric(elementParts[4]), "Selected results count filterElement part is not numeric");
+		assertTrue(elementParts.length >= 5, "Results count container format is invalid");
+		assertTrue(StringUtils.isNumeric(elementParts[4]), "Selected results count container part is not numeric");
 		return Integer.parseInt(elementParts[4]);
 	}
 

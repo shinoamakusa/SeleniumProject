@@ -30,12 +30,12 @@ public class PageDriver {
 	protected WebDriver driver;
 
 	/**
-	 * Parent filterElement for filterElement matching
+	 * Parent container for container matching
 	 */
 	protected PageElement parentElement;
 
 	/**
-	 * Current selected page filterElement
+	 * Current selected page container
 	 */
 	protected PageElement selectedElement;
 
@@ -142,20 +142,20 @@ public class PageDriver {
 	}
 
 	/**
-	 * Finds first page filterElement by attribute value
+	 * Finds first page container by attribute value
 	 * 
 	 * @param attributeName
 	 *            Attribute name
 	 * @param attributeValue
 	 *            Attribute value
-	 * @return First page filterElement matched
+	 * @return First page container matched
 	 */
 	public PageElement findByAttribute(final String attributeName, final String attributeValue) {
 		return findByAttribute(attributeName, attributeValue, 1);
 	}
 
 	/**
-	 * Finds a page filterElement by attribute value
+	 * Finds a page container by attribute value
 	 * 
 	 * @param attributeName
 	 *            Attribute name
@@ -163,73 +163,73 @@ public class PageDriver {
 	 *            Attribute value
 	 * @param num
 	 *            Number in the list of all elements matched
-	 * @return Page filterElement matched
+	 * @return Page container matched
 	 */
 	public PageElement findByAttribute(final String attributeName, final String attributeValue, final int num) {
 		return findBy(ElementLocator.byAttribute(attributeName, attributeValue), num);
 	}
 
 	/**
-	 * Finds first page filterElement by CSS class name
+	 * Finds first page container by CSS class name
 	 * 
 	 * @param className
 	 *            CSS class name
-	 * @return First page filterElement matched
+	 * @return First page container matched
 	 */
 	public PageElement findByClass(final String className) {
 		return findByClass(className, 1);
 	}
 
 	/**
-	 * Finds a page filterElement by CSS class name
+	 * Finds a page container by CSS class name
 	 * 
 	 * @param className
 	 *            CSS class name
 	 * @param num
 	 *            Number in the list of all elements matched
-	 * @return Page filterElement matched
+	 * @return Page container matched
 	 */
 	public PageElement findByClass(final String className, final int num) {
 		return findBy(ElementLocator.byClass(className), num);
 	}
 
 	/**
-	 * Finds first page filterElement by CSS class name
+	 * Finds first page container by CSS class name
 	 * 
 	 * @param cssSelector
 	 *            CSS class name
-	 * @return First page filterElement matched
+	 * @return First page container matched
 	 */
 	public PageElement findByCssSelector(final String cssSelector) {
 		return findByCssSelector(cssSelector, 1);
 	}
 
 	/**
-	 * Finds a page filterElement by CSS class name
+	 * Finds a page container by CSS class name
 	 * 
 	 * @param cssSekector
 	 *            CSS class name
 	 * @param num
 	 *            Number in the list of all elements matched
-	 * @return Page filterElement matched
+	 * @return Page container matched
 	 */
 	public PageElement findByCssSelector(final String cssSekector, final int num) {
 		return findBy(ElementLocator.byCssSelector(cssSekector), num);
 	}
 
 	/**
-	 * Finds first page filterElement by ID attribute
+	 * Finds first page container by ID attribute
 	 * 
 	 * @param id
 	 *            Value of ID attribute
-	 * @return First page filterElement matched
+	 * @return First page container matched
 	 */
 	public PageElement findByID(final String id) {
 		return findByID(id, 1);
 	}
 
 	/**
-	 * Finds a page filterElement by ID attribute
+	 * Finds a page container by ID attribute
 	 * 
 	 * @param id
 	 *            Value of ID attribute
@@ -243,7 +243,7 @@ public class PageDriver {
 	}
 
 	/**
-	 * Finds first page filterElement matched by a locator
+	 * Finds first page container matched by a locator
 	 * 
 	 * @param locator
 	 *            Locator
@@ -254,7 +254,7 @@ public class PageDriver {
 	}
 
 	/**
-	 * Finds a page filterElement matched by a locator
+	 * Finds a page container matched by a locator
 	 * 
 	 * @param locator
 	 *            Element locator
@@ -267,18 +267,18 @@ public class PageDriver {
 	}
 
 	/**
-	 * Finds first page filterElement by NAME attribute
+	 * Finds first page container by NAME attribute
 	 * 
 	 * @param name
 	 *            Value of NAME attribute
-	 * @return First page filterElement matched
+	 * @return First page container matched
 	 */
 	public PageElement findByName(final String name) {
 		return findByName(name, 1);
 	}
 
 	/**
-	 * Finds a page filterElement by NAME attribute
+	 * Finds a page container by NAME attribute
 	 * 
 	 * @param name
 	 *            Value of NAME attribute
@@ -291,18 +291,18 @@ public class PageDriver {
 	}
 
 	/**
-	 * Finds first page filterElement by HTML tag
+	 * Finds first page container by HTML tag
 	 * 
 	 * @param tag
 	 *            HTML tag
-	 * @return First page filterElement matched
+	 * @return First page container matched
 	 */
 	public PageElement findByTag(final String tag) {
 		return findByTag(tag, 1);
 	}
 
 	/**
-	 * Finds a page filterElement by HTML tag
+	 * Finds a page container by HTML tag
 	 * 
 	 * @param tag
 	 *            HTML tag
@@ -315,18 +315,18 @@ public class PageDriver {
 	}
 
 	/**
-	 * Finds first page filterElement by text value
+	 * Finds first page container by text value
 	 * 
 	 * @param value
 	 *            Element text value
-	 * @return First page filterElement matched
+	 * @return First page container matched
 	 */
 	public PageElement findByText(final String value) {
 		return findByText(value, 1);
 	}
 
 	/**
-	 * Finds a page filterElement by text value
+	 * Finds a page container by text value
 	 * 
 	 * @param value
 	 *            Element text value
@@ -339,18 +339,18 @@ public class PageDriver {
 	}
 
 	/**
-	 * Gets the current set parent page filterElement
+	 * Gets the current set parent page container
 	 * 
-	 * @return Selected parent page filterElement
+	 * @return Selected parent page container
 	 */
 	public PageElement parentElement() {
 		return parentElement;
 	}
 
 	/**
-	 * Gets the current selected page filterElement
+	 * Gets the current selected page container
 	 * 
-	 * @return Selected page filterElement
+	 * @return Selected page container
 	 */
 	public PageElement selectedElement() {
 		return selectedElement;
@@ -381,16 +381,16 @@ public class PageDriver {
 	}
 
 	/**
-	 * Resets parent page filterElement to null
+	 * Resets parent page container to null
 	 */
 	public void resetParent() {
 		this.parentElement = null;
 	}
 
 	/**
-	 * Selects specified filterElement
+	 * Selects specified container
 	 * 
-	 * @param filterElement
+	 * @param container
 	 *            Element to select
 	 */
 	public void select(final PageElement element) {
@@ -400,8 +400,8 @@ public class PageDriver {
 	/**
 	 * Selects dropdown list option by id
 	 * 
-	 * @param filterElement
-	 *            Select tag filterElement
+	 * @param container
+	 *            Select tag container
 	 * @param num
 	 *            Option tag index
 	 */
@@ -416,8 +416,8 @@ public class PageDriver {
 	/**
 	 * Selects dropdown list option by visible text
 	 * 
-	 * @param filterElement
-	 *            Select tag filterElement
+	 * @param container
+	 *            Select tag container
 	 * @param text
 	 *            Option tag visible text
 	 */
@@ -432,8 +432,8 @@ public class PageDriver {
 	/**
 	 * Selects dropdown list option by value
 	 * 
-	 * @param filterElement
-	 *            Select tag filterElement
+	 * @param container
+	 *            Select tag container
 	 * @param value
 	 *            Option tag value
 	 */
@@ -446,10 +446,10 @@ public class PageDriver {
 	}
 
 	/**
-	 * Sets current parent page filterElement
+	 * Sets current parent page container
 	 * 
-	 * @param filterElement
-	 *            Page filterElement to set to be a parent filterElement
+	 * @param container
+	 *            Page container to set to be a parent container
 	 */
 	public void setParentElement(final PageElement element) {
 		parentElement = element;
@@ -523,14 +523,14 @@ public class PageDriver {
 	}
 
 	/**
-	 * Finds a specific filterElement matched by locator and is specific number index in
+	 * Finds a specific container matched by locator and is specific number index in
 	 * list of all elements matched
 	 * 
 	 * @param locator
 	 *            Element locator
 	 * @param num
 	 *            Number index in list of elements
-	 * @return Matched filterElement on success, null otherwise
+	 * @return Matched container on success, null otherwise
 	 */
 	private PageElement findBy(final By locator, final int num) {
 		List<PageElement> elementList = findAll(locator);

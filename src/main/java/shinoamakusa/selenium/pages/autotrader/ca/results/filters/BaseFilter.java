@@ -5,18 +5,18 @@ import org.openqa.selenium.WebDriverException;
 import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
 import main.java.shinoamakusa.selenium.core.elements.PageElement;
 
-public class PageFilter {
+public class BaseFilter {
 
 	protected BrowserDriver driver;
 	protected int menuOptionCount;
-	protected PageFilterMenu menu;
-	protected PageElement filterElement;
+	protected BaseFilterMenu menu;
+	protected PageElement container;
 
-	public PageFilter(PageElement element) {
-		this.filterElement = element;
+	public BaseFilter(PageElement element) {
+		this.container = element;
 	}
 
-	public PageFilter() {
+	public BaseFilter() {
 
 	}
 
@@ -30,7 +30,7 @@ public class PageFilter {
 
 	protected void chooseMenuOption(final String value) {
 		try {
-			menu = new PageFilterMenu(filterElement.findByClass("dropdown-menu"));
+			menu = new BaseFilterMenu(container.findByClass("dropdown-menu"));
 			menu.setOption(value);
 			menuOptionCount = menu.getFilterMenuCount();
 			driver.click(menu.getOption());

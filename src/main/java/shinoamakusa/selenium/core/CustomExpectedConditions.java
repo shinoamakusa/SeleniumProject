@@ -14,12 +14,12 @@ import main.java.shinoamakusa.selenium.core.elements.PageElement;
 public class CustomExpectedConditions {
 	
 	/**
-	 * Gets a list of all elements matched by child selector within parent filterElement
+	 * Gets a list of all elements matched by child selector within parent container
 	 * 
 	 * @param parent
-	 *            Parent filterElement
+	 *            Parent container
 	 * @param childLocator
-	 *            Locator for filterElement to match within parent filterElement
+	 *            Locator for container to match within parent container
 	 * @return List of elements matched, null otherwise
 	 */
 	public static final ExpectedCondition<List<PageElement>> presenceOfNestedElementsLocatedBy(final WebElement parent,
