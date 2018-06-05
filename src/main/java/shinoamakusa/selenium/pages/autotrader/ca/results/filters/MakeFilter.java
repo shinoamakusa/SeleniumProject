@@ -11,9 +11,9 @@ public class MakeFilter extends PageFilter {
 	}
 
 	public void change(final String make) {
+		select(make);
+		filterMenuNumberResults = getFilterCount();
 		try {
-			select(make);
-			filterMenuNumberResults = getFilterCount();
 			driver.click(driver.selectedElement());
 		} catch (WebDriverException e) {
 			checkForModal();

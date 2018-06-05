@@ -11,9 +11,9 @@ public class ModelFilter extends PageFilter {
 	}
 
 	public void change(final String model) {
+		select(model);
+		filterMenuNumberResults = getFilterCount();
 		try {
-			select(model);
-			filterMenuNumberResults = getFilterCount();
 			driver.click(driver.selectedElement());
 		} catch (WebDriverException e) {
 			checkForModal();
