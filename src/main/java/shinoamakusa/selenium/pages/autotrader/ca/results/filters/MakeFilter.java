@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriverException;
 
 import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
 
-public class MakeFilter extends BaseFilter {
+public class MakeFilter extends PageFilter {
 
 	public MakeFilter(BrowserDriver driver) {
 		this.driver = driver;

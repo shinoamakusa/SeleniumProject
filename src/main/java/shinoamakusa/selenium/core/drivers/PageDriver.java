@@ -397,53 +397,6 @@ public class PageDriver {
 		selectedElement = element;
 	}
 
-	/**
-	 * Selects dropdown list option by id
-	 * 
-	 * @param container
-	 *            Select tag container
-	 * @param num
-	 *            Option tag index
-	 */
-	public void selectOptionByIndex(final PageElement element, final int num) {
-		if (element.isSelectTagElement()) {
-			Select listElement = new Select(element.webElement());
-			listElement.selectByIndex(num);
-
-		}
-	}
-
-	/**
-	 * Selects dropdown list option by visible text
-	 * 
-	 * @param container
-	 *            Select tag container
-	 * @param text
-	 *            Option tag visible text
-	 */
-	public void selectOptionByText(final PageElement element, final String text) {
-		if (element.isSelectTagElement()) {
-			Select listElement = new Select(element.webElement());
-			listElement.selectByVisibleText(text);
-
-		}
-	}
-
-	/**
-	 * Selects dropdown list option by value
-	 * 
-	 * @param container
-	 *            Select tag container
-	 * @param value
-	 *            Option tag value
-	 */
-	public void selectOptionByValue(final PageElement element, final String value) {
-		if (element.isSelectTagElement()) {
-			Select listElement = new Select(element.webElement());
-			listElement.selectByValue(value);
-
-		}
-	}
 
 	/**
 	 * Sets current parent page container

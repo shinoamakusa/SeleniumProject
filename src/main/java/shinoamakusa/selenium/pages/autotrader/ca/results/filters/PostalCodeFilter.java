@@ -2,7 +2,7 @@ package main.java.shinoamakusa.selenium.pages.autotrader.ca.results.filters;
 
 import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
 
-public class PostalCodeFilter extends BaseFilter {
+public class PostalCodeFilter extends PageFilter {
 
 	public PostalCodeFilter(BrowserDriver driver) {
 		this.driver = driver;

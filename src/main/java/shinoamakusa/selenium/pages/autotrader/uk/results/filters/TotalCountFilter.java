@@ -2,7 +2,7 @@ package main.java.shinoamakusa.selenium.pages.autotrader.uk.results.filters;
 
 import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
 
-public class TotalCountFilter extends BaseFilter {
+public class TotalCountFilter extends PageFilter {
 
 	public TotalCountFilter(BrowserDriver driver) {
 		this.driver = driver;

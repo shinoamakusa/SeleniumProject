@@ -2,11 +2,11 @@ package main.java.shinoamakusa.selenium.pages.autotrader.ca.results.filters;
 
 import main.java.shinoamakusa.selenium.core.elements.PageElement;
 
-public class BaseFilterMenu {
+public class PageFilterMenu {
 	private PageElement container;
 	private PageElement menuOption;
 	
-	public BaseFilterMenu(PageElement element)
+	public PageFilterMenu(PageElement element)
 	{
 		this.container = element;
 		

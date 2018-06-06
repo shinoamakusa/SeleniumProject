@@ -2,21 +2,18 @@ package main.java.shinoamakusa.selenium.pages.autotrader.ca.results.filters;
 
 import org.openqa.selenium.WebDriverException;
 
-import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
 import main.java.shinoamakusa.selenium.core.elements.PageElement;
+import main.java.shinoamakusa.selenium.core.filters.BaseFilter;
 
-public class BaseFilter {
-
-	protected BrowserDriver driver;
+public class PageFilter extends BaseFilter {
 	protected int menuOptionCount;
-	protected BaseFilterMenu menu;
-	protected PageElement container;
+	protected PageFilterMenu menu;
 
-	public BaseFilter(PageElement element) {
+	public PageFilter(PageElement element) {
 		this.container = element;
 	}
 
-	public BaseFilter() {
+	public PageFilter() {
 
 	}
 
@@ -30,7 +27,7 @@ public class BaseFilter {
 
 	protected void chooseMenuOption(final String value) {
 		try {
-			menu = new BaseFilterMenu(container.findByClass("dropdown-menu"));
+			menu = new PageFilterMenu(container.findByClass("dropdown-menu"));
 			menu.setOption(value);
 			menuOptionCount = menu.getFilterMenuCount();
 			driver.click(menu.getOption());

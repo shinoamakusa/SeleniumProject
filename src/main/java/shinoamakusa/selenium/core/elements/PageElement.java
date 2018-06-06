@@ -22,8 +22,8 @@ import main.java.shinoamakusa.selenium.core.CustomExpectedConditions;
  */
 public class PageElement {
 
-	private static WebDriver driver;
-	private static WebDriverWait wait;
+	protected static WebDriver driver;
+	protected static WebDriverWait wait;
 
 	/**
 	 * Checks if certain number of elements exist in DOM
@@ -123,12 +123,17 @@ public class PageElement {
 	/**
 	 * Selenium WebElement object
 	 */
-	private WebElement element;
+	protected WebElement element;
 
 	/**
 	 * WebElement's HTML tag
 	 */
-	private String tag = "";
+	protected String tag = "";
+
+	public PageElement()
+	{
+		
+	}
 
 	/**
 	 * PageElement class constructor
@@ -159,7 +164,7 @@ public class PageElement {
 			this.tag = element.getTagName();
 		}
 	}
-
+	
 	/**
 	 * PageElement class constructor
 	 * 
@@ -498,34 +503,6 @@ public class PageElement {
 	}
 
 	/**
-	 * Gets options of select tag container
-	 * 
-	 * @return List of options of select tag container if exist
-	 */
-	public List<PageElement> getSelectOptions() {
-		if (isSelectTagElement()) {
-			List<PageElement> elementList = new ArrayList<PageElement>();
-			List<WebElement> list = new Select(element).getOptions();
-			for (WebElement el : list) {
-				elementList.add(new PageElement(el));
-			}
-			return elementList;
-		} else {
-			return new ArrayList<PageElement>();
-		}
-	}
-
-	public PageElement getSelectedOption() {
-		if (isSelectTagElement()) {
-			WebElement selected = new Select(element).getFirstSelectedOption();
-			return new PageElement(selected);
-
-		} else {
-			return new PageElement(null);
-		}
-	}
-
-	/**
 	 * Gets a tag of container
 	 * 
 	 * @return Tag of page container
@@ -620,16 +597,7 @@ public class PageElement {
 
 	}
 
-	/**
-	 * Determines if specific container is container of SELECT tag
-	 * 
-	 * @param container
-	 *            Page container
-	 * @return True on success, false otherwise
-	 */
-	public boolean isSelectTagElement() {
-		return element != null ? tag.equalsIgnoreCase("select") : false;
-	}
+	
 
 	/**
 	 * Checks that given page container is not stale (exists)
@@ -661,48 +629,6 @@ public class PageElement {
 			return false;
 		} catch (NullPointerException e) {
 			return false;
-		}
-	}
-
-	/**
-	 * Selects dropdown list option by id
-	 * 
-	 * @param num
-	 *            Option tag index
-	 */
-	public void selectOptionByIndex(final int num) {
-		if (this.isSelectTagElement()) {
-			Select listElement = new Select(element);
-			listElement.selectByIndex(num);
-
-		}
-	}
-
-	/**
-	 * Selects dropdown list option by visible text
-	 * 
-	 * @param text
-	 *            Option tag visible text
-	 */
-	public void selectOptionByText(final String text) {
-		if (this.isSelectTagElement()) {
-			Select listElement = new Select(element);
-			listElement.selectByVisibleText(text);
-
-		}
-	}
-
-	/**
-	 * Selects dropdown list option by value
-	 * 
-	 * @param value
-	 *            Option tag value
-	 */
-	public void selectOptionByValue(final String value) {
-		if (this.isSelectTagElement()) {
-			Select listElement = new Select(element);
-			listElement.selectByValue(value);
-
 		}
 	}
 

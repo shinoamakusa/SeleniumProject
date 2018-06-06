@@ -1,5 +1,6 @@
 package main.java.shinoamakusa.selenium.pages.autotrader.uk.home;
 
+import main.java.shinoamakusa.selenium.core.elements.SelectElement;
 import main.java.shinoamakusa.selenium.pages.BasePage;
 import main.java.shinoamakusa.selenium.pages.autotrader.uk.results.ResultsPage;
 
@@ -51,7 +52,7 @@ public class HomePage extends BasePage {
 		driver.select(driver.findByID("searchVehiclesMake"));
 		if (driver.selectedElement().isClickable()
 				&& driver.selectedElement().findByAttribute("value", make).exists()) {
-			driver.selectedElement().selectOptionByValue(make);
+			new SelectElement(driver.selectedElement()).selectOptionByValue(make);
 		}
 	}
 	
@@ -60,7 +61,7 @@ public class HomePage extends BasePage {
 		driver.select(driver.findByID("searchVehiclesModel"));
 		if (driver.selectedElement().isClickable()
 				&& driver.selectedElement().findByAttribute("value", model).exists()) {
-			driver.selectedElement().selectOptionByValue(model);
+			new SelectElement(driver.selectedElement()).selectOptionByValue(model);
 		}
 	}
 	
@@ -74,7 +75,7 @@ public class HomePage extends BasePage {
 		driver.select(driver.findByID("radius"));
 		if (driver.selectedElement().isClickable()
 				&& driver.selectedElement().findByAttribute("value", radius).exists()) {
-			driver.selectedElement().selectOptionByValue(radius);
+			new SelectElement(driver.selectedElement()).selectOptionByValue(radius);
 		}
 	}
 	

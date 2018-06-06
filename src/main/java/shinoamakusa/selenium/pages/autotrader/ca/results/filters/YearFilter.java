@@ -3,8 +3,9 @@ package main.java.shinoamakusa.selenium.pages.autotrader.ca.results.filters;
 import org.openqa.selenium.WebDriverException;
 
 import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
+import main.java.shinoamakusa.selenium.core.elements.SelectElement;
 
-public class YearFilter extends BaseFilter {
+public class YearFilter extends PageFilter {
 
 	public YearFilter(BrowserDriver driver) {
 		this.driver = driver;
@@ -33,8 +34,9 @@ public class YearFilter extends BaseFilter {
 	private void selectMaxYear(final String year) {
 
 		try {
-			menu = new BaseFilterMenu(container.findByClass("dropdown-menu"));
-			menu.container().findByID("yearHigh").selectOptionByValue(year);
+			menu = new PageFilterMenu(container.findByClass("dropdown-menu"));
+			SelectElement maxYearSelect = new SelectElement(menu.container().findByID("yearHigh"));
+			maxYearSelect.selectOptionByValue(year);
 			driver.click(menu.container().findByID("applyYear"));
 		} catch (WebDriverException e) {
 			checkForModal();

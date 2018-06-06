@@ -13,10 +13,16 @@ public class ResultsPage extends BasePage {
 		this.driver = driver;
 		this.title = this.driver.getTitle();
 		filters = new ResultsFilters(driver);
+		closeModal();
 	}
 
 	public ResultsFilters filters() {
 		return filters;
+	}
+	
+	private void closeModal()
+	{
+		driver.click(driver.findByID("buttonno"));
 	}
 
 }

@@ -18,6 +18,7 @@ public class SearchByMonthlyPriceTest extends BaseTest {
 		assertTrue(resultsPage.isValidPage());
 		assertTrue(resultsPage.filters().countFilter().contains(homepage.getSearchCount()));
 		assertTrue(resultsPage.filters().radius().isSelected(radius));
+		assertTrue(resultsPage.filters().postal().isSelected(postalCode));
 
 	}
 

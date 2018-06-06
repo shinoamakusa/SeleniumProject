@@ -1,5 +1,6 @@
 package main.java.shinoamakusa.selenium.pages.autotrader.ca.home;
 
+import main.java.shinoamakusa.selenium.core.elements.SelectElement;
 import main.java.shinoamakusa.selenium.pages.BasePage;
 import main.java.shinoamakusa.selenium.pages.autotrader.ca.results.ResultsPage;
 
@@ -21,7 +22,7 @@ public class HomePage extends BasePage {
 		submitSearch();
 		return new ResultsPage(driver);
 	}
-	
+
 	public ResultsPage search(final String make, final String model, final String price, final String postalCode) {
 		selectMake(make);
 		selectModel(model);
@@ -34,19 +35,19 @@ public class HomePage extends BasePage {
 	private void selectMake(final String make) {
 		driver.select(driver.findByID("rfMakes"));
 		if (driver.selectedElement().isClickable())
-			driver.selectOptionByValue(driver.selectedElement(), make);
+			new SelectElement(driver.selectedElement()).selectOptionByValue(make);
 	}
 
 	private void selectModel(final String model) {
 		driver.select(driver.findByID("rfModel"));
 		if (driver.selectedElement().isClickable())
-			driver.selectOptionByValue(driver.selectedElement(), model);
+			new SelectElement(driver.selectedElement()).selectOptionByValue(model);
 	}
 
 	private void selectPrice(final String price) {
 		driver.select(driver.findByID("rfPriceHigh"));
 		if (driver.selectedElement().isClickable())
-			driver.selectOptionByValue(driver.selectedElement(), price);
+			new SelectElement(driver.selectedElement()).selectOptionByValue(price);
 	}
 
 	private void submitSearch() {
