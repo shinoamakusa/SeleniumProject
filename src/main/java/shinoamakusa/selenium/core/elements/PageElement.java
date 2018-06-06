@@ -515,6 +515,16 @@ public class PageElement {
 		}
 	}
 
+	public PageElement getSelectedOption() {
+		if (isSelectTagElement()) {
+			WebElement selected = new Select(element).getFirstSelectedOption();
+			return new PageElement(selected);
+
+		} else {
+			return new PageElement(null);
+		}
+	}
+
 	/**
 	 * Gets a tag of container
 	 * 
@@ -775,7 +785,8 @@ public class PageElement {
 	}
 
 	/**
-	 * Finds all elements within parent container's scope matched by specified locator
+	 * Finds all elements within parent container's scope matched by specified
+	 * locator
 	 * 
 	 * @param parent
 	 *            Parent container
@@ -797,8 +808,8 @@ public class PageElement {
 	}
 
 	/**
-	 * Finds a specific container within parent container's scope matched by locator and
-	 * is specific number index in list of all elements matched
+	 * Finds a specific container within parent container's scope matched by locator
+	 * and is specific number index in list of all elements matched
 	 * 
 	 * @param parent
 	 *            Parent container
