@@ -2,13 +2,13 @@
 <suite name = "AutoTrader.ca Suite">
 <test name = "AutoTrader.ca Search">
 <classes>
-<class name = "test.java.shinoamakusa.selenium.autotrader.ca.SearchTest">
+<class name = "shinoamakusa.selenium.autotrader.ca.SearchTest">
 </class>
 </classes>
 </test>
 <test name = "AutoTrader.ca Search with Filters">
 <classes>
-<class name = "test.java.shinoamakusa.selenium.autotrader.ca.SearchTestWithFilters">
+<class name = "shinoamakusa.selenium.autotrader.ca.SearchTestWithFilters">
 </class>
 </classes>
 </test>

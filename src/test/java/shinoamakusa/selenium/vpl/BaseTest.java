@@ -1,12 +1,12 @@
-package test.java.shinoamakusa.selenium.vpl;
+package shinoamakusa.selenium.vpl;
 
 import static org.testng.Assert.assertTrue;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-import main.java.shinoamakusa.selenium.pageobjects.vpl.home.HomePage;
-import main.java.shinoamakusa.selenium.pageobjects.vpl.results.ResultsPage;
+import shinoamakusa.selenium.pageobjects.vpl.home.HomePage;
+import shinoamakusa.selenium.pageobjects.vpl.results.ResultsPage;
 
 public class BaseTest {
 	protected HomePage homepage;

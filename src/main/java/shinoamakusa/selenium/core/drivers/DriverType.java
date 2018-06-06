@@ -1,4 +1,4 @@
-package main.java.shinoamakusa.selenium.core.drivers;
+package shinoamakusa.selenium.core.drivers;
 
 /**
  * Represents various browser types

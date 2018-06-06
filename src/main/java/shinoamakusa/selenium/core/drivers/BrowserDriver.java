@@ -1,4 +1,4 @@
-package main.java.shinoamakusa.selenium.core.drivers;
+package shinoamakusa.selenium.core.drivers;
 
 import java.util.HashSet;
 
@@ -13,7 +13,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import main.java.shinoamakusa.selenium.core.elements.PageElement;
+import shinoamakusa.selenium.core.elements.PageElement;
 
 /**
  * Class representing a browser instance Wrapper class for Selenium WebDriver

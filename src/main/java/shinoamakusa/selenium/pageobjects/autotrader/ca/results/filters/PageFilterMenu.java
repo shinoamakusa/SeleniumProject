@@ -1,6 +1,6 @@
-package main.java.shinoamakusa.selenium.pageobjects.autotrader.ca.results.filters;
+package shinoamakusa.selenium.pageobjects.autotrader.ca.results.filters;
 
-import main.java.shinoamakusa.selenium.core.elements.PageElement;
+import shinoamakusa.selenium.core.elements.PageElement;
 
 public class PageFilterMenu {
 	private PageElement container;

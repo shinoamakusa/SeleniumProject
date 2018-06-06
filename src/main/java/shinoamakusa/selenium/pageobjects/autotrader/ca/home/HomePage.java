@@ -1,8 +1,8 @@
-package main.java.shinoamakusa.selenium.pageobjects.autotrader.ca.home;
+package shinoamakusa.selenium.pageobjects.autotrader.ca.home;
 
-import main.java.shinoamakusa.selenium.core.elements.SelectElement;
-import main.java.shinoamakusa.selenium.core.pages.BasePage;
-import main.java.shinoamakusa.selenium.pageobjects.autotrader.ca.results.ResultsPage;
+import shinoamakusa.selenium.core.elements.SelectElement;
+import shinoamakusa.selenium.core.pages.BasePage;
+import shinoamakusa.selenium.pageobjects.autotrader.ca.results.ResultsPage;
 
 public class HomePage extends BasePage {
 	public HomePage() {

@@ -1,7 +1,7 @@
-package main.java.shinoamakusa.selenium.core.pages;
+package shinoamakusa.selenium.core.pages;
 
-import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
-import main.java.shinoamakusa.selenium.core.drivers.DriverType;
+import shinoamakusa.selenium.core.drivers.BrowserDriver;
+import shinoamakusa.selenium.core.drivers.DriverType;
 
 public class BasePage {
 	protected BrowserDriver driver;

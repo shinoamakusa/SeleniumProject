@@ -1,8 +1,8 @@
-package main.java.shinoamakusa.selenium.pageobjects.autotrader.uk.results.filters;
+package shinoamakusa.selenium.pageobjects.autotrader.uk.results.filters;
 
-import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
-import main.java.shinoamakusa.selenium.core.elements.PageElement;
-import main.java.shinoamakusa.selenium.core.filters.BaseFilter;
+import shinoamakusa.selenium.core.drivers.BrowserDriver;
+import shinoamakusa.selenium.core.elements.PageElement;
+import shinoamakusa.selenium.core.filters.BaseFilter;
 
 public class PageFilter extends BaseFilter {
 	

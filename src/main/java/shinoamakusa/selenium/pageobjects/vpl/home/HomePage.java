@@ -1,7 +1,7 @@
-package main.java.shinoamakusa.selenium.pageobjects.vpl.home;
+package shinoamakusa.selenium.pageobjects.vpl.home;
 
-import main.java.shinoamakusa.selenium.core.pages.BasePage;
-import main.java.shinoamakusa.selenium.pageobjects.vpl.results.ResultsPage;
+import shinoamakusa.selenium.core.pages.BasePage;
+import shinoamakusa.selenium.pageobjects.vpl.results.ResultsPage;
 
 public class HomePage extends BasePage {
 	public HomePage()

@@ -1,4 +1,4 @@
-package test.java.shinoamakusa.selenium.autotrader.uk;
+package shinoamakusa.selenium.autotrader.uk;
 
 import static org.testng.Assert.assertTrue;
 

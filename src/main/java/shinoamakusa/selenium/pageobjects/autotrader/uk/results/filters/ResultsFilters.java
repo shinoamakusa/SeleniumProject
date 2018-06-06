@@ -1,6 +1,6 @@
-package main.java.shinoamakusa.selenium.pageobjects.autotrader.uk.results.filters;
+package shinoamakusa.selenium.pageobjects.autotrader.uk.results.filters;
 
-import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
+import shinoamakusa.selenium.core.drivers.BrowserDriver;
 
 public class ResultsFilters {
 	private TotalCountFilter countFilter;

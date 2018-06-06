@@ -1,9 +1,9 @@
-package main.java.shinoamakusa.selenium.pageobjects.bestbuy.home;
+package shinoamakusa.selenium.pageobjects.bestbuy.home;
 
 import org.openqa.selenium.WebDriverException;
 
-import main.java.shinoamakusa.selenium.core.pages.BasePage;
-import main.java.shinoamakusa.selenium.pageobjects.bestbuy.results.ResultsPage;
+import shinoamakusa.selenium.core.pages.BasePage;
+import shinoamakusa.selenium.pageobjects.bestbuy.results.ResultsPage;
 
 public class HomePage extends BasePage {
 	public HomePage() {

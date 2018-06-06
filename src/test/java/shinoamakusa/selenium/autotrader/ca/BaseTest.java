@@ -1,12 +1,12 @@
-package test.java.shinoamakusa.selenium.autotrader.ca;
+package shinoamakusa.selenium.autotrader.ca;
 
 import static org.testng.Assert.assertTrue;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-import main.java.shinoamakusa.selenium.pageobjects.autotrader.ca.home.HomePage;
-import main.java.shinoamakusa.selenium.pageobjects.autotrader.ca.results.ResultsPage;
+import shinoamakusa.selenium.pageobjects.autotrader.ca.home.HomePage;
+import shinoamakusa.selenium.pageobjects.autotrader.ca.results.ResultsPage;
 
 public class BaseTest {
 	protected HomePage homepage;

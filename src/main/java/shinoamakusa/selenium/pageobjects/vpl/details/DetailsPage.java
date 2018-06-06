@@ -1,7 +1,7 @@
-package main.java.shinoamakusa.selenium.pageobjects.vpl.details;
+package shinoamakusa.selenium.pageobjects.vpl.details;
 
-import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
-import main.java.shinoamakusa.selenium.core.pages.BasePage;
+import shinoamakusa.selenium.core.drivers.BrowserDriver;
+import shinoamakusa.selenium.core.pages.BasePage;
 
 public class DetailsPage extends BasePage {
 	public String author;

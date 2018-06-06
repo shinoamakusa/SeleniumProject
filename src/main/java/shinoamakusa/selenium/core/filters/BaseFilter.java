@@ -1,7 +1,7 @@
-package main.java.shinoamakusa.selenium.core.filters;
+package shinoamakusa.selenium.core.filters;
 
-import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
-import main.java.shinoamakusa.selenium.core.elements.PageElement;
+import shinoamakusa.selenium.core.drivers.BrowserDriver;
+import shinoamakusa.selenium.core.elements.PageElement;
 
 public class BaseFilter {
 	

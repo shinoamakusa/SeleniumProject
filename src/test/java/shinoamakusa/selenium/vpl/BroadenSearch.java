@@ -1,4 +1,4 @@
-package test.java.shinoamakusa.selenium.vpl;
+package shinoamakusa.selenium.vpl;
 
 import static org.testng.Assert.assertTrue;
 

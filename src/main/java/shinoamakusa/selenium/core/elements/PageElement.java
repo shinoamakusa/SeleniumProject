@@ -1,6 +1,5 @@
-package main.java.shinoamakusa.selenium.core.elements;
+package shinoamakusa.selenium.core.elements;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -9,10 +8,9 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import main.java.shinoamakusa.selenium.core.CustomExpectedConditions;
+import shinoamakusa.selenium.core.CustomExpectedConditions;
 
 /**
  * Class representing a page container ( Selenium WebElement)

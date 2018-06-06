@@ -1,9 +1,9 @@
-package main.java.shinoamakusa.selenium.pageobjects.autotrader.ca.results.filters;
+package shinoamakusa.selenium.pageobjects.autotrader.ca.results.filters;
 
 import org.openqa.selenium.WebDriverException;
 
-import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
-import main.java.shinoamakusa.selenium.core.elements.SelectElement;
+import shinoamakusa.selenium.core.drivers.BrowserDriver;
+import shinoamakusa.selenium.core.elements.SelectElement;
 
 public class YearFilter extends PageFilter {
 

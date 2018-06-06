@@ -1,10 +1,10 @@
-package test.java.shinoamakusa.selenium.vpl;
+package shinoamakusa.selenium.vpl;
 
 import static org.testng.Assert.assertTrue;
 
 import org.testng.annotations.Test;
 
-import main.java.shinoamakusa.selenium.pageobjects.vpl.details.DetailsPage;
+import shinoamakusa.selenium.pageobjects.vpl.details.DetailsPage;
 
 public class DetailsPaginationCheck extends BaseTest {
 	@Test

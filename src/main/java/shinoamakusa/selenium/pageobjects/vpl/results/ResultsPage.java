@@ -1,12 +1,12 @@
-package main.java.shinoamakusa.selenium.pageobjects.vpl.results;
+package shinoamakusa.selenium.pageobjects.vpl.results;
 
 import static org.testng.Assert.assertTrue;
 
 import org.apache.commons.lang3.StringUtils;
 
-import main.java.shinoamakusa.selenium.core.drivers.BrowserDriver;
-import main.java.shinoamakusa.selenium.core.pages.BasePage;
-import main.java.shinoamakusa.selenium.pageobjects.vpl.details.DetailsPage;
+import shinoamakusa.selenium.core.drivers.BrowserDriver;
+import shinoamakusa.selenium.core.pages.BasePage;
+import shinoamakusa.selenium.pageobjects.vpl.details.DetailsPage;
 
 public class ResultsPage extends BasePage {
 

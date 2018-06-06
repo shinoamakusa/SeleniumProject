@@ -1,4 +1,4 @@
-package test.java.shinoamakusa.selenium.bestbuy;
+package shinoamakusa.selenium.bestbuy;
 
 import org.testng.annotations.Test;
 
