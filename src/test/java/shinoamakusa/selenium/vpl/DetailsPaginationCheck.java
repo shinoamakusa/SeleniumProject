@@ -4,7 +4,7 @@ import static org.testng.Assert.assertTrue;
 
 import org.testng.annotations.Test;
 
-import main.java.shinoamakusa.selenium.pages.vpl.details.DetailsPage;
+import main.java.shinoamakusa.selenium.pageobjects.vpl.details.DetailsPage;
 
 public class DetailsPaginationCheck extends BaseTest {
 	@Test

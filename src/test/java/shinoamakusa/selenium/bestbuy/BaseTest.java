@@ -5,8 +5,8 @@ import static org.testng.Assert.assertTrue;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-import main.java.shinoamakusa.selenium.pages.bestbuy.home.HomePage;
-import main.java.shinoamakusa.selenium.pages.bestbuy.results.ResultsPage;
+import main.java.shinoamakusa.selenium.pageobjects.bestbuy.home.HomePage;
+import main.java.shinoamakusa.selenium.pageobjects.bestbuy.results.ResultsPage;
 
 public class BaseTest {
 	protected HomePage homepage;
