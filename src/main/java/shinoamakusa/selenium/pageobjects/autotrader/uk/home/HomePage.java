@@ -9,19 +9,19 @@ import shinoamakusa.selenium.pageobjects.autotrader.uk.results.ResultsPage;
 
 public class HomePage extends BasePage {
 
-	private String searchCount;
 	private HomeFilters filters;
+	private String searchCount;
 
 	public HomePage() {
 		this.urlPart = "autotrader.co.uk";
 	}
 
-	public String getSearchCount() {
-		return searchCount;
-	}
-
 	public HomeFilters filters() {
 		return filters;
+	}
+
+	public String getSearchCount() {
+		return searchCount;
 	}
 
 	public void open() {
@@ -33,20 +33,29 @@ public class HomePage extends BasePage {
 
 	}
 
-	private void selectMake(final String make) {
+	public void selectMake(final String make) {
 		filters().make().select(make);
 	}
 
-	private void selectModel(final String model) {
+	public void selectModel(final String model) {
 		filters().model().select(model);
 	}
 
-	private void selectMonthlyPrice() {
+	public void selectMonthlyPrice() {
 
 		filters().monthlyPrice().select();
 	}
 
-	private void selectRadius(final String radius) {
+	public void selectNearlyNew(final boolean state) {
+		filters().carFilters().nearlyNewFilter().select(state);
+	}
+
+	public void selectNew(final boolean state) {
+		filters().carFilters().newFilter().select(state);
+
+	}
+
+	public void selectRadius(final String radius) {
 		filters().radius().select(radius);
 	}
 
@@ -61,17 +70,8 @@ public class HomePage extends BasePage {
 		return new ResultsPage(driver);
 	}
 
-	private void typePostalCode(String postalCode) {
+	public void typePostalCode(String postalCode) {
 		filters().postal().enterValue(postalCode);
-	}
-
-	private void uncheckNearlyNew() {
-		filters().nearlyNewFilter().select(false);
-	}
-
-	private void uncheckNew() {
-		filters().newFilter().select(false);
-
 	}
 
 }

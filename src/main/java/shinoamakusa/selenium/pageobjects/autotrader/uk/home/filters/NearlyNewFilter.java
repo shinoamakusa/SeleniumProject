@@ -10,13 +10,18 @@ public class NearlyNewFilter extends BaseFilter {
 		this.driver = driver;
 		this.locator = ByLocator.attribute("for", "oneSearchAdNearlyNew");
 	}
-	
-	public void select(boolean checked)
-	{
+
+	public void select(boolean checked) {
 		PageElement container = driver.findByLocator(this.locator);
 		if (container.findByName("onesearchad").hasSelectedState(!checked)) {
 			driver.click(container);
 		}
+	}
+
+	public boolean isSelected() {
+		PageElement container = driver.findByLocator(this.locator);
+		return container.findByName("onesearchad").hasSelectedState(true);
+
 	}
 
 }

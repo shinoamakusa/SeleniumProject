@@ -8,12 +8,10 @@ public class HomeFilters {
 	private MakeFilter make;
 	private ModelFilter model;
 	private MonthlyPriceFilter monthlyPrice;
-	private NearlyNewFilter nearlyNewFilter;
-	private NewFilter newFilter;
 	private PostalCodeFilter postal;
 	private RadiusFilter radius;
 	private TotalPriceFilter totalPrice;
-	private UsedFilter usedFilter;
+	private CarFilters carFilters;
 
 	public HomeFilters(BrowserDriver driver) {
 		model = new ModelFilter(driver);
@@ -22,9 +20,11 @@ public class HomeFilters {
 		postal = new PostalCodeFilter(driver);
 		monthlyPrice = new MonthlyPriceFilter(driver);
 		totalPrice = new TotalPriceFilter(driver);
-		nearlyNewFilter = new NearlyNewFilter(driver);
-		newFilter = new NewFilter(driver);
-		usedFilter = new UsedFilter(driver);
+		carFilters = new CarFilters(driver);
+	}
+
+	public CarFilters carFilters() {
+		return carFilters;
 	}
 
 	public MakeFilter make() {
@@ -39,14 +39,6 @@ public class HomeFilters {
 		return monthlyPrice;
 	}
 
-	public NearlyNewFilter nearlyNewFilter() {
-		return nearlyNewFilter;
-	}
-
-	public NewFilter newFilter() {
-		return newFilter;
-	}
-
 	public PostalCodeFilter postal() {
 		return postal;
 	}
@@ -57,10 +49,6 @@ public class HomeFilters {
 
 	public TotalPriceFilter totalPrice() {
 		return totalPrice;
-	}
-
-	public UsedFilter usedFilter() {
-		return usedFilter;
 	}
 
 }

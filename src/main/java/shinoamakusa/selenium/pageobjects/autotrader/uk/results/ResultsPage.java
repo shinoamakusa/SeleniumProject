@@ -26,16 +26,7 @@ public class ResultsPage extends BasePage {
 		closeModal();
 	}
 
-	public ResultsFilters filters() {
-		return filters;
-	}
-
-	private void closeModal() {
-		driver.click(driver.findByID("buttonno"));
-		driver.click(driver.findByID("js-cookie-alert-close"));
-	}
-
-	public boolean checkSortingOrder(boolean descending) {
+	public boolean sortOrderValid(boolean descending) {
 		By containerLocator = ByLocator.className("search-page__results");
 		By locator = ByLocator.className("finance-price");
 
@@ -55,6 +46,40 @@ public class ResultsPage extends BasePage {
 		else
 			return Ordering.natural().isOrdered(values);
 
+	}
+	
+	public void selectMonthlySortDesc()
+	{
+		filters().sortFilter().select("monthly-price-desc");
+	}
+
+	public boolean countContains(String value) {
+		return filters().countFilter().contains(value);
+	}
+
+	public ResultsFilters filters() {
+		return filters;
+	}
+
+	public boolean isMakeSelected(String make) {
+		return filters().make().isSelected(make);
+	}
+
+	public boolean isModelSelected(String model) {
+		return filters().model().isSelected(model);
+	}
+
+	public boolean isPostalCode(String postalCode) {
+		return filters().postal().isSelected(postalCode);
+	}
+
+	public boolean isRadiusSelected(String radius) {
+		return filters().radius().isSelected(radius);
+	}
+
+	private void closeModal() {
+		driver.click(driver.findByID("buttonno"));
+		driver.click(driver.findByID("js-cookie-alert-close"));
 	}
 
 }
