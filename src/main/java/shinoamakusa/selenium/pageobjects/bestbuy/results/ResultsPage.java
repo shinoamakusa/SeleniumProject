@@ -1,7 +1,7 @@
 package shinoamakusa.selenium.pageobjects.bestbuy.results;
 
 import shinoamakusa.selenium.core.drivers.BrowserDriver;
-import shinoamakusa.selenium.core.elements.ElementLocator;
+import shinoamakusa.selenium.core.elements.ByLocator;
 import shinoamakusa.selenium.core.elements.PageElement;
 import shinoamakusa.selenium.core.pages.BasePage;
 
@@ -18,8 +18,8 @@ public class ResultsPage extends BasePage {
 	 * same
 	 */
 	public boolean itemCountsEqual() {
-		return PageElement.elementTextContains(ElementLocator.byClass("display-total"),
-				driver.selectedElement().getText().replaceAll("[()]", ""));
+		return driver.findByClass("display-total")
+				.textContains(driver.selectedElement().getText().replaceAll("[()]", ""));
 	}
 
 	/**
@@ -35,7 +35,7 @@ public class ResultsPage extends BasePage {
 				PageElement element = driver.findByAttribute("data-value", Integer.toString(option));
 				int numPosts = Integer.parseInt(element.getText());
 				driver.click(element);
-				passed = PageElement.elementCountEquals(ElementLocator.byClass("listing-item"), numPosts);
+				passed = PageElement.elementCountEquals(ByLocator.className("listing-item"), numPosts);
 			}
 
 			return passed;

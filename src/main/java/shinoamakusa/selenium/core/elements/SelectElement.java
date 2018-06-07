@@ -73,7 +73,7 @@ public class SelectElement extends PageElement {
 			return new PageElement(selected);
 
 		} else {
-			return new PageElement(null);
+			return new PageElement();
 		}
 	}
 

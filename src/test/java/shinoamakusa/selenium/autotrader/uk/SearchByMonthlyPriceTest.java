@@ -13,7 +13,7 @@ public class SearchByMonthlyPriceTest extends BaseTest {
 		String radius = "50";
 		String make = "BMW";
 		String model = "3 SERIES";
-		
+
 		homepage.filters().postal().enterValue(postalCode);
 		homepage.filters().radius().select(radius);
 		homepage.filters().nearlyNewFilter().select(false);
@@ -23,13 +23,16 @@ public class SearchByMonthlyPriceTest extends BaseTest {
 		homepage.filters().monthlyPrice().select();
 
 		resultsPage = homepage.submitSearch();
-		
+
 		assertTrue(resultsPage.isValidPage());
 		assertTrue(resultsPage.filters().countFilter().contains(homepage.getSearchCount()));
 		assertTrue(resultsPage.filters().radius().isSelected(radius));
 		assertTrue(resultsPage.filters().postal().isSelected(postalCode));
 		assertTrue(resultsPage.filters().make().isSelected(make));
 		assertTrue(resultsPage.filters().model().isSelected(model));
+
+		resultsPage.filters().sortFilter().select("monthly-price-desc");
+		assertTrue(resultsPage.checkSortingOrder(true));
 
 	}
 

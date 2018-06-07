@@ -6,16 +6,19 @@ import shinoamakusa.selenium.core.elements.PageElement;
 import shinoamakusa.selenium.core.elements.SelectElement;
 import shinoamakusa.selenium.core.filters.BaseFilter;
 
-public class RadiusFilter extends BaseFilter {
-
-	public RadiusFilter(BrowserDriver driver) {
+public class SortFilter extends BaseFilter {
+	public SortFilter(BrowserDriver driver) {
 		this.driver = driver;
-		this.locator = ByLocator.name("radius");
+		this.locator = ByLocator.className("js-sort-options");
 	}
 
-	public boolean isSelected(final String radius) {
+	public void select(String value) {
+
 		PageElement container = driver.findByLocator(this.locator);
-		return new SelectElement(container).getSelectedOption().getAttribute("value").equalsIgnoreCase(radius);
+		PageElement sortOption = container.findByAttribute("value", value);
+		if (sortOption.exists())
+			new SelectElement(container).selectOptionByValue(value);
+
 	}
 
 }

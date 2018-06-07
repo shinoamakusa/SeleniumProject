@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import shinoamakusa.selenium.core.elements.ElementLocator;
+import shinoamakusa.selenium.core.elements.ByLocator;
 import shinoamakusa.selenium.core.elements.PageElement;
 
 /**
@@ -21,7 +21,7 @@ import shinoamakusa.selenium.core.elements.PageElement;
  * @author Oleg Kravenkov
  *
  */
-public class PageDriver {
+public class BaseDriver {
 
 	/**
 	 * Selenium WebDriver
@@ -44,9 +44,9 @@ public class PageDriver {
 	protected WebDriverWait wait;
 
 	/**
-	 * PageDriver class constructor
+	 * BaseDriver class constructor
 	 */
-	public PageDriver() {
+	public BaseDriver() {
 
 	}
 
@@ -60,7 +60,7 @@ public class PageDriver {
 	 * @return List of page elements matched
 	 */
 	public List<PageElement> findAllByAttribute(final String attributeName, final String attributeValue) {
-		return findAll(ElementLocator.byAttribute(attributeName, attributeValue));
+		return findAll(ByLocator.attribute(attributeName, attributeValue));
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class PageDriver {
 	 * @return List of page elements matched
 	 */
 	public List<PageElement> findAllByClass(final String className) {
-		return findAll(ElementLocator.byClass(className));
+		return findAll(ByLocator.className(className));
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class PageDriver {
 	 * @return List of page elements matched
 	 */
 	public List<PageElement> findAllByCssSelector(final String cssSelector) {
-		return findAll(ElementLocator.byCssSelector(cssSelector));
+		return findAll(ByLocator.cssSelector(cssSelector));
 	}
 
 	/**
@@ -93,14 +93,14 @@ public class PageDriver {
 	 * @return List of page elements matched
 	 */
 	public List<PageElement> findAllByID(final String id) {
-		return findAll(ElementLocator.byID(id));
+		return findAll(ByLocator.id(id));
 	}
 
 	/**
 	 * Finds page elements matched by a locator
 	 * 
 	 * @param locator
-	 *            Locator
+	 *            ByLocator
 	 * @return List of matched elements, null otherwise
 	 */
 	public List<PageElement> findAllByLocator(final By locator) {
@@ -115,7 +115,7 @@ public class PageDriver {
 	 * @return List of page elements matched
 	 */
 	public List<PageElement> findAllByName(final String name) {
-		return findAll(ElementLocator.byName(name));
+		return findAll(ByLocator.name(name));
 	}
 
 	/**
@@ -126,7 +126,7 @@ public class PageDriver {
 	 * @return List of page elements matched
 	 */
 	public List<PageElement> findAllByTag(final String tag) {
-		return findAll(ElementLocator.byTag(tag));
+		return findAll(ByLocator.tag(tag));
 	}
 
 	/**
@@ -137,7 +137,7 @@ public class PageDriver {
 	 * @return List of page elements matched
 	 */
 	public List<PageElement> findAllByText(final String value) {
-		return findAll(ElementLocator.byText(value));
+		return findAll(ByLocator.text(value));
 	}
 
 	/**
@@ -165,7 +165,7 @@ public class PageDriver {
 	 * @return Page container matched
 	 */
 	public PageElement findByAttribute(final String attributeName, final String attributeValue, final int num) {
-		return findBy(ElementLocator.byAttribute(attributeName, attributeValue), num);
+		return findBy(ByLocator.attribute(attributeName, attributeValue), num);
 	}
 
 	/**
@@ -189,7 +189,7 @@ public class PageDriver {
 	 * @return Page container matched
 	 */
 	public PageElement findByClass(final String className, final int num) {
-		return findBy(ElementLocator.byClass(className), num);
+		return findBy(ByLocator.className(className), num);
 	}
 
 	/**
@@ -213,7 +213,7 @@ public class PageDriver {
 	 * @return Page container matched
 	 */
 	public PageElement findByCssSelector(final String cssSekector, final int num) {
-		return findBy(ElementLocator.byCssSelector(cssSekector), num);
+		return findBy(ByLocator.cssSelector(cssSekector), num);
 	}
 
 	/**
@@ -238,14 +238,14 @@ public class PageDriver {
 	 */
 
 	public PageElement findByID(final String id, final int num) {
-		return findBy(ElementLocator.byID(id), num);
+		return findBy(ByLocator.id(id), num);
 	}
 
 	/**
 	 * Finds first page container matched by a locator
 	 * 
 	 * @param locator
-	 *            Locator
+	 *            ByLocator
 	 * @return First elements matched
 	 */
 	public PageElement findByLocator(final By locator) {
@@ -286,7 +286,7 @@ public class PageDriver {
 	 * @return List of page elements matched
 	 */
 	public PageElement findByName(final String name, final int num) {
-		return findBy(ElementLocator.byName(name), num);
+		return findBy(ByLocator.name(name), num);
 	}
 
 	/**
@@ -310,7 +310,7 @@ public class PageDriver {
 	 * @return List of page elements matched
 	 */
 	public PageElement findByTag(final String tag, final int num) {
-		return findBy(ElementLocator.byTag(tag), num);
+		return findBy(ByLocator.tag(tag), num);
 	}
 
 	/**
@@ -334,7 +334,7 @@ public class PageDriver {
 	 * @return List of page elements matched
 	 */
 	public PageElement findByText(final String value, final int num) {
-		return findBy(ElementLocator.byText(value), num);
+		return findBy(ByLocator.text(value), num);
 	}
 
 	/**
@@ -463,7 +463,6 @@ public class PageDriver {
 				List<WebElement> webList = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
 				for (WebElement element : webList) {
 					list.add(new PageElement(element, locator));
-
 				}
 
 				return list;
@@ -490,7 +489,7 @@ public class PageDriver {
 			PageElement element = elementList.get(num - 1);
 			return element;
 		} else
-			return new PageElement(null);
+			return new PageElement();
 	}
 
 }

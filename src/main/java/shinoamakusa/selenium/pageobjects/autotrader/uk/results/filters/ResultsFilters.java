@@ -4,10 +4,11 @@ import shinoamakusa.selenium.core.drivers.BrowserDriver;
 
 public class ResultsFilters {
 	private TotalCountFilter countFilter;
-	private RadiusFilter radius;
-	private PostalCodeFilter postal;
 	private MakeFilter make;
 	private ModelFilter model;
+	private PostalCodeFilter postal;
+	private RadiusFilter radius;
+	private SortFilter sortFilter;
 
 	public ResultsFilters(BrowserDriver driver) {
 		countFilter = new TotalCountFilter(driver);
@@ -15,19 +16,12 @@ public class ResultsFilters {
 		postal = new PostalCodeFilter(driver);
 		make = new MakeFilter(driver);
 		model = new ModelFilter(driver);
+		sortFilter = new SortFilter(driver);
 
 	}
 
 	public TotalCountFilter countFilter() {
 		return countFilter;
-	}
-
-	public RadiusFilter radius() {
-		return radius;
-	}
-
-	public PostalCodeFilter postal() {
-		return postal;
 	}
 
 	public MakeFilter make() {
@@ -36,6 +30,18 @@ public class ResultsFilters {
 
 	public ModelFilter model() {
 		return model;
+	}
+
+	public PostalCodeFilter postal() {
+		return postal;
+	}
+
+	public RadiusFilter radius() {
+		return radius;
+	}
+
+	public SortFilter sortFilter() {
+		return sortFilter;
 	}
 
 }

@@ -21,7 +21,7 @@ import shinoamakusa.selenium.core.elements.PageElement;
  * @author Oleg Kravenkov
  *
  */
-public class BrowserDriver extends PageDriver {
+public class BrowserDriver extends BaseDriver {
 
 	/**
 	 * Default ChromeDriver location

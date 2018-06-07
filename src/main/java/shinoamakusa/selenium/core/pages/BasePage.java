@@ -9,29 +9,36 @@ public class BasePage {
 	protected String title;
 	protected String url;
 	protected String urlPart;
-	
-	public BasePage()
-	{
-		driver =  new BrowserDriver(DriverType.Chrome);
+
+	public BasePage() {
+		driver = new BrowserDriver(DriverType.Chrome);
 	}
-	
-	public void close()
-	{
+
+	/**
+	 * Closes page
+	 */
+	public void close() {
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		driver.close();
 	}
-	
-	public boolean isValidPage()
-	{
+
+	/**
+	 * Validates correct page is loaded
+	 * 
+	 * @return True on success, false otherwise
+	 */
+	public boolean isValidPage() {
 		return driver.urlContains(this.urlPart);
 	}
-	
-	public void open()
-	{
+
+	/**
+	 * Opens page
+	 */
+	public void open() {
 		driver.open();
 	}
 

@@ -3,13 +3,15 @@ package shinoamakusa.selenium.pageobjects.autotrader.ca.results.filters;
 import org.openqa.selenium.WebDriverException;
 
 import shinoamakusa.selenium.core.drivers.BrowserDriver;
+import shinoamakusa.selenium.core.elements.ByLocator;
+import shinoamakusa.selenium.core.elements.PageElement;
 import shinoamakusa.selenium.core.elements.SelectElement;
 
 public class YearFilter extends PageFilter {
 
 	public YearFilter(BrowserDriver driver) {
 		this.driver = driver;
-		this.container = driver.findByID("faceted-parent-Year");
+		this.locator = ByLocator.id("faceted-parent-Year");
 	}
 
 	public void changeMaxTo(final String year) {
@@ -19,12 +21,14 @@ public class YearFilter extends PageFilter {
 	}
 
 	public boolean isSelected(final String year) {
+		PageElement container = driver.findByLocator(this.locator);
 		return container.findByID("faceted-Year").textContains(year);
 	}
 
 	private void selectYearFilter() {
 		try {
-			driver.click(this.container);
+			PageElement container = driver.findByLocator(this.locator);
+			driver.click(container);
 		} catch (WebDriverException e) {
 			checkForModal();
 			selectYearFilter();
@@ -34,6 +38,7 @@ public class YearFilter extends PageFilter {
 	private void selectMaxYear(final String year) {
 
 		try {
+			PageElement container = driver.findByLocator(this.locator);
 			menu = new PageFilterMenu(container.findByClass("dropdown-menu"));
 			SelectElement maxYearSelect = new SelectElement(menu.container().findByID("yearHigh"));
 			maxYearSelect.selectOptionByValue(year);

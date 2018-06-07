@@ -2,7 +2,7 @@ package shinoamakusa.selenium.core.elements;
 
 import org.openqa.selenium.By;
 
-public final class ElementLocator {
+public final class ByLocator {
 	/**
 	 * Gets a XPath locator for matching elements by attribute
 	 * 
@@ -10,7 +10,7 @@ public final class ElementLocator {
 	 *            Attribute name
 	 * @return XPath locator
 	 */
-	public static final By byAttribute(final String attributeName) {
+	public static final By attribute(final String attributeName) {
 		return By.xpath(new StringBuilder("//*[@").append(attributeName).append("]").toString());
 	}
 
@@ -23,7 +23,7 @@ public final class ElementLocator {
 	 *            Attribute value
 	 * @return XPath locator
 	 */
-	public static final By byAttribute(final String attributeName, final String attributeValue) {
+	public static final By attribute(final String attributeName, final String attributeValue) {
 		return By.xpath(new StringBuilder("//*[@").append(attributeName).append("='").append(attributeValue)
 				.append("']").toString());
 	}
@@ -35,7 +35,7 @@ public final class ElementLocator {
 	 *            CSS class name
 	 * @return XPath locator
 	 */
-	public static final By byClass(final String className) {
+	public static final By className(final String className) {
 		return By.className(className);
 	}
 
@@ -46,7 +46,7 @@ public final class ElementLocator {
 	 *            CSS class name
 	 * @return XPath locator
 	 */
-	public static final By byCssSelector(final String selector) {
+	public static final By cssSelector(final String selector) {
 		return By.cssSelector(selector);
 	}
 
@@ -57,7 +57,7 @@ public final class ElementLocator {
 	 *            Value of ID attribute
 	 * @return XPath locator
 	 */
-	public static final By byID(final String id) {
+	public static final By id(final String id) {
 		return By.id(id);
 	}
 
@@ -68,7 +68,7 @@ public final class ElementLocator {
 	 *            Value of NAME attribute
 	 * @return XPath locator
 	 */
-	public static final By byName(final String name) {
+	public static final By name(final String name) {
 		return By.name(name);
 	}
 
@@ -79,7 +79,7 @@ public final class ElementLocator {
 	 *            HTML tag
 	 * @return XPath locator
 	 */
-	public static final By byTag(final String tag) {
+	public static final By tag(final String tag) {
 		return By.tagName(tag);
 	}
 
@@ -90,7 +90,7 @@ public final class ElementLocator {
 	 *            Element text value
 	 * @return XPath locator
 	 */
-	public static final By byText(final String value) {
+	public static final By text(final String value) {
 		return By.xpath(new StringBuilder("//*[text() = '").append(value).append("']").toString());
 	}
 

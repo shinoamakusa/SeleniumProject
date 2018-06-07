@@ -9,10 +9,6 @@ public class PageFilter extends BaseFilter {
 	protected int menuOptionCount;
 	protected PageFilterMenu menu;
 
-	public PageFilter(PageElement element) {
-		this.container = element;
-	}
-
 	public PageFilter() {
 
 	}
@@ -27,6 +23,7 @@ public class PageFilter extends BaseFilter {
 
 	protected void chooseMenuOption(final String value) {
 		try {
+			PageElement container = driver.findByLocator(this.locator);
 			menu = new PageFilterMenu(container.findByClass("dropdown-menu"));
 			menu.setOption(value);
 			menuOptionCount = menu.getFilterMenuCount();
