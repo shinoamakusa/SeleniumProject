@@ -6,11 +6,15 @@ public class ResultsFilters {
 	private TotalCountFilter countFilter;
 	private RadiusFilter radius;
 	private PostalCodeFilter postal;
+	private MakeFilter make;
+	private ModelFilter model;
 
 	public ResultsFilters(BrowserDriver driver) {
 		countFilter = new TotalCountFilter(driver);
 		radius = new RadiusFilter(driver);
 		postal = new PostalCodeFilter(driver);
+		make = new MakeFilter(driver);
+		model = new ModelFilter(driver);
 
 	}
 
@@ -24,6 +28,14 @@ public class ResultsFilters {
 
 	public PostalCodeFilter postal() {
 		return postal;
+	}
+
+	public MakeFilter make() {
+		return make;
+	}
+
+	public ModelFilter model() {
+		return model;
 	}
 
 }

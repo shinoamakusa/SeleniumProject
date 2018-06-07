@@ -1,5 +1,6 @@
 package shinoamakusa.selenium.core.elements;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -9,8 +10,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import shinoamakusa.selenium.core.CustomExpectedConditions;
 
 /**
  * Class representing a page container ( Selenium WebElement)
@@ -86,6 +85,26 @@ public class PageElement {
 	}
 
 	/**
+	 * Checks if page container contains specific text
+	 * 
+	 * @param locator
+	 *            Page container locator
+	 * @param value
+	 *            Text value to check
+	 * @return True on success, false otherwise
+	 */
+	public static boolean elementTextContains(final By locator, final String value) {
+		try {
+			wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, value));
+			return true;
+		} catch (TimeoutException t) {
+			return false;
+		} catch (NullPointerException e) {
+			return false;
+		}
+	}
+
+	/**
 	 * Sets WebDriver and WebDriverWait fields
 	 * 
 	 * @param driver
@@ -99,26 +118,6 @@ public class PageElement {
 	}
 
 	/**
-	 * Checks if page container contains specific text
-	 * 
-	 * @param locator
-	 *            Page container locator
-	 * @param value
-	 *            Text value to check
-	 * @return True on success, false otherwise
-	 */
-	public static boolean textContains(final By locator, final String value) {
-		try {
-			wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, value));
-			return true;
-		} catch (TimeoutException t) {
-			return false;
-		} catch (NullPointerException e) {
-			return false;
-		}
-	}
-
-	/**
 	 * Selenium WebElement object
 	 */
 	protected WebElement element;
@@ -128,9 +127,11 @@ public class PageElement {
 	 */
 	protected String tag = "";
 
-	public PageElement()
-	{
-		
+	private By locator;
+	private By parentLocator;
+
+	public PageElement() {
+
 	}
 
 	/**
@@ -150,6 +151,31 @@ public class PageElement {
 	 * PageElement class constructor
 	 * 
 	 * @param container
+	 *            Selenium WebElement object
+	 * @param locator
+	 *            Element locator
+	 */
+	public PageElement(final WebElement element, final By locator) {
+		this.element = element;
+		if (this.element != null) {
+			this.tag = element.getTagName();
+			this.locator = locator;
+		}
+	}
+
+	public PageElement(final WebElement element, final By locator, final By parentLocator) {
+		this.element = element;
+		if (this.element != null) {
+			this.tag = element.getTagName();
+			this.locator = locator;
+			this.parentLocator = parentLocator;
+		}
+	}
+
+	/**
+	 * PageElement class constructor
+	 * 
+	 * @param container
 	 *            Selenium WebElement
 	 * @param driver
 	 *            Selenium WebDriver container
@@ -162,7 +188,7 @@ public class PageElement {
 			this.tag = element.getTagName();
 		}
 	}
-	
+
 	/**
 	 * PageElement class constructor
 	 * 
@@ -568,10 +594,27 @@ public class PageElement {
 	 */
 	public boolean isClickable() {
 		try {
-			wait.until(ExpectedConditions.elementToBeClickable(element));
+			wait.until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(locator)));
 			return true;
 		} catch (TimeoutException t) {
 			return false;
+		} catch (NullPointerException e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Checks that given page container is present
+	 * 
+	 * @return True if present, false otherwise
+	 */
+	public boolean isPresent() {
+		WebDriverWait wait = new WebDriverWait(driver, 3);
+		try {
+			wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(element)));
+			return false;
+		} catch (TimeoutException t) {
+			return true;
 		} catch (NullPointerException e) {
 			return false;
 		}
@@ -595,20 +638,13 @@ public class PageElement {
 
 	}
 
-	
-
-	/**
-	 * Checks that given page container is not stale (exists)
-	 * 
-	 * @return True if not stale, false otherwise
-	 */
 	public boolean isStale() {
 		WebDriverWait wait = new WebDriverWait(driver, 3);
 		try {
-			wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(element)));
-			return false;
-		} catch (TimeoutException t) {
+			wait.until(ExpectedConditions.stalenessOf(element));
 			return true;
+		} catch (TimeoutException t) {
+			return false;
 		} catch (NullPointerException e) {
 			return false;
 		}
@@ -628,6 +664,14 @@ public class PageElement {
 		} catch (NullPointerException e) {
 			return false;
 		}
+	}
+
+	public By locator() {
+		return locator;
+	}
+
+	public By parentLocator() {
+		return parentLocator;
 	}
 
 	/**
@@ -661,21 +705,6 @@ public class PageElement {
 			return true;
 		} catch (TimeoutException t) {
 			return false;
-		} catch (NullPointerException e) {
-			return false;
-		}
-	}
-
-	public boolean textNotChangedIn(int seconds) {
-		String text = element.getText();
-		WebDriverWait wait = new WebDriverWait(driver, seconds);
-
-		try {
-			wait.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(element, text)));
-			textNotChangedIn(seconds);
-			return false;
-		} catch (TimeoutException t) {
-			return true;
 		} catch (NullPointerException e) {
 			return false;
 		}
@@ -721,8 +750,13 @@ public class PageElement {
 	private List<PageElement> findAll(final By locator) {
 		if (wait != null && element != null && locator != null) {
 			try {
-				List<PageElement> list = wait
-						.until(CustomExpectedConditions.presenceOfNestedElementsLocatedBy(element, locator, wait));
+				List<PageElement> list = new ArrayList<PageElement>();
+				List<WebElement> webList = wait.until(ExpectedConditions
+						.refreshed(ExpectedConditions.presenceOfNestedElementsLocatedBy(this.locator, locator)));
+				for (WebElement element : webList) {
+					list.add(new PageElement(element, locator, this.locator));
+
+				}
 				return list;
 			} catch (TimeoutException t) {
 				return null;
@@ -749,7 +783,7 @@ public class PageElement {
 			PageElement element = elementList.get(num - 1);
 			return element;
 		} else
-			return new PageElement(null);
+			return new PageElement(null, locator, this.locator);
 	}
 
 }

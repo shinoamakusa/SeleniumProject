@@ -6,19 +6,30 @@ import org.testng.annotations.Test;
 
 public class SearchByMonthlyPriceTest extends BaseTest {
 
-	@Test(invocationCount = 1)
+	@Test(invocationCount = 10)
 	public void searchByMonthlyPriceTest() {
 
 		String postalCode = "M15 4FN";
 		String radius = "50";
 		String make = "BMW";
 		String model = "3 SERIES";
+		
+		homepage.filters().postal().enterValue(postalCode);
+		homepage.filters().radius().select(radius);
+		homepage.filters().nearlyNewFilter().select(false);
+		homepage.filters().newFilter().select(false);
+		homepage.filters().make().select(make);
+		homepage.filters().model().select(model);
+		homepage.filters().monthlyPrice().select();
 
-		resultsPage = homepage.search(postalCode, radius, make, model);
+		resultsPage = homepage.submitSearch();
+		
 		assertTrue(resultsPage.isValidPage());
 		assertTrue(resultsPage.filters().countFilter().contains(homepage.getSearchCount()));
 		assertTrue(resultsPage.filters().radius().isSelected(radius));
 		assertTrue(resultsPage.filters().postal().isSelected(postalCode));
+		assertTrue(resultsPage.filters().make().isSelected(make));
+		assertTrue(resultsPage.filters().model().isSelected(model));
 
 	}
 

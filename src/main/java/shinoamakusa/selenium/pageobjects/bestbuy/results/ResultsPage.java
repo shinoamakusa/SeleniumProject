@@ -18,7 +18,7 @@ public class ResultsPage extends BasePage {
 	 * same
 	 */
 	public boolean itemCountsEqual() {
-		return PageElement.textContains(ElementLocator.byClass("display-total"),
+		return PageElement.elementTextContains(ElementLocator.byClass("display-total"),
 				driver.selectedElement().getText().replaceAll("[()]", ""));
 	}
 

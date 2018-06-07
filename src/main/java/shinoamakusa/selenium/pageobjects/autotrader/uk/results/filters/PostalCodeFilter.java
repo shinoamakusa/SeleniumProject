@@ -1,9 +1,9 @@
 package shinoamakusa.selenium.pageobjects.autotrader.uk.results.filters;
 
 import shinoamakusa.selenium.core.drivers.BrowserDriver;
-import shinoamakusa.selenium.core.elements.SelectElement;
+import shinoamakusa.selenium.core.filters.BaseFilter;
 
-public class PostalCodeFilter extends PageFilter {
+public class PostalCodeFilter extends BaseFilter {
 
 	public PostalCodeFilter(BrowserDriver driver) {
 		this.driver = driver;
@@ -11,8 +11,7 @@ public class PostalCodeFilter extends PageFilter {
 	}
 
 	public boolean isSelected(final String code) {
-		String text = code.replaceAll(" ", "").toLowerCase();
-		return container.getAttribute("value").equalsIgnoreCase(text);
+		return container.getAttribute("value").equalsIgnoreCase(code.replaceAll(" ", "").toLowerCase());
 	}
 
 }

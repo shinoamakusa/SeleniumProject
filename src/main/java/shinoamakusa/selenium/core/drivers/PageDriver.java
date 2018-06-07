@@ -462,7 +462,7 @@ public class PageDriver {
 				List<PageElement> list = new ArrayList<PageElement>();
 				List<WebElement> webList = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
 				for (WebElement element : webList) {
-					list.add(new PageElement(element));
+					list.add(new PageElement(element, locator));
 
 				}
 
