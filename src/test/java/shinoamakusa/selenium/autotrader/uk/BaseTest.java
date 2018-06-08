@@ -12,6 +12,14 @@ public class BaseTest {
 	protected HomePage homepage;
 	protected ResultsPage resultsPage;
 	
+	protected final String postalCode = "M15 4FN";
+	protected final String radius = "50";
+	protected final String make = "BMW";
+	protected final String model = "3 SERIES";
+
+	protected final boolean selectNew = false;
+	protected final boolean selectNearlyNew = false;
+	
 	@AfterMethod
 	public void after() {
 		resultsPage.close();

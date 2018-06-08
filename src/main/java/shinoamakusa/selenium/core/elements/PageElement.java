@@ -544,8 +544,9 @@ public class PageElement {
 	 */
 	public boolean hasSelectedState(boolean selected) {
 
+		WebDriverWait wait = new WebDriverWait(driver, 0);
 		try {
-			wait.until(ExpectedConditions.elementSelectionStateToBe(this.locator, selected));
+			wait.until(ExpectedConditions.not(ExpectedConditions.elementSelectionStateToBe(this.locator, !selected)));
 			return true;
 		} catch (TimeoutException t) {
 			return false;

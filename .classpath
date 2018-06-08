@@ -18,7 +18,5 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Projects/Selenium/Drivers/client-combined-3.12.0.jar"/>
-	<classpathentry kind="lib" path="D:/Projects/Selenium/Drivers/selenium-server-standalone-3.12.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

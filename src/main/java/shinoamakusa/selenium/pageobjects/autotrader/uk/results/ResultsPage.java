@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.pagefactory.ByChained;
 
 import com.google.common.collect.Ordering;
 
@@ -22,35 +23,16 @@ public class ResultsPage extends BasePage {
 		this.urlPart = "autotrader.co.uk/car-search";
 		this.driver = driver;
 		this.title = this.driver.getTitle();
+		this.url = this.driver.getUrl();
 		filters = new ResultsFilters(driver);
 		closeModal();
 	}
 
-	public boolean sortOrderValid(boolean descending) {
-		By containerLocator = ByLocator.className("search-page__results");
-		By locator = ByLocator.className("finance-price");
+	public boolean carFiltersContain(List<String> compareList) {
+		List<String> list = getSelectedCarFilters();
+		list.removeAll(compareList);
+		return list.isEmpty();
 
-		if (driver.findByLocator(containerLocator).hasUpdated()) {
-			PageElement.elementCountEquals(locator, 10);
-		}
-
-		List<Integer> values = new ArrayList<Integer>();
-		List<PageElement> elements = driver.findAllByLocator(locator);
-		for (PageElement element : elements) {
-			int value = Integer.parseInt(StringUtils.substringBetween(element.getText(), "£", "per").trim());
-			values.add(value);
-		}
-
-		if (descending)
-			return Ordering.natural().reverse().isOrdered(values);
-		else
-			return Ordering.natural().isOrdered(values);
-
-	}
-	
-	public void selectMonthlySortDesc()
-	{
-		filters().sortFilter().select("monthly-price-desc");
 	}
 
 	public boolean countContains(String value) {
@@ -77,9 +59,54 @@ public class ResultsPage extends BasePage {
 		return filters().radius().isSelected(radius);
 	}
 
+	public void selectMonthlyPriceHighest() {
+		filters().sortFilter().select("monthly-price-desc");
+	}
+
+	public void selectTotalPriceLowest() {
+		filters().sortFilter().select("price-asc");
+	}
+
+	public boolean sortOrderDescending(boolean descending) {
+		By containerLocator = ByLocator.className("search-page__results");
+		By locator = ByLocator.attribute("data-standout-type", "");
+
+		if (driver.findByLocator(containerLocator).hasUpdated()) {
+			PageElement.elementCountEquals(locator, 10);
+		}
+
+		if (this.url.contains("total-price"))
+			locator = new ByChained(locator, ByLocator.className("vehicle-price"));
+		else
+			locator = new ByChained(locator, ByLocator.className("finance-price"));
+
+		List<Integer> values = new ArrayList<Integer>();
+		List<PageElement> elements = driver.findAllByLocator(locator);
+		for (PageElement element : elements) {
+			int value;
+			if (this.url.contains("total-price"))
+				value = Integer.parseInt(element.getText().substring(1).trim());
+			else
+				value = Integer.parseInt(StringUtils.substringBetween(element.getText(), "£", "per").trim());
+			values.add(value);
+		}
+
+		if (descending)
+			return Ordering.natural().reverse().isOrdered(values);
+		else
+			return Ordering.natural().isOrdered(values);
+
+	}
+
 	private void closeModal() {
 		driver.click(driver.findByID("buttonno"));
+		if (this.url.contains("total-price"))
+			driver.click(driver.findByAttribute("data-label", "finance-search-callout"));
 		driver.click(driver.findByID("js-cookie-alert-close"));
+	}
+
+	private List<String> getSelectedCarFilters() {
+		return filters().carFilters().getSelectedFilters();
 	}
 
 }

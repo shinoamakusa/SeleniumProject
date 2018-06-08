@@ -3,6 +3,7 @@ package shinoamakusa.selenium.core.filters;
 import org.openqa.selenium.By;
 
 import shinoamakusa.selenium.core.drivers.BrowserDriver;
+import shinoamakusa.selenium.core.elements.PageElement;
 
 public class BaseFilter {
 
@@ -28,6 +29,11 @@ public class BaseFilter {
 	public BaseFilter(By locator, BrowserDriver driver) {
 		this.driver = driver;
 		this.locator = locator;
+	}
+	
+	public String getText() {
+		PageElement container = driver.findByLocator(this.locator);
+		return container.getText();
 	}
 
 }

@@ -1,8 +1,12 @@
 package shinoamakusa.selenium.pageobjects.autotrader.uk.home;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
 
 import shinoamakusa.selenium.core.elements.ByLocator;
+import shinoamakusa.selenium.core.elements.PageElement;
 import shinoamakusa.selenium.core.pages.BasePage;
 import shinoamakusa.selenium.pageobjects.autotrader.uk.home.filters.HomeFilters;
 import shinoamakusa.selenium.pageobjects.autotrader.uk.results.ResultsPage;
@@ -11,6 +15,7 @@ public class HomePage extends BasePage {
 
 	private HomeFilters filters;
 	private String searchCount;
+	private List<String> selectedCarFilters;
 
 	public HomePage() {
 		this.urlPart = "autotrader.co.uk";
@@ -20,7 +25,7 @@ public class HomePage extends BasePage {
 		return filters;
 	}
 
-	public String getSearchCount() {
+	public String searchCount() {
 		return searchCount;
 	}
 
@@ -29,7 +34,9 @@ public class HomePage extends BasePage {
 		String homeUrl = new StringBuilder("https://").append(this.urlPart).toString();
 		driver.goTo(homeUrl);
 		this.title = driver.getTitle();
+		this.url = this.driver.getUrl();
 		filters = new HomeFilters(driver);
+		selectedCarFilters = new ArrayList<String>();
 
 	}
 
@@ -44,6 +51,11 @@ public class HomePage extends BasePage {
 	public void selectMonthlyPrice() {
 
 		filters().monthlyPrice().select();
+	}
+	
+	public void selectTotalPrice() {
+
+		filters().totalPrice().select();
 	}
 
 	public void selectNearlyNew(final boolean state) {
@@ -60,18 +72,25 @@ public class HomePage extends BasePage {
 	}
 
 	public ResultsPage submitSearch() {
-		//driver.waitFor(5);
+		selectedCarFilters = filters().carFilters().getSelectedFilters();
+
+		driver.waitFor(1);
 		By locator = ByLocator.id("js-search-button");
-		driver.select(driver.findByLocator(locator));
-		if (driver.selectedElement().hasUpdated() && driver.selectedElement().isClickable()) {
-			searchCount = driver.selectedElement().getText().split(" ")[1];
-			driver.click(driver.selectedElement());
+		PageElement searchButton = driver.findByLocator(locator);
+		if ( searchButton.isClickable()) {
+			searchCount = searchButton.getText().split(" ")[1];
+			driver.click(searchButton);
 		}
 		return new ResultsPage(driver);
 	}
 
 	public void typePostalCode(String postalCode) {
 		filters().postal().enterValue(postalCode);
+	}
+	
+	public List<String> selectedCarFilters()
+	{
+		return selectedCarFilters;
 	}
 
 }

@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name = "AutoTrader.co.uk Suite">
+<test name = "AutoTrader.co.uk Search">
+<classes>
+<class name = "shinoamakusa.selenium.autotrader.uk.MonthlyPriceTest">
+</class>
+</classes>
+</test>
+<test name = "AutoTrader.co.uk Search with Filters">
+<classes>
+<class name = "shinoamakusa.selenium.autotrader.uk.TotalPriceTest">
+</class>
+</classes>
+</test>
+</suite>
