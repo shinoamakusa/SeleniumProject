@@ -109,7 +109,7 @@ public class BrowserDriver extends BaseDriver {
 				link = element.getAttribute("href");
 			}
 
-			if (element.isClickable())
+			if (element.isVisible() && element.isClickable() && element.webElement().isEnabled())
 				element.click();
 
 			if (!StringUtils.isBlank(link))
@@ -298,7 +298,7 @@ public class BrowserDriver extends BaseDriver {
 	 */
 	private void initialize(final WebDriver webDriver) {
 		driver = webDriver;
-		wait = new WebDriverWait(driver, 30);
+		wait = new WebDriverWait(driver, 10);
 		PageElement.setDriver(driver, wait);
 	}
 }

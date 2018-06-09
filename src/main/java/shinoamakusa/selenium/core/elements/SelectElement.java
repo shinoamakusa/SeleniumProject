@@ -32,7 +32,7 @@ public class SelectElement extends PageElement {
 	 *            Option tag index
 	 */
 	public void selectOptionByIndex(final int num) {
-		if (this.isSelectTagElement()) {
+		if (this.isSelectTagElement() && element.isEnabled()) {
 			Select listElement = new Select(element);
 			listElement.selectByIndex(num);
 
@@ -46,7 +46,7 @@ public class SelectElement extends PageElement {
 	 *            Option tag visible text
 	 */
 	public void selectOptionByText(final String text) {
-		if (this.isSelectTagElement()) {
+		if (this.isSelectTagElement() && element.isEnabled()) {
 			Select listElement = new Select(element);
 			listElement.selectByVisibleText(text);
 
@@ -60,7 +60,7 @@ public class SelectElement extends PageElement {
 	 *            Option tag value
 	 */
 	public void selectOptionByValue(final String value) {
-		if (this.isSelectTagElement()) {
+		if (this.isSelectTagElement() && element.isEnabled()) {
 			Select listElement = new Select(element);
 			listElement.selectByValue(value);
 
@@ -68,7 +68,7 @@ public class SelectElement extends PageElement {
 	}
 	
 	public PageElement getSelectedOption() {
-		if (isSelectTagElement()) {
+		if (isSelectTagElement() && element.isEnabled()) {
 			WebElement selected = new Select(element).getFirstSelectedOption();
 			return new PageElement(selected);
 
@@ -83,7 +83,7 @@ public class SelectElement extends PageElement {
 	 * @return List of options of select tag container if exist
 	 */
 	public List<PageElement> getSelectOptions() {
-		if (isSelectTagElement()) {
+		if (isSelectTagElement() && element.isEnabled()) {
 			List<PageElement> elementList = new ArrayList<PageElement>();
 			List<WebElement> list = new Select(element).getOptions();
 			for (WebElement el : list) {

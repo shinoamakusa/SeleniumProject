@@ -27,7 +27,7 @@ public class TotalPriceTest extends BaseTest {
 		assertTrue(resultsPage.carFiltersContain(homepage.selectedCarFilters()));
 
 		resultsPage.selectTotalPriceLowest();
-		assertTrue(resultsPage.sortOrderDescending(false));
+		assertTrue(resultsPage.isSortOrderDescending(false));
 
 	}
 

@@ -41,10 +41,12 @@ public class HomePage extends BasePage {
 	}
 
 	public void selectMake(final String make) {
+		//driver.waitFor(2);
 		filters().make().select(make);
 	}
 
 	public void selectModel(final String model) {
+		//driver.waitFor(2);
 		filters().model().select(model);
 	}
 
@@ -74,10 +76,10 @@ public class HomePage extends BasePage {
 	public ResultsPage submitSearch() {
 		selectedCarFilters = filters().carFilters().getSelectedFilters();
 
-		driver.waitFor(1);
+		//driver.waitFor(3);
 		By locator = ByLocator.id("js-search-button");
 		PageElement searchButton = driver.findByLocator(locator);
-		if ( searchButton.isClickable()) {
+		if (searchButton.textContains(filters().model().getCount()) && searchButton.isClickable()) {
 			searchCount = searchButton.getText().split(" ")[1];
 			driver.click(searchButton);
 		}

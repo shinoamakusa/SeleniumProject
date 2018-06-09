@@ -15,14 +15,16 @@ public class ModelFilter extends BaseFilter {
 		this.locator = ByLocator.name("model");
 	}
 
-	public String getCount(String model) {
+	public String getCount() {
 		PageElement container = driver.findByLocator(locator);
-		return StringUtils.substringBetween(container.findByAttribute("value", model).getText(), "(", ")");
+		container.hasUpdated();
+		return StringUtils.substringBetween(new SelectElement(container).getSelectedOption().getText(), "(", ")");
 	}
 
 	public void select(String model) {
 		try {
 			PageElement container = driver.findByLocator(locator);
+			container.hasUpdated();
 			if (container.isClickable()) {
 				PageElement modelOption = container.findByAttribute("value", model);
 				if (modelOption.exists())

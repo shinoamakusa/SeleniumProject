@@ -10,7 +10,7 @@ public class RadiusFilter extends BaseFilter {
 
 	public RadiusFilter(BrowserDriver driver) {
 		this.driver = driver;
-		this.locator = ByLocator.name("radius");
+		this.locator = ByLocator.attribute("data-field-name", "radius");
 	}
 
 	public boolean isSelected(final String radius) {

@@ -23,7 +23,7 @@ public class MakeFilter extends BaseFilter {
 	public void select(String make) {
 		try {
 			PageElement container = driver.findByLocator(this.locator);
-
+			container.hasUpdated();
 			if (container.isClickable()) {
 				PageElement makeOption = container.findByAttribute("value", make);
 				if (makeOption.exists()) {

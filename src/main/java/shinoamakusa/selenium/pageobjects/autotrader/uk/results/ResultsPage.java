@@ -67,7 +67,7 @@ public class ResultsPage extends BasePage {
 		filters().sortFilter().select("price-asc");
 	}
 
-	public boolean sortOrderDescending(boolean descending) {
+	public boolean isSortOrderDescending(boolean descending) {
 		By containerLocator = ByLocator.className("search-page__results");
 		By locator = ByLocator.attribute("data-standout-type", "");
 
@@ -85,9 +85,10 @@ public class ResultsPage extends BasePage {
 		for (PageElement element : elements) {
 			int value;
 			if (this.url.contains("total-price"))
-				value = Integer.parseInt(element.getText().substring(1).trim());
+				value = Integer.parseInt(element.getText().substring(1).replaceAll(",", "").trim());
 			else
-				value = Integer.parseInt(StringUtils.substringBetween(element.getText(), "£", "per").trim());
+				value = Integer.parseInt(
+						StringUtils.substringBetween(element.getText(), "£", "per").replaceAll(",", "").trim());
 			values.add(value);
 		}
 

@@ -29,7 +29,7 @@ public class MonthlyPriceTest extends BaseTest {
 		assertTrue(resultsPage.carFiltersContain(homepage.selectedCarFilters()));
 
 		resultsPage.selectMonthlyPriceHighest();
-		assertTrue(resultsPage.sortOrderDescending(true));
+		assertTrue(resultsPage.isSortOrderDescending(true));
 
 	}
 

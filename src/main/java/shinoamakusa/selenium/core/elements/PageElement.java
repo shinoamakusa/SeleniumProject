@@ -104,13 +104,13 @@ public class PageElement {
 	protected WebElement element;
 
 	/**
-	 * WebElement's HTML tag
-	 */
-	protected String tag = "";
-	/**
 	 * Element locator
 	 */
 	protected By locator;
+	/**
+	 * WebElement's HTML tag
+	 */
+	protected String tag = "";
 
 	/**
 	 * PageElement class constructor
@@ -525,9 +525,15 @@ public class PageElement {
 	public boolean hasAttribute(final String name, final String value) {
 
 		try {
-			wait.until(ExpectedConditions.or(ExpectedConditions.attributeToBe(this.locator, name, value),
-					ExpectedConditions.attributeContains(this.locator, name, value)));
-			return true;
+			if (this.locator != null) {
+				return wait.until(ExpectedConditions.or(ExpectedConditions.attributeToBe(this.locator, name, value),
+						ExpectedConditions.attributeContains(this.locator, name, value)));
+			} else if (this.element != null) {
+				return wait.until(ExpectedConditions.or(ExpectedConditions.attributeToBe(this.element, name, value),
+						ExpectedConditions.attributeContains(this.element, name, value)));
+			} else {
+				return false;
+			}
 		} catch (TimeoutException t) {
 			return false;
 		} catch (NullPointerException e) {
@@ -546,14 +552,50 @@ public class PageElement {
 
 		WebDriverWait wait = new WebDriverWait(driver, 0);
 		try {
-			wait.until(ExpectedConditions.not(ExpectedConditions.elementSelectionStateToBe(this.locator, !selected)));
-			return true;
+			if (this.locator != null) {
+				return wait.until(
+						ExpectedConditions.not(ExpectedConditions.elementSelectionStateToBe(this.locator, !selected)));
+			} else if (this.element != null) {
+				return wait.until(
+						ExpectedConditions.not(ExpectedConditions.elementSelectionStateToBe(this.element, !selected)));
+			} else {
+				return false;
+			}
 		} catch (TimeoutException t) {
 			return false;
 		} catch (NullPointerException e) {
 			return false;
 		}
 
+	}
+
+	public boolean hasUpdated() {
+		try {
+			String html;
+			WebDriverWait wait = new WebDriverWait(driver, 5);
+
+			if (this.element == null && this.locator != null)
+				this.element = findWebElement(this.locator);
+			html = element.getAttribute("innerHTML");
+
+			if (this.locator != null) {
+				return wait.until(ExpectedConditions.not(ExpectedConditions.or(
+						ExpectedConditions.refreshed(ExpectedConditions.attributeToBe(this.locator, "innerHTML", html)),
+						ExpectedConditions
+								.refreshed(ExpectedConditions.attributeContains(this.locator, "innerHTML", html)))));
+			} else if (this.element != null) {
+				return wait.until(ExpectedConditions.not(ExpectedConditions.or(
+						ExpectedConditions.refreshed(ExpectedConditions.attributeToBe(this.element, "innerHTML", html)),
+						ExpectedConditions
+								.refreshed(ExpectedConditions.attributeContains(this.element, "innerHTML", html)))));
+			} else {
+				return false;
+			}
+		} catch (TimeoutException t) {
+			return false;
+		} catch (NullPointerException e) {
+			return false;
+		}
 	}
 
 	/**
@@ -563,23 +605,15 @@ public class PageElement {
 	 */
 	public boolean isClickable() {
 		try {
-			wait.until(ExpectedConditions.elementToBeClickable(this.locator));
-			return true;
-		} catch (TimeoutException t) {
-			return false;
-		} catch (NullPointerException e) {
-			return false;
-		}
-	}
-
-	public boolean hasUpdated() {
-		try {
-			String html = element.getAttribute("innerHTML");
-
-			wait.until(ExpectedConditions
-					.not(ExpectedConditions.or(ExpectedConditions.attributeToBe(this.locator, "innerHTML", html),
-							ExpectedConditions.attributeContains(this.locator, "innerHTML", html))));
-			return true;
+			if (this.locator != null) {
+				return wait.until(
+						ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(this.locator))) != null;
+			} else if (this.element != null) {
+				return wait.until(
+						ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(this.element))) != null;
+			} else {
+				return false;
+			}
 		} catch (TimeoutException t) {
 			return false;
 		} catch (NullPointerException e) {
@@ -595,10 +629,13 @@ public class PageElement {
 	public boolean isPresent() {
 		WebDriverWait wait = new WebDriverWait(driver, 3);
 		try {
-			wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(element)));
-			return false;
+			if (this.element != null) {
+				return wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(element)));
+			} else {
+				return false;
+			}
 		} catch (TimeoutException t) {
-			return true;
+			return false;
 		} catch (NullPointerException e) {
 			return false;
 		}
@@ -612,8 +649,13 @@ public class PageElement {
 	public boolean isSelected() {
 
 		try {
-			wait.until(ExpectedConditions.elementToBeSelected(this.locator));
-			return true;
+			if (this.locator != null) {
+				return wait.until(ExpectedConditions.elementToBeSelected(this.locator));
+			} else if (this.element != null) {
+				return wait.until(ExpectedConditions.elementToBeSelected(this.element));
+			} else {
+				return false;
+			}
 		} catch (TimeoutException t) {
 			return false;
 		} catch (NullPointerException e) {
@@ -630,12 +672,15 @@ public class PageElement {
 	public boolean isStale() {
 		WebDriverWait wait = new WebDriverWait(driver, 3);
 		try {
-			wait.until(ExpectedConditions.stalenessOf(element));
-			return true;
+			if (this.element != null) {
+				return wait.until(ExpectedConditions.stalenessOf(element));
+			} else {
+				return true;
+			}
 		} catch (TimeoutException t) {
 			return false;
 		} catch (NullPointerException e) {
-			return false;
+			return true;
 		}
 	}
 
@@ -646,8 +691,13 @@ public class PageElement {
 	 */
 	public boolean isVisible() {
 		try {
-			wait.until(ExpectedConditions.visibilityOfElementLocated(this.locator));
-			return true;
+			if (this.locator != null) {
+				return wait.until(ExpectedConditions.visibilityOfElementLocated(this.locator)) != null;
+			} else if (this.element != null) {
+				return wait.until(ExpectedConditions.visibilityOf(this.element)) != null;
+			} else {
+				return false;
+			}
 		} catch (TimeoutException t) {
 			return false;
 		} catch (NullPointerException e) {
@@ -664,8 +714,13 @@ public class PageElement {
 	 */
 	public boolean textContains(final String value) {
 		try {
-			wait.until(ExpectedConditions.textToBePresentInElementLocated(this.locator, value));
-			return true;
+			if (this.locator != null) {
+				return wait.until(ExpectedConditions.textToBePresentInElementLocated(this.locator, value));
+			} else if (this.element != null) {
+				return wait.until(ExpectedConditions.textToBePresentInElement(this.element, value));
+			} else {
+				return false;
+			}
 		} catch (TimeoutException t) {
 			return false;
 		} catch (NullPointerException e) {
@@ -682,8 +737,13 @@ public class PageElement {
 	 */
 	public boolean textEqual(final String value) {
 		try {
-			wait.until(ExpectedConditions.textToBePresentInElementLocated(this.locator, value));
-			return true;
+			if (this.locator != null) {
+				return wait.until(ExpectedConditions.textToBePresentInElementLocated(this.locator, value));
+			} else if (this.element != null) {
+				return wait.until(ExpectedConditions.textToBePresentInElement(this.element, value));
+			} else {
+				return false;
+			}
 		} catch (TimeoutException t) {
 			return false;
 		} catch (NullPointerException e) {
@@ -700,8 +760,15 @@ public class PageElement {
 	 */
 	public boolean textNotEqual(final String value) {
 		try {
-			wait.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElementLocated(this.locator, value)));
-			return true;
+			if (this.locator != null) {
+				return wait.until(ExpectedConditions
+						.not(ExpectedConditions.textToBePresentInElementLocated(this.locator, value)));
+			} else if (this.element != null) {
+				return wait.until(
+						ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(this.element, value)));
+			} else {
+				return false;
+			}
 		} catch (TimeoutException t) {
 			return false;
 		} catch (NullPointerException e) {
@@ -729,7 +796,7 @@ public class PageElement {
 	 * @return List of elements matched on success, null otherwise
 	 */
 	private List<PageElement> findAll(final By locator) {
-		if (wait != null && element != null && locator != null) {
+		if (wait != null && this.locator != null && locator != null) {
 			try {
 				List<PageElement> list = new ArrayList<PageElement>();
 				List<WebElement> webList = wait.until(ExpectedConditions
@@ -764,6 +831,14 @@ public class PageElement {
 			return element;
 		} else
 			return new PageElement(null);
+	}
+
+	private WebElement findWebElement(final By locator) {
+		if (wait != null && locator != null) {
+			return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+		} else {
+			return null;
+		}
 	}
 
 }
