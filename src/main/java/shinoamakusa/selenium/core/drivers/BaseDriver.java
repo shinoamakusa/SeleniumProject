@@ -29,16 +29,6 @@ public class BaseDriver {
 	protected WebDriver driver;
 
 	/**
-	 * Parent container for container matching
-	 */
-	protected PageElement parentElement;
-
-	/**
-	 * Current selected page container
-	 */
-	protected PageElement selectedElement;
-
-	/**
 	 * Selenium WebDriver wait
 	 */
 	protected WebDriverWait wait;
@@ -338,24 +328,6 @@ public class BaseDriver {
 	}
 
 	/**
-	 * Gets the current set parent page container
-	 * 
-	 * @return Selected parent page container
-	 */
-	public PageElement parentElement() {
-		return parentElement;
-	}
-
-	/**
-	 * Gets the current selected page container
-	 * 
-	 * @return Selected page container
-	 */
-	public PageElement selectedElement() {
-		return selectedElement;
-	}
-
-	/**
 	 * Gets page title
 	 * 
 	 * @return Page title
@@ -377,34 +349,6 @@ public class BaseDriver {
 			return driver.getCurrentUrl();
 		}
 		return StringUtils.EMPTY;
-	}
-
-	/**
-	 * Resets parent page container to null
-	 */
-	public void resetParent() {
-		this.parentElement = null;
-	}
-
-	/**
-	 * Selects specified container
-	 * 
-	 * @param container
-	 *            Element to select
-	 */
-	public void select(final PageElement element) {
-		selectedElement = element;
-	}
-
-
-	/**
-	 * Sets current parent page container
-	 * 
-	 * @param container
-	 *            Page container to set to be a parent container
-	 */
-	public void setParentElement(final PageElement element) {
-		parentElement = element;
 	}
 
 	/**

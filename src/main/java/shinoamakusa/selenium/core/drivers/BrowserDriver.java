@@ -114,14 +114,6 @@ public class BrowserDriver extends BaseDriver {
 
 			if (!StringUtils.isBlank(link))
 				history.add(link);
-
-			if (selectedElement != null && selectedElement.isStale()) {
-				selectedElement = null;
-			}
-
-			if (parentElement != null && parentElement.isStale()) {
-				parentElement = null;
-			}
 			return link;
 		}
 
@@ -182,8 +174,6 @@ public class BrowserDriver extends BaseDriver {
 		if (driver != null && !StringUtils.isBlank(url)) {
 			driver.get(url);
 			history.add(url);
-			select(null);
-			setParentElement(null);
 		}
 	}
 

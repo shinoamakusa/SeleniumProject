@@ -38,14 +38,11 @@ public class ResultsPage extends BasePage {
 	public void getResultInfo(int num) {
 		PageElement element = driver.findByLocator(ITEM_LOCATOR, num);
 
-		driver.select(element.findByLocator(ITEM_TITLE_LOCATOR));
-		itemTitle = driver.selectedElement().getText().trim();
+		itemTitle = element.findByLocator(ITEM_TITLE_LOCATOR).getText().trim();
 
-		driver.select(element.findByLocator(ITEM_SUBTITLE_LOCATOR));
-		subtitle = driver.selectedElement().getText().trim();
+		subtitle = element.findByLocator(ITEM_SUBTITLE_LOCATOR).getText().trim();
 
-		driver.select(element.findByLocator(ITEM_AUTHOR_LOCATOR));
-		author = driver.selectedElement().getText().trim();
+		author = element.findByLocator(ITEM_AUTHOR_LOCATOR).getText().trim();
 	}
 
 	/**
