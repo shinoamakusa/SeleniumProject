@@ -1,9 +1,20 @@
 package shinoamakusa.selenium.pageobjects.vpl.details;
 
+import org.openqa.selenium.By;
+
 import shinoamakusa.selenium.core.drivers.BrowserDriver;
+import shinoamakusa.selenium.core.elements.ByLocator;
+import shinoamakusa.selenium.core.elements.PageElement;
 import shinoamakusa.selenium.core.pages.BasePage;
 
 public class DetailsPage extends BasePage {
+	private static final By ITEM_AUTHOR_LOCATOR = ByLocator.attribute("testid", "author_search");
+	private static final By ITEM_SUBTITLE_LOCATOR = ByLocator.attribute("testid", "text_bibsubtitle");
+	private static final By ITEM_TITLE_LOCATOR = ByLocator.attribute("testid", "text_bibtitle");
+	
+	private static final By NEXT_ITEM_LINK = ByLocator.attribute("testid", "link_next");
+	private static final By PREVIOUS_ITEM_LINK = ByLocator.attribute("testid", "link_prev");
+	
 	public String author;
 	public String itemTitle;
 	public String subtitle;
@@ -15,24 +26,24 @@ public class DetailsPage extends BasePage {
 	}
 
 	public void getDetails() {
-		driver.select(driver.findByAttribute("testid", "text_bibtitle"));
-		itemTitle = driver.selectedElement().getText().trim();
+		PageElement element = driver.findByLocator(ITEM_TITLE_LOCATOR);
+		itemTitle = element.getText().trim();
 
-		driver.select(driver.findByAttribute("testid", "text_bibsubtitle"));
-		subtitle = driver.selectedElement().getText().trim();
+		element = driver.findByLocator(ITEM_SUBTITLE_LOCATOR);
+		subtitle = element.getText().trim();
 
-		driver.select(driver.findByAttribute("testid", "author_search"));
-		author = driver.selectedElement().getText().trim();
+		element = driver.findByLocator(ITEM_AUTHOR_LOCATOR);
+		author = element.getText().trim();
 	}
 
 	/**
 	 * Follows the link to next item in details page pagination
 	 */
 	public DetailsPage goToNextItem() {
-		driver.select(driver.findByAttribute("testid", "link_next"));
-		if (driver.selectedElement().webElement() == null)
+		PageElement element = driver.findByLocator(NEXT_ITEM_LINK);
+		if (element.webElement() == null)
 			return null;
-		driver.click(driver.selectedElement());
+		driver.click(element);
 		return new DetailsPage(driver);
 	}
 
@@ -40,10 +51,10 @@ public class DetailsPage extends BasePage {
 	 * Follows the link to previous item in details page pagination
 	 */
 	public DetailsPage goToPreviousItem() {
-		driver.select(driver.findByAttribute("testid", "link_prev"));
-		if (driver.selectedElement().webElement() == null)
+		PageElement element = driver.findByLocator(PREVIOUS_ITEM_LINK);
+		if (element.webElement() == null)
 			return null;
-		driver.click(driver.selectedElement());
+		driver.click(element);
 		return new DetailsPage(driver);
 	}
 

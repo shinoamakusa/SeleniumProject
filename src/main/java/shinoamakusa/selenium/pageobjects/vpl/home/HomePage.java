@@ -1,13 +1,19 @@
 package shinoamakusa.selenium.pageobjects.vpl.home;
 
+import org.openqa.selenium.By;
+
+import shinoamakusa.selenium.core.elements.ByLocator;
 import shinoamakusa.selenium.core.pages.BasePage;
 import shinoamakusa.selenium.pageobjects.vpl.results.ResultsPage;
 
 public class HomePage extends BasePage {
-	public HomePage()
-	{
+	private static final By SEARCH_BOX_LOCATOR = ByLocator.id("edit-search");
+	private static final By SEARCH_BUTTON_LOCATOR = ByLocator.id("edit-submit");
+
+	public HomePage() {
 		this.urlPart = "vpl.ca";
 	}
+
 	public void open() {
 		super.open();
 		String homeUrl = new StringBuilder("https://").append(this.urlPart).toString();
@@ -15,13 +21,12 @@ public class HomePage extends BasePage {
 		this.title = driver.getTitle();
 
 	}
-	
-	public ResultsPage searchFor(final String searchQuery) {
-		String searchBoxID = "edit-search";
-		String searchBtnID = "edit-submit";
 
-		driver.search(driver.findByID(searchBoxID), driver.findByID(searchBtnID), searchQuery);
-		
+	public ResultsPage searchFor(final String searchQuery) {
+
+		driver.search(driver.findByLocator(SEARCH_BOX_LOCATOR), driver.findByLocator(SEARCH_BUTTON_LOCATOR),
+				searchQuery);
+
 		return new ResultsPage(driver);
 
 	}

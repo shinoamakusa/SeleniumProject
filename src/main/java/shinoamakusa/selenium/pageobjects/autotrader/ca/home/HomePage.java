@@ -1,10 +1,21 @@
 package shinoamakusa.selenium.pageobjects.autotrader.ca.home;
 
+import org.openqa.selenium.By;
+
+import shinoamakusa.selenium.core.elements.ByLocator;
+import shinoamakusa.selenium.core.elements.PageElement;
 import shinoamakusa.selenium.core.elements.SelectElement;
 import shinoamakusa.selenium.core.pages.BasePage;
 import shinoamakusa.selenium.pageobjects.autotrader.ca.results.ResultsPage;
 
 public class HomePage extends BasePage {
+	private static final By MAKE_LOCATOR = ByLocator.id("rfMakes");
+	private static final By MODEL_LOCATOR = ByLocator.id("rfModel");
+	private static final By PRICE_LOCATOR = ByLocator.id("rfPriceHigh");
+
+	private static final By SUBMIT_BUTTON_LOCATOR = ByLocator.id("SearchButton");
+	private static final By POSTAL_CODE_LOCATOR = ByLocator.id("locationAddress");
+
 	public HomePage() {
 		this.urlPart = "autotrader.ca";
 	}
@@ -33,30 +44,30 @@ public class HomePage extends BasePage {
 	}
 
 	private void selectMake(final String make) {
-		driver.select(driver.findByID("rfMakes"));
-		if (driver.selectedElement().isClickable())
-			new SelectElement(driver.selectedElement()).selectOptionByValue(make);
+		PageElement element = driver.findByLocator(MAKE_LOCATOR);
+		if (element.isClickable())
+			new SelectElement(element).selectOptionByValue(make);
 	}
 
 	private void selectModel(final String model) {
-		driver.select(driver.findByID("rfModel"));
-		if (driver.selectedElement().isClickable())
-			new SelectElement(driver.selectedElement()).selectOptionByValue(model);
+		PageElement element = driver.findByLocator(MODEL_LOCATOR);
+		if (element.isClickable())
+			new SelectElement(element).selectOptionByValue(model);
 	}
 
 	private void selectPrice(final String price) {
-		driver.select(driver.findByID("rfPriceHigh"));
-		if (driver.selectedElement().isClickable())
-			new SelectElement(driver.selectedElement()).selectOptionByValue(price);
+		PageElement element = driver.findByLocator(PRICE_LOCATOR);
+		if (element.isClickable())
+			new SelectElement(element).selectOptionByValue(price);
 	}
 
 	private void submitSearch() {
-		driver.click(driver.findByID("SearchButton"));
+		driver.click(driver.findByLocator(SUBMIT_BUTTON_LOCATOR));
 	}
 
 	private void typePostalCode(final String postalCode) {
-		driver.select(driver.findByID("locationAddress"));
-		driver.typeInto(driver.selectedElement(), postalCode);
+		PageElement element = driver.findByLocator(POSTAL_CODE_LOCATOR);
+		driver.typeInto(element, postalCode);
 	}
 
 }
