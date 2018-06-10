@@ -13,7 +13,7 @@ public class MonthlyPriceFilter extends BaseFilter {
 
 	public void select() {
 		BaseElement container = driver.findByLocator(this.locator);
-		if (container.findByID("searchVehiclesPriceTypeMonthly").hasSelectedState(false)) {
+		if (!container.findByID("searchVehiclesPriceTypeMonthly").toRadioElement().isSelected(true)) {
 			driver.click(container);
 		}
 	}

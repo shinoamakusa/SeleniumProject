@@ -526,11 +526,9 @@ public class BaseElement {
 
 		try {
 			if (this.locator != null) {
-				return wait.until(ExpectedConditions.or(ExpectedConditions.attributeToBe(this.locator, name, value),
-						ExpectedConditions.attributeContains(this.locator, name, value)));
+				return wait.until(ExpectedConditions.attributeToBe(this.locator, name, value));
 			} else if (this.element != null) {
-				return wait.until(ExpectedConditions.or(ExpectedConditions.attributeToBe(this.element, name, value),
-						ExpectedConditions.attributeContains(this.element, name, value)));
+				return wait.until(ExpectedConditions.attributeToBe(this.element, name, value));
 			} else {
 				return false;
 			}
@@ -539,34 +537,6 @@ public class BaseElement {
 		} catch (NullPointerException e) {
 			return false;
 		}
-	}
-
-	/**
-	 * Checks to see if page container located has specific selected state
-	 * 
-	 * @param selected
-	 *            Selection state
-	 * @return True on success, false otherwise
-	 */
-	public boolean hasSelectedState(boolean selected) {
-
-		WebDriverWait wait = new WebDriverWait(driver, 0);
-		try {
-			if (this.locator != null) {
-				return wait.until(
-						ExpectedConditions.not(ExpectedConditions.elementSelectionStateToBe(this.locator, !selected)));
-			} else if (this.element != null) {
-				return wait.until(
-						ExpectedConditions.not(ExpectedConditions.elementSelectionStateToBe(this.element, !selected)));
-			} else {
-				return false;
-			}
-		} catch (TimeoutException t) {
-			return false;
-		} catch (NullPointerException e) {
-			return false;
-		}
-
 	}
 
 	public boolean hasUpdated() {
@@ -639,29 +609,6 @@ public class BaseElement {
 		} catch (NullPointerException e) {
 			return false;
 		}
-	}
-
-	/**
-	 * Checks to see if page container is selected
-	 * 
-	 * @return True if container is selected, false otherwise
-	 */
-	public boolean isSelected() {
-
-		try {
-			if (this.locator != null) {
-				return wait.until(ExpectedConditions.elementToBeSelected(this.locator));
-			} else if (this.element != null) {
-				return wait.until(ExpectedConditions.elementToBeSelected(this.element));
-			} else {
-				return false;
-			}
-		} catch (TimeoutException t) {
-			return false;
-		} catch (NullPointerException e) {
-			return false;
-		}
-
 	}
 
 	/**
@@ -844,12 +791,22 @@ public class BaseElement {
 	public SelectElement toSelectElement() {
 		return new SelectElement(this);
 	}
-	
+
 	public TextInputElement toTextInputElement() {
 		return new TextInputElement(this);
 	}
+
 	public ButtonElement toButtonElement() {
 		return new ButtonElement(this);
+	}
+
+	public RadioElement toRadioElement() {
+		return new RadioElement(this);
+	}
+	
+	public CheckboxElement toCheckboxElement()
+	{
+		return new CheckboxElement(this);
 	}
 
 }

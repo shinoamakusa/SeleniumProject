@@ -24,7 +24,7 @@ public class NewFilter extends BaseFilter {
 	public void select(boolean state)
 	{
 		BaseElement container = driver.findByLocator(this.locator);
-		if (container.findByName("onesearchad").hasSelectedState(!state)) {
+		if (!container.findByName("onesearchad").toCheckboxElement().isChecked(state)) {
 			driver.click(container);
 			this.selectedState = state;
 		}

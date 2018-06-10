@@ -15,17 +15,34 @@ public class SelectElement extends BaseElement {
 		this.locator = pageElement.locator;
 	}
 	
-	/**
-	 * Determines if specific container is container of SELECT tag
-	 * 
-	 * @param container
-	 *            Page container
-	 * @return True on success, false otherwise
-	 */
-	public boolean isSelectTagElement() {
-		return element != null ? tag.equalsIgnoreCase("select") : false;
+	public BaseElement getSelectedOption() {
+		if (isSelectTagElement() && element.isEnabled()) {
+			WebElement selected = new Select(element).getFirstSelectedOption();
+			return new BaseElement(selected);
+
+		} else {
+			return new BaseElement();
+		}
 	}
 	
+	/**
+	 * Gets options of select tag container
+	 * 
+	 * @return List of options of select tag container if exist
+	 */
+	public List<BaseElement> getSelectOptions() {
+		if (isSelectTagElement() && element.isEnabled()) {
+			List<BaseElement> elementList = new ArrayList<BaseElement>();
+			List<WebElement> list = new Select(element).getOptions();
+			for (WebElement el : list) {
+				elementList.add(new BaseElement(el));
+			}
+			return elementList;
+		} else {
+			return new ArrayList<BaseElement>();
+		}
+	}
+
 	/**
 	 * Selects dropdown list option by id
 	 * 
@@ -53,7 +70,7 @@ public class SelectElement extends BaseElement {
 
 		}
 	}
-
+	
 	/**
 	 * Selects dropdown list option by value
 	 * 
@@ -67,33 +84,16 @@ public class SelectElement extends BaseElement {
 
 		}
 	}
-	
-	public BaseElement getSelectedOption() {
-		if (isSelectTagElement() && element.isEnabled()) {
-			WebElement selected = new Select(element).getFirstSelectedOption();
-			return new BaseElement(selected);
-
-		} else {
-			return new BaseElement();
-		}
-	}
 
 	/**
-	 * Gets options of select tag container
+	 * Determines if specific container is container of SELECT tag
 	 * 
-	 * @return List of options of select tag container if exist
+	 * @param container
+	 *            Page container
+	 * @return True on success, false otherwise
 	 */
-	public List<BaseElement> getSelectOptions() {
-		if (isSelectTagElement() && element.isEnabled()) {
-			List<BaseElement> elementList = new ArrayList<BaseElement>();
-			List<WebElement> list = new Select(element).getOptions();
-			for (WebElement el : list) {
-				elementList.add(new BaseElement(el));
-			}
-			return elementList;
-		} else {
-			return new ArrayList<BaseElement>();
-		}
+	private boolean isSelectTagElement() {
+		return element != null ? tag.equalsIgnoreCase("select") : false;
 	}
 
 }

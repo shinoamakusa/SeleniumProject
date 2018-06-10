@@ -9,14 +9,14 @@ public class TextInputElement extends BaseElement {
 	}
 
 	public void enterText(String text) {
-		if (this.isTextInputElement() && this.isClickable()) {
+		if (this.isTextInputElement() && this.isClickable() && element.isEnabled()) {
 			element.click();
 			element.clear();
 			element.sendKeys(text);
 		}
 	}
 	
-	public boolean isTextInputElement() {
+	private boolean isTextInputElement() {
 		return element != null ? tag.equalsIgnoreCase("input") && this.hasAttribute("type", "text") : false;
 	}
 

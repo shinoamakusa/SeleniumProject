@@ -13,7 +13,7 @@ public class TotalPriceFilter extends BaseFilter {
 
 	public void select() {
 		BaseElement container = driver.findByLocator(this.locator);
-		if (container.findByID("searchVehiclesPriceTypeTotal").hasSelectedState(false)) {
+		if (!container.findByID("searchVehiclesPriceTypeTotal").toRadioElement().isSelected(true)) {
 			driver.click(container);
 		}
 	}
