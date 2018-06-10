@@ -7,13 +7,13 @@ import shinoamakusa.selenium.core.filters.BaseFilter;
 
 public class MonthlyPriceFilter extends BaseFilter {
 	public MonthlyPriceFilter(BrowserDriver driver) {
-		this.driver = driver;
+		super(driver);
 		this.locator = ByLocator.attribute("for", "searchVehiclesPriceTypeMonthly");
 	}
 
 	public void select() {
 		BaseElement container = driver.findByLocator(this.locator);
-		if (!container.findByID("searchVehiclesPriceTypeMonthly").toRadioElement().isSelected(true)) {
+		if (!container.findByID("searchVehiclesPriceTypeMonthly").toRadioElement().hasSelectedState(true)) {
 			driver.click(container);
 		}
 	}

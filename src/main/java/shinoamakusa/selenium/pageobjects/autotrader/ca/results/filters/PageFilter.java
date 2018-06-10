@@ -2,6 +2,7 @@ package shinoamakusa.selenium.pageobjects.autotrader.ca.results.filters;
 
 import org.openqa.selenium.WebDriverException;
 
+import shinoamakusa.selenium.core.drivers.BrowserDriver;
 import shinoamakusa.selenium.core.elements.BaseElement;
 import shinoamakusa.selenium.core.filters.BaseFilter;
 
@@ -11,6 +12,11 @@ public class PageFilter extends BaseFilter {
 
 	public PageFilter() {
 
+	}
+	
+	public PageFilter(BrowserDriver driver)
+	{
+		super(driver);
 	}
 
 	public int getMenuOptionResultsCount() {

@@ -5,12 +5,12 @@ import java.util.List;
 
 import shinoamakusa.selenium.core.drivers.BrowserDriver;
 
-public class CarFilters {
+public class HomeCarOptions {
 	private NearlyNewFilter nearlyNewFilter;
 	private NewFilter newFilter;
 	private UsedFilter usedFilter;
 
-	public CarFilters(BrowserDriver driver) {
+	public HomeCarOptions(BrowserDriver driver) {
 		nearlyNewFilter = new NearlyNewFilter(driver);
 		newFilter = new NewFilter(driver);
 		usedFilter = new UsedFilter(driver);

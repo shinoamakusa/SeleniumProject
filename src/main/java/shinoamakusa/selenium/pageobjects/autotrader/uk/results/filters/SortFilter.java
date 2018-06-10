@@ -8,7 +8,7 @@ import shinoamakusa.selenium.core.filters.BaseFilter;
 
 public class SortFilter extends BaseFilter {
 	public SortFilter(BrowserDriver driver) {
-		this.driver = driver;
+		super(driver);
 		this.locator = ByLocator.className("js-sort-options");
 	}
 

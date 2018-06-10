@@ -10,7 +10,7 @@ import shinoamakusa.selenium.core.elements.SelectElement;
 public class YearFilter extends PageFilter {
 
 	public YearFilter(BrowserDriver driver) {
-		this.driver = driver;
+		super(driver);
 		this.locator = ByLocator.id("faceted-parent-Year");
 	}
 

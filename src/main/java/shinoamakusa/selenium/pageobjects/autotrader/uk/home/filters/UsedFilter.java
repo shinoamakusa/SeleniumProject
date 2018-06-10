@@ -4,34 +4,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.pagefactory.ByChained;
 
 import shinoamakusa.selenium.core.drivers.BrowserDriver;
-import shinoamakusa.selenium.core.elements.BaseElement;
 import shinoamakusa.selenium.core.elements.ByLocator;
-import shinoamakusa.selenium.core.filters.BaseFilter;
 
-public class UsedFilter extends BaseFilter {
-	private boolean selectedState = true;
+public class UsedFilter extends CarOptionsFilter {
 
 	public UsedFilter(BrowserDriver driver) {
-		this.driver = driver;
+		super(driver);
 		this.locator = ByLocator.attribute("for", "oneSearchAdUsed");
 	}
 
 	public UsedFilter(BrowserDriver driver, By parentLocator) {
 		this(driver);
 		this.locator = new ByChained(parentLocator, this.locator);
-	}
-
-	public void select(boolean state) {
-		BaseElement container = driver.findByLocator(this.locator);
-		if (!container.findByName("onesearchad").toCheckboxElement().isChecked(state)) {
-			driver.click(container);
-			this.selectedState = state;
-		}
-	}
-
-	public boolean isSelected() {
-		return this.selectedState;
-
 	}
 
 }

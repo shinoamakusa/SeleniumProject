@@ -9,7 +9,7 @@ import shinoamakusa.selenium.core.elements.BaseElement;
 public class ModelFilter extends PageFilter {
 
 	public ModelFilter(BrowserDriver driver) {
-		this.driver = driver;
+		super(driver);
 		this.locator = ByLocator.id("faceted-parent-Model");
 	}
 

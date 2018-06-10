@@ -8,7 +8,7 @@ import shinoamakusa.selenium.core.filters.BaseFilter;
 public class TotalCountFilter extends BaseFilter {
 
 	public TotalCountFilter(BrowserDriver driver) {
-		this.driver = driver;
+		super(driver);
 		this.locator = ByLocator.className("search-form__count");
 	}
 

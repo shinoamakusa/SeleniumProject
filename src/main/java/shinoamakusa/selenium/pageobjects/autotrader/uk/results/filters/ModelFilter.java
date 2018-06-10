@@ -7,7 +7,7 @@ import shinoamakusa.selenium.core.filters.BaseFilter;
 
 public class ModelFilter extends BaseFilter {
 	public ModelFilter(BrowserDriver driver) {
-		this.driver = driver;
+		super(driver);
 		this.locator = ByLocator.attribute("data-button-for", "model");
 	}
 

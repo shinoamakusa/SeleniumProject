@@ -7,7 +7,7 @@ import shinoamakusa.selenium.core.filters.BaseFilter;
 
 public class MakeFilter extends BaseFilter {
 	public MakeFilter(BrowserDriver driver) {
-		this.driver = driver;
+		super(driver);
 		this.locator = ByLocator.attribute("data-button-for", "make");
 	}
 

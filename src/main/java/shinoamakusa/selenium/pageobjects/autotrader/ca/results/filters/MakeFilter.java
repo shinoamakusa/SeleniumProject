@@ -9,7 +9,7 @@ import shinoamakusa.selenium.core.elements.BaseElement;
 public class MakeFilter extends PageFilter {
 
 	public MakeFilter(BrowserDriver driver) {
-		this.driver = driver;
+		super(driver);
 		this.locator = ByLocator.id("faceted-parent-Make");
 	}
 

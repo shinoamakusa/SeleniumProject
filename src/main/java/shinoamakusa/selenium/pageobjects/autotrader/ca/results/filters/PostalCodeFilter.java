@@ -7,7 +7,7 @@ import shinoamakusa.selenium.core.elements.BaseElement;
 public class PostalCodeFilter extends PageFilter {
 
 	public PostalCodeFilter(BrowserDriver driver) {
-		this.driver = driver;
+		super(driver);
 		this.locator = ByLocator.id("faceted-parent-Location");
 	}
 

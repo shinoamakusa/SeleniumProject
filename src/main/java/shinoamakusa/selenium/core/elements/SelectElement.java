@@ -6,15 +6,12 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-public class SelectElement extends BaseElement {
-	
-	public SelectElement(BaseElement pageElement)
-	{
-		this.tag = pageElement.tag;
-		this.element = pageElement.element;
-		this.locator = pageElement.locator;
+public class SelectElement extends InputElement {
+
+	public SelectElement(BaseElement pageElement) {
+		super(pageElement);
 	}
-	
+
 	public BaseElement getSelectedOption() {
 		if (isSelectTagElement() && element.isEnabled()) {
 			WebElement selected = new Select(element).getFirstSelectedOption();
@@ -24,7 +21,7 @@ public class SelectElement extends BaseElement {
 			return new BaseElement();
 		}
 	}
-	
+
 	/**
 	 * Gets options of select tag container
 	 * 
@@ -70,7 +67,7 @@ public class SelectElement extends BaseElement {
 
 		}
 	}
-	
+
 	/**
 	 * Selects dropdown list option by value
 	 * 
@@ -83,17 +80,6 @@ public class SelectElement extends BaseElement {
 			listElement.selectByValue(value);
 
 		}
-	}
-
-	/**
-	 * Determines if specific container is container of SELECT tag
-	 * 
-	 * @param container
-	 *            Page container
-	 * @return True on success, false otherwise
-	 */
-	private boolean isSelectTagElement() {
-		return element != null ? tag.equalsIgnoreCase("select") : false;
 	}
 
 }

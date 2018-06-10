@@ -7,7 +7,7 @@ import shinoamakusa.selenium.core.elements.BaseElement;
 public class TotalCountFilter extends PageFilter {
 
 	public TotalCountFilter(BrowserDriver driver) {
-		this.driver = driver;
+		super(driver);
 		this.locator = ByLocator.id("sbCount");
 	}
 

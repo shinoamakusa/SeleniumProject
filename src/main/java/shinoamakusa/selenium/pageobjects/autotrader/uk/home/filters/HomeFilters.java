@@ -11,7 +11,7 @@ public class HomeFilters {
 	private PostalCodeFilter postal;
 	private RadiusFilter radius;
 	private TotalPriceFilter totalPrice;
-	private CarFilters carFilters;
+	private HomeCarOptions carFilters;
 
 	public HomeFilters(BrowserDriver driver) {
 		model = new ModelFilter(driver);
@@ -20,10 +20,10 @@ public class HomeFilters {
 		postal = new PostalCodeFilter(driver);
 		monthlyPrice = new MonthlyPriceFilter(driver);
 		totalPrice = new TotalPriceFilter(driver);
-		carFilters = new CarFilters(driver);
+		carFilters = new HomeCarOptions(driver);
 	}
 
-	public CarFilters carFilters() {
+	public HomeCarOptions carFilters() {
 		return carFilters;
 	}
 

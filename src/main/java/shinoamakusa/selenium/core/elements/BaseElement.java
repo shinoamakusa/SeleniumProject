@@ -789,11 +789,11 @@ public class BaseElement {
 	}
 
 	public SelectElement toSelectElement() {
-		return new SelectElement(this);
+		return toInputElement().toSelectElement();
 	}
 
 	public TextInputElement toTextInputElement() {
-		return new TextInputElement(this);
+		return toInputElement().toTextInputElement();
 	}
 
 	public ButtonElement toButtonElement() {
@@ -801,12 +801,22 @@ public class BaseElement {
 	}
 
 	public RadioElement toRadioElement() {
-		return new RadioElement(this);
+		return toInputElement().toRadioElement();
 	}
 	
 	public CheckboxElement toCheckboxElement()
 	{
-		return new CheckboxElement(this);
+		return toInputElement().toCheckboxElement();
+	}
+	
+	public InputElement toInputElement()
+	{
+		return new InputElement(this);
+	}
+	
+	public LabelElement toLabelElement()
+	{
+		return new LabelElement(this);
 	}
 
 }

@@ -7,13 +7,13 @@ import shinoamakusa.selenium.core.filters.BaseFilter;
 
 public class TotalPriceFilter extends BaseFilter {
 	public TotalPriceFilter(BrowserDriver driver) {
-		this.driver = driver;
+		super(driver);
 		this.locator = ByLocator.attribute("for", "searchVehiclesPriceTypeTotal");
 	}
 
 	public void select() {
 		BaseElement container = driver.findByLocator(this.locator);
-		if (!container.findByID("searchVehiclesPriceTypeTotal").toRadioElement().isSelected(true)) {
+		if (!container.findByID("searchVehiclesPriceTypeTotal").toRadioElement().hasSelectedState(true)) {
 			driver.click(container);
 		}
 	}

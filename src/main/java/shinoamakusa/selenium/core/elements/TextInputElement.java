@@ -1,11 +1,9 @@
 package shinoamakusa.selenium.core.elements;
 
-public class TextInputElement extends BaseElement {
+public class TextInputElement extends InputElement {
 
 	public TextInputElement(BaseElement pageElement) {
-		this.tag = pageElement.tag;
-		this.element = pageElement.element;
-		this.locator = pageElement.locator;
+		super(pageElement);
 	}
 
 	public void enterText(String text) {
@@ -14,10 +12,6 @@ public class TextInputElement extends BaseElement {
 			element.clear();
 			element.sendKeys(text);
 		}
-	}
-	
-	private boolean isTextInputElement() {
-		return element != null ? tag.equalsIgnoreCase("input") && this.hasAttribute("type", "text") : false;
 	}
 
 }
