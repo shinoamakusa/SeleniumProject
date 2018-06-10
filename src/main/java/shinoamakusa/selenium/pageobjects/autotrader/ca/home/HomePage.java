@@ -2,9 +2,10 @@ package shinoamakusa.selenium.pageobjects.autotrader.ca.home;
 
 import org.openqa.selenium.By;
 
+import shinoamakusa.selenium.core.elements.ButtonElement;
 import shinoamakusa.selenium.core.elements.ByLocator;
-import shinoamakusa.selenium.core.elements.PageElement;
 import shinoamakusa.selenium.core.elements.SelectElement;
+import shinoamakusa.selenium.core.elements.TextInputElement;
 import shinoamakusa.selenium.core.pages.BasePage;
 import shinoamakusa.selenium.pageobjects.autotrader.ca.results.ResultsPage;
 
@@ -44,29 +45,30 @@ public class HomePage extends BasePage {
 	}
 
 	private void selectMake(final String make) {
-		PageElement element = driver.findByLocator(MAKE_LOCATOR);
+		SelectElement element = driver.findByLocator(MAKE_LOCATOR).toSelectElement();
 		if (element.isClickable())
-			new SelectElement(element).selectOptionByValue(make);
+			element.selectOptionByValue(make);
 	}
 
 	private void selectModel(final String model) {
-		PageElement element = driver.findByLocator(MODEL_LOCATOR);
+		SelectElement element = driver.findByLocator(MODEL_LOCATOR).toSelectElement();
 		if (element.isClickable())
-			new SelectElement(element).selectOptionByValue(model);
+			element.selectOptionByValue(model);
 	}
 
 	private void selectPrice(final String price) {
-		PageElement element = driver.findByLocator(PRICE_LOCATOR);
+		SelectElement element = driver.findByLocator(PRICE_LOCATOR).toSelectElement();
 		if (element.isClickable())
-			new SelectElement(element).selectOptionByValue(price);
+			element.selectOptionByValue(price);
 	}
 
 	private void submitSearch() {
-		driver.click(driver.findByLocator(SUBMIT_BUTTON_LOCATOR));
+		ButtonElement element = driver.findByLocator(SUBMIT_BUTTON_LOCATOR).toButtonElement();
+		driver.click(element);
 	}
 
 	private void typePostalCode(final String postalCode) {
-		PageElement element = driver.findByLocator(POSTAL_CODE_LOCATOR);
+		TextInputElement element = driver.findByLocator(POSTAL_CODE_LOCATOR).toTextInputElement();
 		driver.typeInto(element, postalCode);
 	}
 

@@ -3,7 +3,7 @@ package shinoamakusa.selenium.core.filters;
 import org.openqa.selenium.By;
 
 import shinoamakusa.selenium.core.drivers.BrowserDriver;
-import shinoamakusa.selenium.core.elements.PageElement;
+import shinoamakusa.selenium.core.elements.BaseElement;
 
 public class BaseFilter {
 
@@ -32,7 +32,7 @@ public class BaseFilter {
 	}
 	
 	public String getText() {
-		PageElement container = driver.findByLocator(this.locator);
+		BaseElement container = driver.findByLocator(this.locator);
 		return container.getText();
 	}
 

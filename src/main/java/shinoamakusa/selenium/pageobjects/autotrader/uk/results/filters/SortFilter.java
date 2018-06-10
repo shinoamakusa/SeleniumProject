@@ -2,7 +2,7 @@ package shinoamakusa.selenium.pageobjects.autotrader.uk.results.filters;
 
 import shinoamakusa.selenium.core.drivers.BrowserDriver;
 import shinoamakusa.selenium.core.elements.ByLocator;
-import shinoamakusa.selenium.core.elements.PageElement;
+import shinoamakusa.selenium.core.elements.BaseElement;
 import shinoamakusa.selenium.core.elements.SelectElement;
 import shinoamakusa.selenium.core.filters.BaseFilter;
 
@@ -14,10 +14,10 @@ public class SortFilter extends BaseFilter {
 
 	public void select(String value) {
 
-		PageElement container = driver.findByLocator(this.locator);
-		PageElement sortOption = container.findByAttribute("value", value);
+		SelectElement container = driver.findByLocator(this.locator).toSelectElement();
+		BaseElement sortOption = container.findByAttribute("value", value);
 		if (sortOption.exists())
-			new SelectElement(container).selectOptionByValue(value);
+			container.selectOptionByValue(value);
 
 	}
 

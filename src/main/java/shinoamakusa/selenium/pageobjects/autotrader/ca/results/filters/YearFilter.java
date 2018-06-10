@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriverException;
 
 import shinoamakusa.selenium.core.drivers.BrowserDriver;
 import shinoamakusa.selenium.core.elements.ByLocator;
-import shinoamakusa.selenium.core.elements.PageElement;
+import shinoamakusa.selenium.core.elements.BaseElement;
 import shinoamakusa.selenium.core.elements.SelectElement;
 
 public class YearFilter extends PageFilter {
@@ -21,13 +21,13 @@ public class YearFilter extends PageFilter {
 	}
 
 	public boolean isSelected(final String year) {
-		PageElement container = driver.findByLocator(this.locator);
+		BaseElement container = driver.findByLocator(this.locator);
 		return container.findByID("faceted-Year").textContains(year);
 	}
 
 	private void selectYearFilter() {
 		try {
-			PageElement container = driver.findByLocator(this.locator);
+			BaseElement container = driver.findByLocator(this.locator);
 			driver.click(container);
 		} catch (WebDriverException e) {
 			checkForModal();
@@ -38,7 +38,7 @@ public class YearFilter extends PageFilter {
 	private void selectMaxYear(final String year) {
 
 		try {
-			PageElement container = driver.findByLocator(this.locator);
+			BaseElement container = driver.findByLocator(this.locator);
 			menu = new PageFilterMenu(container.findByClass("dropdown-menu"));
 			SelectElement maxYearSelect = new SelectElement(menu.container().findByID("yearHigh"));
 			maxYearSelect.selectOptionByValue(year);

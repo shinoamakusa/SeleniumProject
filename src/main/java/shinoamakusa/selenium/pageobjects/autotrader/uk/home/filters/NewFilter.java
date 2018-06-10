@@ -5,7 +5,7 @@ import org.openqa.selenium.support.pagefactory.ByChained;
 
 import shinoamakusa.selenium.core.drivers.BrowserDriver;
 import shinoamakusa.selenium.core.elements.ByLocator;
-import shinoamakusa.selenium.core.elements.PageElement;
+import shinoamakusa.selenium.core.elements.BaseElement;
 import shinoamakusa.selenium.core.filters.BaseFilter;
 
 public class NewFilter extends BaseFilter {
@@ -23,7 +23,7 @@ public class NewFilter extends BaseFilter {
 	
 	public void select(boolean state)
 	{
-		PageElement container = driver.findByLocator(this.locator);
+		BaseElement container = driver.findByLocator(this.locator);
 		if (container.findByName("onesearchad").hasSelectedState(!state)) {
 			driver.click(container);
 			this.selectedState = state;

@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 
 import shinoamakusa.selenium.core.drivers.BrowserDriver;
 import shinoamakusa.selenium.core.elements.ByLocator;
-import shinoamakusa.selenium.core.elements.PageElement;
+import shinoamakusa.selenium.core.elements.BaseElement;
 import shinoamakusa.selenium.core.pages.BasePage;
 
 public class DetailsPage extends BasePage {
@@ -26,7 +26,7 @@ public class DetailsPage extends BasePage {
 	}
 
 	public void getDetails() {
-		PageElement element = driver.findByLocator(ITEM_TITLE_LOCATOR);
+		BaseElement element = driver.findByLocator(ITEM_TITLE_LOCATOR);
 		itemTitle = element.getText().trim();
 
 		element = driver.findByLocator(ITEM_SUBTITLE_LOCATOR);
@@ -40,7 +40,7 @@ public class DetailsPage extends BasePage {
 	 * Follows the link to next item in details page pagination
 	 */
 	public DetailsPage goToNextItem() {
-		PageElement element = driver.findByLocator(NEXT_ITEM_LINK);
+		BaseElement element = driver.findByLocator(NEXT_ITEM_LINK);
 		if (element.webElement() == null)
 			return null;
 		driver.click(element);
@@ -51,7 +51,7 @@ public class DetailsPage extends BasePage {
 	 * Follows the link to previous item in details page pagination
 	 */
 	public DetailsPage goToPreviousItem() {
-		PageElement element = driver.findByLocator(PREVIOUS_ITEM_LINK);
+		BaseElement element = driver.findByLocator(PREVIOUS_ITEM_LINK);
 		if (element.webElement() == null)
 			return null;
 		driver.click(element);

@@ -11,7 +11,7 @@ import com.google.common.collect.Ordering;
 
 import shinoamakusa.selenium.core.drivers.BrowserDriver;
 import shinoamakusa.selenium.core.elements.ByLocator;
-import shinoamakusa.selenium.core.elements.PageElement;
+import shinoamakusa.selenium.core.elements.BaseElement;
 import shinoamakusa.selenium.core.pages.BasePage;
 import shinoamakusa.selenium.pageobjects.autotrader.uk.results.filters.ResultsFilters;
 
@@ -72,7 +72,7 @@ public class ResultsPage extends BasePage {
 		By locator = ByLocator.attribute("data-standout-type", "");
 
 		if (driver.findByLocator(containerLocator).hasUpdated()) {
-			PageElement.elementCountEquals(locator, 10);
+			BaseElement.elementCountEquals(locator, 10);
 		}
 
 		if (this.url.contains("total-price"))
@@ -81,8 +81,8 @@ public class ResultsPage extends BasePage {
 			locator = new ByChained(locator, ByLocator.className("finance-price"));
 
 		List<Integer> values = new ArrayList<Integer>();
-		List<PageElement> elements = driver.findAllByLocator(locator);
-		for (PageElement element : elements) {
+		List<BaseElement> elements = driver.findAllByLocator(locator);
+		for (BaseElement element : elements) {
 			int value;
 			if (this.url.contains("total-price"))
 				value = Integer.parseInt(element.getText().substring(1).replaceAll(",", "").trim());

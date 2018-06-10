@@ -5,7 +5,7 @@ import org.openqa.selenium.StaleElementReferenceException;
 
 import shinoamakusa.selenium.core.drivers.BrowserDriver;
 import shinoamakusa.selenium.core.elements.ByLocator;
-import shinoamakusa.selenium.core.elements.PageElement;
+import shinoamakusa.selenium.core.elements.BaseElement;
 import shinoamakusa.selenium.core.elements.SelectElement;
 import shinoamakusa.selenium.core.filters.BaseFilter;
 
@@ -16,18 +16,18 @@ public class MakeFilter extends BaseFilter {
 	}
 
 	public String getCount(String make) {
-		PageElement container = driver.findByLocator(this.locator);
+		BaseElement container = driver.findByLocator(this.locator);
 		return StringUtils.substringBetween(container.findByAttribute("value", make).getText(), "(", ")");
 	}
 
 	public void select(String make) {
 		try {
-			PageElement container = driver.findByLocator(this.locator);
+			SelectElement container = driver.findByLocator(this.locator).toSelectElement();
 			container.hasUpdated();
 			if (container.isClickable()) {
-				PageElement makeOption = container.findByAttribute("value", make);
+				BaseElement makeOption = container.findByAttribute("value", make);
 				if (makeOption.exists()) {
-					new SelectElement(container).selectOptionByValue(make);
+					container.selectOptionByValue(make);
 				}
 			}
 		} catch (StaleElementReferenceException e) {

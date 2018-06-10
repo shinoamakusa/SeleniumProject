@@ -5,14 +5,16 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 
+import shinoamakusa.selenium.core.elements.ButtonElement;
 import shinoamakusa.selenium.core.elements.ByLocator;
-import shinoamakusa.selenium.core.elements.PageElement;
 import shinoamakusa.selenium.core.pages.BasePage;
 import shinoamakusa.selenium.pageobjects.autotrader.uk.home.filters.HomeFilters;
 import shinoamakusa.selenium.pageobjects.autotrader.uk.results.ResultsPage;
 
 public class HomePage extends BasePage {
 
+	private static final By SEARCH_BUTTON_LOCATOR = ByLocator.id("js-search-button");
+	
 	private HomeFilters filters;
 	private String searchCount;
 	private List<String> selectedCarFilters;
@@ -77,8 +79,7 @@ public class HomePage extends BasePage {
 		selectedCarFilters = filters().carFilters().getSelectedFilters();
 
 		//driver.waitFor(3);
-		By locator = ByLocator.id("js-search-button");
-		PageElement searchButton = driver.findByLocator(locator);
+		ButtonElement searchButton = driver.findByLocator(SEARCH_BUTTON_LOCATOR).toButtonElement();
 		if (searchButton.textContains(filters().model().getCount()) && searchButton.isClickable()) {
 			searchCount = searchButton.getText().split(" ")[1];
 			driver.click(searchButton);

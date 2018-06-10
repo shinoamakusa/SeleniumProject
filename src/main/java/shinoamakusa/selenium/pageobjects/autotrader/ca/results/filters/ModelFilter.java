@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriverException;
 
 import shinoamakusa.selenium.core.drivers.BrowserDriver;
 import shinoamakusa.selenium.core.elements.ByLocator;
-import shinoamakusa.selenium.core.elements.PageElement;
+import shinoamakusa.selenium.core.elements.BaseElement;
 
 public class ModelFilter extends PageFilter {
 
@@ -21,14 +21,14 @@ public class ModelFilter extends PageFilter {
 	}
 
 	public boolean isSelected(final String model) {
-		PageElement container = driver.findByLocator(this.locator);
+		BaseElement container = driver.findByLocator(this.locator);
 		return container.findByID("faceted-Model").getText().equalsIgnoreCase(model);
 	}
 
 	private void selectModelFilter() {
 
 		try {
-			PageElement container = driver.findByLocator(this.locator);
+			BaseElement container = driver.findByLocator(this.locator);
 			driver.click(container);
 		} catch (WebDriverException e) {
 			checkForModal();

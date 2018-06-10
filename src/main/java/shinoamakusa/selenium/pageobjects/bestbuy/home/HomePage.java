@@ -28,8 +28,8 @@ public class HomePage extends BasePage {
 	public ResultsPage searchFor(final String searchQuery) {
 		if (isValidPage()) {
 			try {
-				driver.search(driver.findByLocator(SEARCH_BOX_LOCATOR), driver.findByLocator(SEARCH_BUTTON_LOCATOR),
-						searchQuery);
+				driver.search(driver.findByLocator(SEARCH_BOX_LOCATOR).toTextInputElement(),
+						driver.findByLocator(SEARCH_BUTTON_LOCATOR).toButtonElement(), searchQuery);
 			} catch (WebDriverException e) {
 				checkForModal();
 				searchFor(searchQuery);

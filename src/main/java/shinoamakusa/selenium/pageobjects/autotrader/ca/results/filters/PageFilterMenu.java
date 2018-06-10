@@ -1,23 +1,23 @@
 package shinoamakusa.selenium.pageobjects.autotrader.ca.results.filters;
 
-import shinoamakusa.selenium.core.elements.PageElement;
+import shinoamakusa.selenium.core.elements.BaseElement;
 
 public class PageFilterMenu {
-	private PageElement container;
-	private PageElement menuOption;
+	private BaseElement container;
+	private BaseElement menuOption;
 	
-	public PageFilterMenu(PageElement element)
+	public PageFilterMenu(BaseElement element)
 	{
 		this.container = element;
 		
 	}
 	
-	public PageElement container()
+	public BaseElement container()
 	{
 		return container;
 	}
 	
-	public PageElement getOption()
+	public BaseElement getOption()
 	{
 		return menuOption;
 	}

@@ -13,7 +13,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import shinoamakusa.selenium.core.elements.PageElement;
+import shinoamakusa.selenium.core.elements.BaseElement;
+import shinoamakusa.selenium.core.elements.ButtonElement;
+import shinoamakusa.selenium.core.elements.TextInputElement;
 
 /**
  * Class representing a browser instance Wrapper class for Selenium WebDriver
@@ -102,7 +104,7 @@ public class BrowserDriver extends BaseDriver {
 	 *            Web page container to click
 	 * @return Url string if container is link, empty string otherwise
 	 */
-	public String click(final PageElement element) {
+	public String click(final BaseElement element) {
 		if (element != null) {
 			String link = StringUtils.EMPTY;
 			if (element.getTag().equalsIgnoreCase("a")) {
@@ -150,7 +152,7 @@ public class BrowserDriver extends BaseDriver {
 	 * @param container
 	 *            Page container to perform code on
 	 */
-	public void executeJS(final String code, PageElement element) {
+	public void executeJS(final String code, BaseElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript(code, element.webElement());
 	}
@@ -240,7 +242,7 @@ public class BrowserDriver extends BaseDriver {
 	 * @param searchQuery
 	 *            Query to perform search on
 	 */
-	public void search(final PageElement searchBox, final PageElement searchButton, final String searchQuery) {
+	public void search(final TextInputElement searchBox, final ButtonElement searchButton, final String searchQuery) {
 		typeInto(searchBox, searchQuery);
 		click(searchButton);
 	}
@@ -272,11 +274,9 @@ public class BrowserDriver extends BaseDriver {
 	 * @param keys
 	 *            Text string to fill in
 	 */
-	public void typeInto(final PageElement element, final String keys) {
-		if (element.webElement() != null && !StringUtils.isBlank(keys)) {
-			element.click();
-			element.webElement().clear();
-			element.webElement().sendKeys(keys);
+	public void typeInto(final TextInputElement element, final String keys) {
+		if (element != null && !StringUtils.isBlank(keys)) {
+			element.enterText(keys);
 		}
 	}
 
@@ -289,6 +289,6 @@ public class BrowserDriver extends BaseDriver {
 	private void initialize(final WebDriver webDriver) {
 		driver = webDriver;
 		wait = new WebDriverWait(driver, 10);
-		PageElement.setDriver(driver, wait);
+		BaseElement.setDriver(driver, wait);
 	}
 }

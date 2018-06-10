@@ -4,7 +4,7 @@ import org.openqa.selenium.StaleElementReferenceException;
 
 import shinoamakusa.selenium.core.drivers.BrowserDriver;
 import shinoamakusa.selenium.core.elements.ByLocator;
-import shinoamakusa.selenium.core.elements.PageElement;
+import shinoamakusa.selenium.core.elements.BaseElement;
 import shinoamakusa.selenium.core.elements.SelectElement;
 import shinoamakusa.selenium.core.filters.BaseFilter;
 
@@ -16,11 +16,11 @@ public class RadiusFilter extends BaseFilter {
 
 	public void select(String radius) {
 		try {
-			PageElement container = driver.findByLocator(this.locator);
+			SelectElement container = driver.findByLocator(this.locator).toSelectElement();
 			if (container.isClickable()) {
-				PageElement radiusOption = container.findByAttribute("value", radius);
+				BaseElement radiusOption = container.findByAttribute("value", radius);
 				if (radiusOption.exists())
-					new SelectElement(container).selectOptionByValue(radius);
+					container.selectOptionByValue(radius);
 			}
 		} catch (StaleElementReferenceException e) {
 			select(radius);

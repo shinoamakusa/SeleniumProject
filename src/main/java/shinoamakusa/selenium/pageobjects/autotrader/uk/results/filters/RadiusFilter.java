@@ -2,7 +2,6 @@ package shinoamakusa.selenium.pageobjects.autotrader.uk.results.filters;
 
 import shinoamakusa.selenium.core.drivers.BrowserDriver;
 import shinoamakusa.selenium.core.elements.ByLocator;
-import shinoamakusa.selenium.core.elements.PageElement;
 import shinoamakusa.selenium.core.elements.SelectElement;
 import shinoamakusa.selenium.core.filters.BaseFilter;
 
@@ -14,8 +13,8 @@ public class RadiusFilter extends BaseFilter {
 	}
 
 	public boolean isSelected(final String radius) {
-		PageElement container = driver.findByLocator(this.locator);
-		return new SelectElement(container).getSelectedOption().getAttribute("value").equalsIgnoreCase(radius);
+		SelectElement container = driver.findByLocator(this.locator).toSelectElement();
+		return container.getSelectedOption().getAttribute("value").equalsIgnoreCase(radius);
 	}
 
 }

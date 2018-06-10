@@ -18,7 +18,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * @author Oleg Kravenkov
  *
  */
-public class PageElement {
+public class BaseElement {
 
 	protected static WebDriver driver;
 	protected static WebDriverWait wait;
@@ -94,8 +94,8 @@ public class PageElement {
 	 *            WebDriverwait object
 	 */
 	public static void setDriver(final WebDriver driver, final WebDriverWait wait) {
-		PageElement.driver = driver;
-		PageElement.wait = wait;
+		BaseElement.driver = driver;
+		BaseElement.wait = wait;
 	}
 
 	/**
@@ -115,7 +115,7 @@ public class PageElement {
 	/**
 	 * PageElement class constructor
 	 */
-	public PageElement() {
+	public BaseElement() {
 
 	}
 
@@ -125,14 +125,14 @@ public class PageElement {
 	 * @param container
 	 *            Selenium WebElement object
 	 */
-	public PageElement(final WebElement element) {
+	public BaseElement(final WebElement element) {
 		this.element = element;
 		if (this.element != null) {
 			this.tag = element.getTagName();
 		}
 	}
 
-	public PageElement(final WebElement element, final By locator) {
+	public BaseElement(final WebElement element, final By locator) {
 		this.element = element;
 		if (this.element != null) {
 			this.tag = element.getTagName();
@@ -148,10 +148,10 @@ public class PageElement {
 	 * @param driver
 	 *            Selenium WebDriver container
 	 */
-	public PageElement(final WebElement element, final WebDriver driver) {
+	public BaseElement(final WebElement element, final WebDriver driver) {
 		this.element = element;
-		PageElement.driver = driver;
-		PageElement.wait = new WebDriverWait(PageElement.driver, 30);
+		BaseElement.driver = driver;
+		BaseElement.wait = new WebDriverWait(BaseElement.driver, 30);
 		if (this.element != null) {
 			this.tag = element.getTagName();
 		}
@@ -167,10 +167,10 @@ public class PageElement {
 	 * @param wait
 	 *            Selenium WebDriverWait container
 	 */
-	public PageElement(final WebElement element, final WebDriver driver, final WebDriverWait wait) {
+	public BaseElement(final WebElement element, final WebDriver driver, final WebDriverWait wait) {
 		this.element = element;
-		PageElement.driver = driver;
-		PageElement.wait = wait;
+		BaseElement.driver = driver;
+		BaseElement.wait = wait;
 		if (this.element != null) {
 			this.tag = element.getTagName();
 		}
@@ -202,7 +202,7 @@ public class PageElement {
 	 *            Attribute value
 	 * @return List of page elements matched
 	 */
-	public List<PageElement> findAllByAttribute(final String attributeName, final String attributeValue) {
+	public List<BaseElement> findAllByAttribute(final String attributeName, final String attributeValue) {
 		return findAll(ByLocator.attribute(attributeName, attributeValue));
 	}
 
@@ -213,7 +213,7 @@ public class PageElement {
 	 *            CSS class name
 	 * @return List of page elements matched
 	 */
-	public List<PageElement> findAllByClass(final String className) {
+	public List<BaseElement> findAllByClass(final String className) {
 		return findAll(ByLocator.className(className));
 	}
 
@@ -224,7 +224,7 @@ public class PageElement {
 	 *            CSS class name
 	 * @return List of page elements matched
 	 */
-	public List<PageElement> findAllByCssSelector(final String cssSelector) {
+	public List<BaseElement> findAllByCssSelector(final String cssSelector) {
 		return findAll(ByLocator.cssSelector(cssSelector));
 	}
 
@@ -235,7 +235,7 @@ public class PageElement {
 	 *            Value of ID attribute
 	 * @return List of page elements matched
 	 */
-	public List<PageElement> findAllByID(final String id) {
+	public List<BaseElement> findAllByID(final String id) {
 		return findAll(ByLocator.id(id));
 	}
 
@@ -246,7 +246,7 @@ public class PageElement {
 	 *            ByLocator
 	 * @return List of matched elements, null otherwise
 	 */
-	public List<PageElement> findAllByLocator(final By locator) {
+	public List<BaseElement> findAllByLocator(final By locator) {
 		return findAll(locator);
 	}
 
@@ -257,7 +257,7 @@ public class PageElement {
 	 *            Value of NAME attribute
 	 * @return List of page elements matched
 	 */
-	public List<PageElement> findAllByName(final String name) {
+	public List<BaseElement> findAllByName(final String name) {
 		return findAll(ByLocator.name(name));
 	}
 
@@ -268,7 +268,7 @@ public class PageElement {
 	 *            HTML tag
 	 * @return List of page elements matched
 	 */
-	public List<PageElement> findAllByTag(final String tag) {
+	public List<BaseElement> findAllByTag(final String tag) {
 		return findAll(ByLocator.tag(tag));
 	}
 
@@ -279,7 +279,7 @@ public class PageElement {
 	 *            Element text value
 	 * @return List of page elements matched
 	 */
-	public List<PageElement> findAllByText(final String value) {
+	public List<BaseElement> findAllByText(final String value) {
 		return findAll(ByLocator.text(value));
 	}
 
@@ -292,7 +292,7 @@ public class PageElement {
 	 *            Attribute value
 	 * @return First page container matched
 	 */
-	public PageElement findByAttribute(final String attributeName, final String attributeValue) {
+	public BaseElement findByAttribute(final String attributeName, final String attributeValue) {
 		return findByAttribute(attributeName, attributeValue, 1);
 	}
 
@@ -307,7 +307,7 @@ public class PageElement {
 	 *            Number in the list of all elements matched
 	 * @return Page container matched
 	 */
-	public PageElement findByAttribute(final String attributeName, final String attributeValue, final int num) {
+	public BaseElement findByAttribute(final String attributeName, final String attributeValue, final int num) {
 		return findBy(ByLocator.attribute(attributeName, attributeValue), num);
 	}
 
@@ -318,7 +318,7 @@ public class PageElement {
 	 *            CSS class name
 	 * @return First page container matched
 	 */
-	public PageElement findByClass(final String className) {
+	public BaseElement findByClass(final String className) {
 		return findByClass(className, 1);
 	}
 
@@ -331,7 +331,7 @@ public class PageElement {
 	 *            Number in the list of all elements matched
 	 * @return Page container matched
 	 */
-	public PageElement findByClass(final String className, final int num) {
+	public BaseElement findByClass(final String className, final int num) {
 		return findBy(ByLocator.className(className), num);
 	}
 
@@ -342,7 +342,7 @@ public class PageElement {
 	 *            CSS class name
 	 * @return First page container matched
 	 */
-	public PageElement findByCssSelector(final String cssSelector) {
+	public BaseElement findByCssSelector(final String cssSelector) {
 		return findByCssSelector(cssSelector, 1);
 	}
 
@@ -355,7 +355,7 @@ public class PageElement {
 	 *            Number in the list of all elements matched
 	 * @return Page container matched
 	 */
-	public PageElement findByCssSelector(final String cssSekector, final int num) {
+	public BaseElement findByCssSelector(final String cssSekector, final int num) {
 		return findBy(ByLocator.cssSelector(cssSekector), num);
 	}
 
@@ -366,7 +366,7 @@ public class PageElement {
 	 *            Value of ID attribute
 	 * @return First page container matched
 	 */
-	public PageElement findByID(final String id) {
+	public BaseElement findByID(final String id) {
 		return findByID(id, 1);
 	}
 
@@ -380,7 +380,7 @@ public class PageElement {
 	 * @return List of page elements matched
 	 */
 
-	public PageElement findByID(final String id, final int num) {
+	public BaseElement findByID(final String id, final int num) {
 		return findBy(ByLocator.id(id), num);
 	}
 
@@ -391,7 +391,7 @@ public class PageElement {
 	 *            ByLocator
 	 * @return First elements matched
 	 */
-	public PageElement findByLocator(final By locator) {
+	public BaseElement findByLocator(final By locator) {
 		return findByLocator(locator, 1);
 	}
 
@@ -404,7 +404,7 @@ public class PageElement {
 	 *            Number in matched elements sequence
 	 * @return Element matched, null otherwise
 	 */
-	public PageElement findByLocator(final By locator, final int num) {
+	public BaseElement findByLocator(final By locator, final int num) {
 		return findBy(locator, num);
 	}
 
@@ -415,7 +415,7 @@ public class PageElement {
 	 *            Value of NAME attribute
 	 * @return First page container matched
 	 */
-	public PageElement findByName(final String name) {
+	public BaseElement findByName(final String name) {
 		return findByName(name, 1);
 	}
 
@@ -428,7 +428,7 @@ public class PageElement {
 	 *            Number in the list off all elements matched
 	 * @return List of page elements matched
 	 */
-	public PageElement findByName(final String name, final int num) {
+	public BaseElement findByName(final String name, final int num) {
 		return findBy(ByLocator.name(name), num);
 	}
 
@@ -439,7 +439,7 @@ public class PageElement {
 	 *            HTML tag
 	 * @return First page container matched
 	 */
-	public PageElement findByTag(final String tag) {
+	public BaseElement findByTag(final String tag) {
 		return findByTag(tag, 1);
 	}
 
@@ -452,7 +452,7 @@ public class PageElement {
 	 *            Number in the list off all elements matched
 	 * @return List of page elements matched
 	 */
-	public PageElement findByTag(final String tag, final int num) {
+	public BaseElement findByTag(final String tag, final int num) {
 		return findBy(ByLocator.tag(tag), num);
 	}
 
@@ -463,7 +463,7 @@ public class PageElement {
 	 *            Element text value
 	 * @return First page container matched
 	 */
-	public PageElement findByText(final String value) {
+	public BaseElement findByText(final String value) {
 		return findByText(value, 1);
 	}
 
@@ -476,7 +476,7 @@ public class PageElement {
 	 *            Number in the list off all elements matched
 	 * @return List of page elements matched
 	 */
-	public PageElement findByText(final String value, final int num) {
+	public BaseElement findByText(final String value, final int num) {
 		return findBy(ByLocator.text(value), num);
 	}
 
@@ -795,18 +795,18 @@ public class PageElement {
 	 *            Element matching locator
 	 * @return List of elements matched on success, null otherwise
 	 */
-	private List<PageElement> findAll(final By locator) {
+	private List<BaseElement> findAll(final By locator) {
 		if (wait != null && this.locator != null && locator != null) {
 			try {
-				List<PageElement> list = new ArrayList<PageElement>();
+				List<BaseElement> list = new ArrayList<BaseElement>();
 				List<WebElement> webList = wait.until(ExpectedConditions
 						.refreshed(ExpectedConditions.presenceOfNestedElementsLocatedBy(this.locator, locator)));
 				for (WebElement element : webList) {
-					list.add(new PageElement(element, new ByChained(this.locator, locator)));
+					list.add(new BaseElement(element, new ByChained(this.locator, locator)));
 				}
 				return list;
 			} catch (TimeoutException t) {
-				return new ArrayList<PageElement>();
+				return new ArrayList<BaseElement>();
 			}
 		}
 		return null;
@@ -824,13 +824,13 @@ public class PageElement {
 	 *            Number index in list of elements
 	 * @return Matched container on success, null otherwise
 	 */
-	private PageElement findBy(final By locator, final int num) {
-		List<PageElement> elementList = findAll(locator);
+	private BaseElement findBy(final By locator, final int num) {
+		List<BaseElement> elementList = findAll(locator);
 		if (elementList != null && elementList.size() >= num) {
-			PageElement element = elementList.get(num - 1);
+			BaseElement element = elementList.get(num - 1);
 			return element;
 		} else
-			return new PageElement(null);
+			return new BaseElement(null);
 	}
 
 	private WebElement findWebElement(final By locator) {
@@ -839,6 +839,17 @@ public class PageElement {
 		} else {
 			return null;
 		}
+	}
+
+	public SelectElement toSelectElement() {
+		return new SelectElement(this);
+	}
+	
+	public TextInputElement toTextInputElement() {
+		return new TextInputElement(this);
+	}
+	public ButtonElement toButtonElement() {
+		return new ButtonElement(this);
 	}
 
 }

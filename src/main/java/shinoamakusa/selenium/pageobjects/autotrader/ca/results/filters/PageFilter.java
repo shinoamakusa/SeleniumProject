@@ -2,7 +2,7 @@ package shinoamakusa.selenium.pageobjects.autotrader.ca.results.filters;
 
 import org.openqa.selenium.WebDriverException;
 
-import shinoamakusa.selenium.core.elements.PageElement;
+import shinoamakusa.selenium.core.elements.BaseElement;
 import shinoamakusa.selenium.core.filters.BaseFilter;
 
 public class PageFilter extends BaseFilter {
@@ -23,7 +23,7 @@ public class PageFilter extends BaseFilter {
 
 	protected void chooseMenuOption(final String value) {
 		try {
-			PageElement container = driver.findByLocator(this.locator);
+			BaseElement container = driver.findByLocator(this.locator);
 			menu = new PageFilterMenu(container.findByClass("dropdown-menu"));
 			menu.setOption(value);
 			menuOptionCount = menu.getFilterMenuCount();

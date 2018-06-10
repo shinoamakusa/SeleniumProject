@@ -2,7 +2,7 @@ package shinoamakusa.selenium.pageobjects.autotrader.uk.home.filters;
 
 import shinoamakusa.selenium.core.drivers.BrowserDriver;
 import shinoamakusa.selenium.core.elements.ByLocator;
-import shinoamakusa.selenium.core.elements.PageElement;
+import shinoamakusa.selenium.core.elements.BaseElement;
 import shinoamakusa.selenium.core.filters.BaseFilter;
 
 public class MonthlyPriceFilter extends BaseFilter {
@@ -12,7 +12,7 @@ public class MonthlyPriceFilter extends BaseFilter {
 	}
 
 	public void select() {
-		PageElement container = driver.findByLocator(this.locator);
+		BaseElement container = driver.findByLocator(this.locator);
 		if (container.findByID("searchVehiclesPriceTypeMonthly").hasSelectedState(false)) {
 			driver.click(container);
 		}

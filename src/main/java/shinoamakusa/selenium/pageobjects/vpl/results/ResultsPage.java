@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 
 import shinoamakusa.selenium.core.drivers.BrowserDriver;
 import shinoamakusa.selenium.core.elements.ByLocator;
-import shinoamakusa.selenium.core.elements.PageElement;
+import shinoamakusa.selenium.core.elements.BaseElement;
 import shinoamakusa.selenium.core.pages.BasePage;
 import shinoamakusa.selenium.pageobjects.vpl.details.DetailsPage;
 
@@ -36,7 +36,7 @@ public class ResultsPage extends BasePage {
 	}
 
 	public void getResultInfo(int num) {
-		PageElement element = driver.findByLocator(ITEM_LOCATOR, num);
+		BaseElement element = driver.findByLocator(ITEM_LOCATOR, num);
 
 		itemTitle = element.findByLocator(ITEM_TITLE_LOCATOR).getText().trim();
 
@@ -51,7 +51,7 @@ public class ResultsPage extends BasePage {
 	 * @return Number of search results
 	 */
 	public int getResultsCount() {
-		PageElement element = driver.findByLocator(ITEMS_COUNT_LOCATOR);
+		BaseElement element = driver.findByLocator(ITEMS_COUNT_LOCATOR);
 		String[] elementParts = element.getText().split(" ");
 		return Integer.parseInt(elementParts[4]);
 	}
@@ -70,8 +70,8 @@ public class ResultsPage extends BasePage {
 	 */
 	private void goToResult(int num) {
 		
-		PageElement element = driver.findByLocator(ITEM_LOCATOR, num);
-		PageElement link = element.findByLocator(ITEM_TITLE_LOCATOR);
+		BaseElement element = driver.findByLocator(ITEM_LOCATOR, num);
+		BaseElement link = element.findByLocator(ITEM_TITLE_LOCATOR);
 
 		driver.click(link);
 	}

@@ -6,12 +6,13 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-public class SelectElement extends PageElement {
+public class SelectElement extends BaseElement {
 	
-	public SelectElement(PageElement pageElement)
+	public SelectElement(BaseElement pageElement)
 	{
 		this.tag = pageElement.tag;
 		this.element = pageElement.element;
+		this.locator = pageElement.locator;
 	}
 	
 	/**
@@ -67,13 +68,13 @@ public class SelectElement extends PageElement {
 		}
 	}
 	
-	public PageElement getSelectedOption() {
+	public BaseElement getSelectedOption() {
 		if (isSelectTagElement() && element.isEnabled()) {
 			WebElement selected = new Select(element).getFirstSelectedOption();
-			return new PageElement(selected);
+			return new BaseElement(selected);
 
 		} else {
-			return new PageElement();
+			return new BaseElement();
 		}
 	}
 
@@ -82,16 +83,16 @@ public class SelectElement extends PageElement {
 	 * 
 	 * @return List of options of select tag container if exist
 	 */
-	public List<PageElement> getSelectOptions() {
+	public List<BaseElement> getSelectOptions() {
 		if (isSelectTagElement() && element.isEnabled()) {
-			List<PageElement> elementList = new ArrayList<PageElement>();
+			List<BaseElement> elementList = new ArrayList<BaseElement>();
 			List<WebElement> list = new Select(element).getOptions();
 			for (WebElement el : list) {
-				elementList.add(new PageElement(el));
+				elementList.add(new BaseElement(el));
 			}
 			return elementList;
 		} else {
-			return new ArrayList<PageElement>();
+			return new ArrayList<BaseElement>();
 		}
 	}
 

@@ -4,15 +4,15 @@ import org.openqa.selenium.By;
 
 import shinoamakusa.selenium.core.drivers.BrowserDriver;
 import shinoamakusa.selenium.core.elements.ByLocator;
-import shinoamakusa.selenium.core.elements.PageElement;
+import shinoamakusa.selenium.core.elements.BaseElement;
 import shinoamakusa.selenium.core.pages.BasePage;
 
 public class ResultsPage extends BasePage {
-	private static final By BB_ONLY_TAB_LOCATOR = ByLocator.id("at-BBY-only");
-	private static final By BB_MARKET_TAB_LOCATOR = ByLocator.id("at-BBY-MP");
+	private static final By BESTBUY_ONLY_TAB_LOCATOR = ByLocator.id("at-BBY-only");
+	private static final By BESTBUY_MARKETPLACE_TAB_LOCATOR = ByLocator.id("at-BBY-MP");
 
-	private static final By BB_MARKET_COUNT_LOCATOR = ByLocator.id("at-BBYMP-item-count");
-	private static final By BB_ONLY_COUNT_LOCATOR = ByLocator.id("at-BBY-item-count");
+	private static final By BESTBUY_MARKETPLACE_COUNT_LOCATOR = ByLocator.id("at-BBYMP-item-count");
+	private static final By BESTBUY_ONLY_COUNT_LOCATOR = ByLocator.id("at-BBY-item-count");
 
 	private static final By TAB_LOCATOR = ByLocator.className("ui-tab");
 	private static final By TOTAL_COUNT_LOCATOR = ByLocator.className("display-total");
@@ -46,10 +46,10 @@ public class ResultsPage extends BasePage {
 			boolean passed = false;
 			int[] perPageOptions = { 32, 64, 96 };
 			for (int option : perPageOptions) {
-				PageElement element = driver.findByAttribute("data-value", Integer.toString(option));
+				BaseElement element = driver.findByAttribute("data-value", Integer.toString(option));
 				int numPosts = Integer.parseInt(element.getText());
 				driver.click(element);
-				passed = PageElement.elementCountEquals(ByLocator.className("listing-item"), numPosts);
+				passed = BaseElement.elementCountEquals(ByLocator.className("listing-item"), numPosts);
 			}
 
 			return passed;
@@ -64,7 +64,7 @@ public class ResultsPage extends BasePage {
 	 */
 	public void selectBBMarketTab() {
 		if (selectBBTab(1))
-			selectedTabCountLocator = BB_MARKET_COUNT_LOCATOR;
+			selectedTabCountLocator = BESTBUY_MARKETPLACE_COUNT_LOCATOR;
 
 	}
 
@@ -73,22 +73,22 @@ public class ResultsPage extends BasePage {
 	 */
 	public void selectBBOnlyTab() {
 		if (selectBBTab(2))
-			selectedTabCountLocator = BB_ONLY_COUNT_LOCATOR;
+			selectedTabCountLocator = BESTBUY_ONLY_COUNT_LOCATOR;
 
 	}
 
 	private boolean selectBBTab(final int num) {
-		driver.click(driver.findByLocator(TAB_LOCATOR, num));
-		PageElement tab = new PageElement();
+		BaseElement element = driver.findByLocator(TAB_LOCATOR, num);
+		driver.click(element);
 		switch (num) {
 		case 1:
-			tab = driver.findByLocator(BB_MARKET_TAB_LOCATOR);
+			element = element.findByLocator(BESTBUY_MARKETPLACE_TAB_LOCATOR);
 			break;
 		case 2:
-			tab = driver.findByLocator(BB_ONLY_TAB_LOCATOR);
+			element = element.findByLocator(BESTBUY_ONLY_TAB_LOCATOR);
 			break;
 		}
-		return tab.hasAttribute("class", "active");
+		return element.hasAttribute("class", "active");
 	}
 
 }
