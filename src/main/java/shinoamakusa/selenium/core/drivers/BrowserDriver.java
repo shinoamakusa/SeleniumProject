@@ -13,6 +13,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import shinoamakusa.selenium.core.elements.BaseElement;
 import shinoamakusa.selenium.core.elements.ButtonElement;
 import shinoamakusa.selenium.core.elements.TextInputElement;
@@ -24,21 +25,6 @@ import shinoamakusa.selenium.core.elements.TextInputElement;
  *
  */
 public class BrowserDriver extends BaseDriver {
-
-	/**
-	 * Default ChromeDriver location
-	 */
-	private static final String CHROME_DRIVER_PATH = "D:\\Projects\\Selenium\\Drivers\\chromedriver.exe";
-
-	/**
-	 * Default EdgeDriver location
-	 */
-	private static final String EDGE_DRIVER_PATH = "D:\\Projects\\Selenium\\Drivers\\MicrosoftWebDriver.exe";
-
-	/**
-	 * Default FirefoxDriver location
-	 */
-	private static final String FIREFOX_DRIVER_PATH = "D:\\Projects\\Selenium\\Drivers\\geckodriver.exe";
 
 	/**
 	 * Page navigation history
@@ -78,16 +64,13 @@ public class BrowserDriver extends BaseDriver {
 	public BrowserDriver(final DriverType type, final String driverPath) {
 		switch (type) {
 		case Chrome:
-			System.setProperty("webdriver.chrome.driver",
-					StringUtils.isBlank(driverPath) ? CHROME_DRIVER_PATH : driverPath);
+			WebDriverManager.chromedriver().version("2.40").setup();
 			break;
 		case Firefox:
-			System.setProperty("webdriver.gecko.driver",
-					StringUtils.isBlank(driverPath) ? FIREFOX_DRIVER_PATH : driverPath);
+			WebDriverManager.firefoxdriver().version("0.20.1").setup();
 			break;
 		case Edge:
-			System.setProperty("webdriver.edge.driver",
-					StringUtils.isBlank(driverPath) ? EDGE_DRIVER_PATH : driverPath);
+			WebDriverManager.edgedriver().version("6.17134").setup();
 			break;
 		default:
 			break;
@@ -193,6 +176,8 @@ public class BrowserDriver extends BaseDriver {
 		case Edge:
 			initialize(new EdgeDriver());
 			break;
+		default:
+			break;
 
 		}
 		if (driver != null) {
@@ -221,6 +206,8 @@ public class BrowserDriver extends BaseDriver {
 				break;
 			case Edge:
 				initialize(new EdgeDriver()); // No way to run Edge inPrivate from WD yet so open normal window
+				break;
+			default:
 				break;
 
 			}
