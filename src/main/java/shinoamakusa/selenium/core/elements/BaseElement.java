@@ -282,6 +282,17 @@ public class BaseElement {
 	public List<BaseElement> findAllByText(final String value) {
 		return findAll(ByLocator.text(value));
 	}
+	
+	/**
+	 * Finds all page elements by text value
+	 * 
+	 * @param value
+	 *            Element text value
+	 * @return List of page elements matched
+	 */
+	public List<BaseElement> findAllByXPath(final String value) {
+		return findAll(ByLocator.xpath(value));
+	}
 
 	/**
 	 * Finds first page container by attribute value
@@ -478,6 +489,30 @@ public class BaseElement {
 	 */
 	public BaseElement findByText(final String value, final int num) {
 		return findBy(ByLocator.text(value), num);
+	}
+	
+	/**
+	 * Finds first page container by XPath
+	 * 
+	 * @param value
+	 *            XPath value
+	 * @return First page container matched
+	 */
+	public BaseElement findByXPath(final String value) {
+		return findByXPath(value, 1);
+	}
+
+	/**
+	 * Finds a page container by XPath
+	 * 
+	 * @param value
+	 *            XPath value
+	 * @param num
+	 *            Number in the list off all elements matched
+	 * @return List of page elements matched
+	 */
+	public BaseElement findByXPath(final String value, final int num) {
+		return findBy(ByLocator.xpath(value), num);
 	}
 
 	/**
