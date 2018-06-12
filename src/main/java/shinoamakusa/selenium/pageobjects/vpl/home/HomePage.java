@@ -11,12 +11,12 @@ public class HomePage extends BasePage {
 	private static final By SEARCH_BUTTON_LOCATOR = ByLocator.id("edit-submit");
 
 	public HomePage() {
-		this.urlPart = "vpl.ca";
+		this.partialURL = "vpl.ca";
 	}
 
 	public void open() {
 		super.open();
-		String homeUrl = new StringBuilder("https://").append(this.urlPart).toString();
+		String homeUrl = new StringBuilder("https://").append(this.partialURL).toString();
 		driver.goTo(homeUrl);
 		this.title = driver.getTitle();
 

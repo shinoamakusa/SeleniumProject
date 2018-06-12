@@ -20,7 +20,7 @@ public class ResultsPage extends BasePage {
 	private By selectedTabCountLocator;
 
 	public ResultsPage(final BrowserDriver driver) {
-		this.urlPart = "www.bestbuy.ca/en-CA/Search/SearchResults.aspx";
+		this.partialURL = "www.bestbuy.ca/en-CA/Search/SearchResults.aspx";
 		this.driver = driver;
 		this.title = this.driver.getTitle();
 		this.url = this.driver.getUrl();

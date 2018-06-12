@@ -14,12 +14,12 @@ public class HomePage extends BasePage {
 	private static final By MODAL_CLOSE_BUTTON_LOCATOR = ByLocator.className("at-close-icon");
 
 	public HomePage() {
-		this.urlPart = "www.bestbuy.ca";
+		this.partialURL = "www.bestbuy.ca";
 	}
 
 	public void open() {
 		super.open();
-		String homeUrl = new StringBuilder("https://").append(this.urlPart).toString();
+		String homeUrl = new StringBuilder("https://").append(this.partialURL).toString();
 		driver.goTo(homeUrl);
 		this.title = driver.getTitle();
 

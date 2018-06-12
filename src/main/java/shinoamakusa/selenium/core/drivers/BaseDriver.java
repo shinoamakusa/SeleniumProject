@@ -129,7 +129,7 @@ public class BaseDriver {
 	public List<BaseElement> findAllByText(final String value) {
 		return findAll(ByLocator.text(value));
 	}
-	
+
 	/**
 	 * Finds all page elements by text value
 	 * 
@@ -337,7 +337,7 @@ public class BaseDriver {
 	public BaseElement findByText(final String value, final int num) {
 		return findBy(ByLocator.text(value), num);
 	}
-	
+
 	/**
 	 * Finds first page container by XPath
 	 * 
@@ -387,19 +387,61 @@ public class BaseDriver {
 	}
 
 	/**
-	 * Determines if correct page has been loaded based on Url part
+	 * Determines if correct page has been loaded based on partial Title
 	 * 
-	 * @param urlPart
-	 *            Part of Url that must exist in full Url
+	 * @param partialTitle
+	 *            Part of title that must exist in full page title
 	 * @return true if correct page is loaded, false otherwise
 	 */
-	public boolean urlContains(final String urlPart) {
-		if (wait != null && !StringUtils.isBlank(urlPart)) {
-			return wait.until(ExpectedConditions.urlContains(urlPart));
+	public boolean titleContains(final String partialTitle) {
+		if (wait != null && !StringUtils.isBlank(partialTitle)) {
+			try {
+				return wait.until(ExpectedConditions.titleContains(partialTitle));
+			} catch (TimeoutException t) {
+				return false;
+			}
+
+		}
+		return false;
+	}
+	
+	/**
+	 * Determines if current page Title is equal to expected one
+	 * 
+	 * @param title
+	 *            Full expected page title
+	 * @return true if correct page is loaded, false otherwise
+	 */
+	public boolean titleIs(final String title) {
+		if (wait != null && !StringUtils.isBlank(title)) {
+			try {
+				return wait.until(ExpectedConditions.titleIs(title));
+			} catch (TimeoutException t) {
+				return false;
+			}
 		}
 		return false;
 	}
 
+	/**
+	 * Determines if correct page has been loaded based on Url part
+	 * 
+	 * @param partialURL
+	 *            Part of Url that must exist in full Url
+	 * @return true if correct page is loaded, false otherwise
+	 */
+	public boolean urlContains(final String partialURL) {
+		if (wait != null && !StringUtils.isBlank(partialURL)) {
+			try {
+				return wait.until(ExpectedConditions.urlContains(partialURL));
+			} catch (TimeoutException t) {
+				return false;
+			}
+
+		}
+		return false;
+	}
+	
 	/**
 	 * Determines if current page URL is equal to one expected
 	 * 
@@ -409,7 +451,11 @@ public class BaseDriver {
 	 */
 	public boolean urlIs(final String url) {
 		if (wait != null && !StringUtils.isBlank(url)) {
-			return wait.until(ExpectedConditions.urlToBe(url));
+			try {
+				return wait.until(ExpectedConditions.urlToBe(url));
+			} catch (TimeoutException t) {
+				return false;
+			}
 		}
 		return false;
 	}

@@ -20,7 +20,7 @@ public class ResultsPage extends BasePage {
 	private ResultsFilters filters;
 
 	public ResultsPage(final BrowserDriver driver) {
-		this.urlPart = "autotrader.co.uk/car-search";
+		this.partialURL = "autotrader.co.uk/car-search";
 		this.driver = driver;
 		this.title = this.driver.getTitle();
 		this.url = this.driver.getUrl();

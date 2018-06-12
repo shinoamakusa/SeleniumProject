@@ -20,7 +20,7 @@ public class HomePage extends BasePage {
 	private List<String> selectedCarFilters;
 
 	public HomePage() {
-		this.urlPart = "autotrader.co.uk";
+		this.partialURL = "autotrader.co.uk";
 	}
 
 	public HomeFilters filters() {
@@ -33,7 +33,7 @@ public class HomePage extends BasePage {
 
 	public void open() {
 		super.open();
-		String homeUrl = new StringBuilder("https://").append(this.urlPart).toString();
+		String homeUrl = new StringBuilder("https://").append(this.partialURL).toString();
 		driver.goTo(homeUrl);
 		this.title = driver.getTitle();
 		this.url = this.driver.getUrl();

@@ -1,9 +1,14 @@
 package shinoamakusa.selenium.core.drivers;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashSet;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -112,6 +117,18 @@ public class BrowserDriver extends BaseDriver {
 	public void close() {
 		if (driver != null) {
 			driver.quit();
+		}
+	}
+
+	public void takeScreenshot(String fileName) {
+		TakesScreenshot sDriver = (TakesScreenshot) driver;
+		File src = sDriver.getScreenshotAs(OutputType.FILE);
+		try {
+			FileUtils.copyFile(src, new File(fileName));
+		} catch (IOException e)
+
+		{
+			System.out.println(e.getMessage());
 		}
 	}
 

@@ -10,7 +10,7 @@ public class ResultsPage extends BasePage {
 	private int lastTotalResults;
 
 	public ResultsPage(final BrowserDriver driver) {
-		this.urlPart = "autotrader.ca/cars";
+		this.partialURL = "autotrader.ca/cars";
 		this.driver = driver;
 		this.title = this.driver.getTitle();
 		filters = new ResultsFilters(driver);
