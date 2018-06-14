@@ -7,7 +7,7 @@ public class ButtonElement extends BaseElement {
 		this.locator = pageElement.locator;
 	}
 
-	private boolean isButtonElement() {
+	protected boolean isButtonElement() {
 		return element != null ? tag.equalsIgnoreCase("button") : false;
 	}
 

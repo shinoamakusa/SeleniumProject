@@ -41,6 +41,17 @@ public class BaseDriver {
 	}
 
 	/**
+	 * Finds all page elements by attribute
+	 * 
+	 * @param attributeName
+	 *            Attribute name
+	 * @return List of page elements matched
+	 */
+	public List<BaseElement> findAllByAttribute(final String attributeName) {
+		return findAll(ByLocator.attribute(attributeName));
+	}
+
+	/**
 	 * Finds all page elements by attribute value
 	 * 
 	 * @param attributeName
@@ -139,6 +150,30 @@ public class BaseDriver {
 	 */
 	public List<BaseElement> findAllByXPath(final String value) {
 		return findAll(ByLocator.xpath(value));
+	}
+
+	/**
+	 * Finds first page container by attribute
+	 * 
+	 * @param attributeName
+	 *            Attribute name
+	 * @return First page container matched
+	 */
+	public BaseElement findByAttribute(final String attributeName) {
+		return findByAttribute(attributeName, 1);
+	}
+
+	/**
+	 * Finds a page container by attribute
+	 * 
+	 * @param attributeName
+	 *            Attribute name
+	 * @param num
+	 *            Number in the list of all elements matched
+	 * @return Page container matched
+	 */
+	public BaseElement findByAttribute(final String attributeName, final int num) {
+		return findBy(ByLocator.attribute(attributeName), num);
 	}
 
 	/**
@@ -404,7 +439,7 @@ public class BaseDriver {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Determines if current page Title is equal to expected one
 	 * 
@@ -441,7 +476,7 @@ public class BaseDriver {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Determines if current page URL is equal to one expected
 	 * 

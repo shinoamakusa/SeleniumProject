@@ -14,7 +14,7 @@ import shinoamakusa.selenium.pageobjects.autotrader.uk.results.ResultsPage;
 public class HomePage extends BasePage {
 
 	private static final By SEARCH_BUTTON_LOCATOR = ByLocator.id("js-search-button");
-	
+
 	private HomeFilters filters;
 	private String searchCount;
 	private List<String> selectedCarFilters;
@@ -27,7 +27,7 @@ public class HomePage extends BasePage {
 		return filters;
 	}
 
-	public String searchCount() {
+	public String count() {
 		return searchCount;
 	}
 
@@ -43,12 +43,12 @@ public class HomePage extends BasePage {
 	}
 
 	public void selectMake(final String make) {
-		//driver.waitFor(2);
+		// driver.waitFor(2);
 		filters().make().select(make);
 	}
 
 	public void selectModel(final String model) {
-		//driver.waitFor(2);
+		// driver.waitFor(2);
 		filters().model().select(model);
 	}
 
@@ -56,7 +56,7 @@ public class HomePage extends BasePage {
 
 		filters().monthlyPrice().select();
 	}
-	
+
 	public void selectTotalPrice() {
 
 		filters().totalPrice().select();
@@ -78,7 +78,6 @@ public class HomePage extends BasePage {
 	public ResultsPage submitSearch() {
 		selectedCarFilters = filters().carFilters().getSelectedFilters();
 
-		//driver.waitFor(3);
 		ButtonElement searchButton = driver.findByLocator(SEARCH_BUTTON_LOCATOR).toButtonElement();
 		if (searchButton.textContains(filters().model().getCount()) && searchButton.isClickable()) {
 			searchCount = searchButton.getText().split(" ")[1];
@@ -90,9 +89,8 @@ public class HomePage extends BasePage {
 	public void typePostalCode(String postalCode) {
 		filters().postal().enterValue(postalCode);
 	}
-	
-	public List<String> selectedCarFilters()
-	{
+
+	public List<String> carFilters() {
 		return selectedCarFilters;
 	}
 

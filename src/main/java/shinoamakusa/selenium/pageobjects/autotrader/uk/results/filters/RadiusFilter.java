@@ -17,4 +17,9 @@ public class RadiusFilter extends BaseFilter {
 		return container.getSelectedOption().getAttribute("value").equalsIgnoreCase(radius);
 	}
 
+	public String value() {
+		SelectElement container = driver.findByLocator(this.locator).toSelectElement();
+		return container.getSelectedOption().getAttribute("value");
+	}
+
 }

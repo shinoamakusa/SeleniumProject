@@ -9,10 +9,6 @@ public class LabelElement extends BaseElement {
 		this.locator = pageElement.locator;
 	}
 
-	private boolean isLabelElement() {
-		return element != null ? tag.equalsIgnoreCase("label") : false;
-	}
-
 	public boolean hasSelectedState(final boolean state) {
 		if (isLabelElement()) {
 			String idFor = getAttribute("for");
@@ -22,6 +18,10 @@ public class LabelElement extends BaseElement {
 			return input.hasSelectedState(state);
 		}
 		return false;
+	}
+
+	private boolean isLabelElement() {
+		return element != null ? tag.equalsIgnoreCase("label") : false;
 	}
 
 }

@@ -31,7 +31,7 @@ public class BasePage {
 	 * 
 	 * @return True on success, false otherwise
 	 */
-	public boolean isValidPage() {
+	public boolean isLoaded() {
 		return driver.urlContains(this.partialURL);
 	}
 

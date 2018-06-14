@@ -29,45 +29,61 @@ public class ResultsPage extends BasePage {
 	}
 
 	public boolean carFiltersContain(List<String> compareList) {
-		List<String> list = getSelectedCarFilters();
+		List<String> list = carFilters();
 		list.removeAll(compareList);
 		return list.isEmpty();
 
 	}
 
 	public boolean countContains(String value) {
-		return filters().countFilter().contains(value);
+		return filters.countFilter().contains(value);
 	}
 
-	public ResultsFilters filters() {
-		return filters;
+	public String count() {
+		return filters.countFilter().value();
+	}
+
+	public String model() {
+		return filters.model().value();
+	}
+
+	public String radius() {
+		return filters.radius().value();
+	}
+
+	public String postalCode() {
+		return filters.postal().value();
+	}
+
+	public String make() {
+		return filters.make().value();
 	}
 
 	public boolean isMakeSelected(String make) {
-		return filters().make().isSelected(make);
+		return filters.make().isSelected(make);
 	}
 
 	public boolean isModelSelected(String model) {
-		return filters().model().isSelected(model);
+		return filters.model().isSelected(model);
 	}
 
 	public boolean isPostalCode(String postalCode) {
-		return filters().postal().isSelected(postalCode);
+		return filters.postal().isSelected(postalCode);
 	}
 
 	public boolean isRadiusSelected(String radius) {
-		return filters().radius().isSelected(radius);
+		return filters.radius().isSelected(radius);
 	}
 
 	public void selectMonthlyPriceHighest() {
-		filters().sortFilter().select("monthly-price-desc");
+		filters.sortFilter().select("monthly-price-desc");
 	}
 
 	public void selectTotalPriceLowest() {
-		filters().sortFilter().select("price-asc");
+		filters.sortFilter().select("price-asc");
 	}
 
-	public boolean isSortOrderDescending(boolean descending) {
+	public boolean isSortOrder(String direction) {
 		By containerLocator = ByLocator.className("search-page__results");
 		By locator = ByLocator.attribute("data-standout-type", "");
 
@@ -92,10 +108,13 @@ public class ResultsPage extends BasePage {
 			values.add(value);
 		}
 
-		if (descending)
+		switch (direction) {
+		case "descending":
 			return Ordering.natural().reverse().isOrdered(values);
-		else
+		case "ascending":
 			return Ordering.natural().isOrdered(values);
+		}
+		return false;
 
 	}
 
@@ -106,8 +125,8 @@ public class ResultsPage extends BasePage {
 		driver.click(driver.findByID("js-cookie-alert-close"));
 	}
 
-	private List<String> getSelectedCarFilters() {
-		return filters().carFilters().getSelectedFilters();
+	public List<String> carFilters() {
+		return filters.carFilters().getSelectedFilters();
 	}
 
 }

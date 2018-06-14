@@ -9,7 +9,7 @@ public class ResultsFilters {
 	private PostalCodeFilter postal;
 	private RadiusFilter radius;
 	private SortFilter sortFilter;
-	private CarFilter carFilters;
+	private CarOptionsFilter carFilters;
 
 	public ResultsFilters(BrowserDriver driver) {
 		countFilter = new TotalCountFilter(driver);
@@ -18,11 +18,11 @@ public class ResultsFilters {
 		make = new MakeFilter(driver);
 		model = new ModelFilter(driver);
 		sortFilter = new SortFilter(driver);
-		carFilters = new CarFilter(driver);
+		carFilters = new CarOptionsFilter(driver);
 
 	}
 
-	public CarFilter carFilters() {
+	public CarOptionsFilter carFilters() {
 		return carFilters;
 	}
 

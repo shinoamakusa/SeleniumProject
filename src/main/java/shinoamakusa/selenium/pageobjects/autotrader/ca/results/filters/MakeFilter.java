@@ -24,6 +24,11 @@ public class MakeFilter extends PageFilter {
 		BaseElement container = driver.findByLocator(this.locator);
 		return container.findByID("faceted-Make").getText().equalsIgnoreCase(make);
 	}
+	
+	public String value() {
+		BaseElement container = driver.findByLocator(this.locator);
+		return container.findByID("faceted-Make").getText();
+	}
 
 	private void selectMakeFilter() {
 		try {

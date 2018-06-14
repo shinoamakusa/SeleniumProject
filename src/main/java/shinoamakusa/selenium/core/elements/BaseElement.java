@@ -194,6 +194,17 @@ public class BaseElement {
 	}
 
 	/**
+	 * Finds all page elements by attribute
+	 * 
+	 * @param attributeName
+	 *            Attribute name
+	 * @return List of page elements matched
+	 */
+	public List<BaseElement> findAllByAttribute(final String attributeName) {
+		return findAll(ByLocator.attribute(attributeName));
+	}
+
+	/**
 	 * Finds all page elements by attribute value
 	 * 
 	 * @param attributeName
@@ -282,7 +293,7 @@ public class BaseElement {
 	public List<BaseElement> findAllByText(final String value) {
 		return findAll(ByLocator.text(value));
 	}
-	
+
 	/**
 	 * Finds all page elements by text value
 	 * 
@@ -292,6 +303,30 @@ public class BaseElement {
 	 */
 	public List<BaseElement> findAllByXPath(final String value) {
 		return findAll(ByLocator.xpath(value));
+	}
+
+	/**
+	 * Finds first page container by attribute
+	 * 
+	 * @param attributeName
+	 *            Attribute name
+	 * @return First page container matched
+	 */
+	public BaseElement findByAttribute(final String attributeName) {
+		return findByAttribute(attributeName, 1);
+	}
+
+	/**
+	 * Finds a page container by attribute
+	 * 
+	 * @param attributeName
+	 *            Attribute name
+	 * @param num
+	 *            Number in the list of all elements matched
+	 * @return Page container matched
+	 */
+	public BaseElement findByAttribute(final String attributeName, final int num) {
+		return findBy(ByLocator.attribute(attributeName), num);
 	}
 
 	/**
@@ -490,7 +525,7 @@ public class BaseElement {
 	public BaseElement findByText(final String value, final int num) {
 		return findBy(ByLocator.text(value), num);
 	}
-	
+
 	/**
 	 * Finds first page container by XPath
 	 * 
@@ -576,12 +611,8 @@ public class BaseElement {
 
 	public boolean hasUpdated() {
 		try {
-			String html;
-			WebDriverWait wait = new WebDriverWait(driver, 5);
-
-			if (this.element == null && this.locator != null)
-				this.element = findWebElement(this.locator);
-			html = element.getAttribute("innerHTML");
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			String html = element != null ? element.getAttribute("innerHTML") : StringUtils.EMPTY;
 
 			if (this.locator != null) {
 				return wait.until(ExpectedConditions.not(ExpectedConditions.or(
@@ -758,6 +789,34 @@ public class BaseElement {
 		}
 	}
 
+	public ButtonElement toButtonElement() {
+		return new ButtonElement(this);
+	}
+
+	public CheckboxElement toCheckboxElement() {
+		return toInputElement().toCheckboxElement();
+	}
+
+	public InputElement toInputElement() {
+		return new InputElement(this);
+	}
+
+	public LabelElement toLabelElement() {
+		return new LabelElement(this);
+	}
+
+	public RadioElement toRadioElement() {
+		return toInputElement().toRadioElement();
+	}
+
+	public SelectElement toSelectElement() {
+		return toInputElement().toSelectElement();
+	}
+
+	public TextInputElement toTextInputElement() {
+		return toInputElement().toTextInputElement();
+	}
+
 	/**
 	 * Gets a WebElement object
 	 * 
@@ -821,37 +880,6 @@ public class BaseElement {
 		} else {
 			return null;
 		}
-	}
-
-	public SelectElement toSelectElement() {
-		return toInputElement().toSelectElement();
-	}
-
-	public TextInputElement toTextInputElement() {
-		return toInputElement().toTextInputElement();
-	}
-
-	public ButtonElement toButtonElement() {
-		return new ButtonElement(this);
-	}
-
-	public RadioElement toRadioElement() {
-		return toInputElement().toRadioElement();
-	}
-	
-	public CheckboxElement toCheckboxElement()
-	{
-		return toInputElement().toCheckboxElement();
-	}
-	
-	public InputElement toInputElement()
-	{
-		return new InputElement(this);
-	}
-	
-	public LabelElement toLabelElement()
-	{
-		return new LabelElement(this);
 	}
 
 }

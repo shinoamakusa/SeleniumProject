@@ -30,10 +30,15 @@ public class BaseFilter {
 		this.driver = driver;
 		this.locator = locator;
 	}
-	
+
 	public String getText() {
 		BaseElement container = driver.findByLocator(this.locator);
 		return container.getText();
+	}
+
+	public String value() {
+		BaseElement container = driver.findByLocator(this.locator);
+		return container.getAttribute("value");
 	}
 
 }

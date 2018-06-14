@@ -24,6 +24,11 @@ public class YearFilter extends PageFilter {
 		BaseElement container = driver.findByLocator(this.locator);
 		return container.findByID("faceted-Year").textContains(year);
 	}
+	
+	public String maxYearValue() {
+		BaseElement container = driver.findByLocator(this.locator);
+		return container.findByID("faceted-Year").getText();
+	}
 
 	private void selectYearFilter() {
 		try {

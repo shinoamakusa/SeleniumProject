@@ -16,4 +16,9 @@ public class PostalCodeFilter extends PageFilter {
 		return container.findByID("faceted-Location").getText().equalsIgnoreCase(postalCode);
 	}
 
+	public String value() {
+		BaseElement container = driver.findByLocator(this.locator);
+		return container.findByID("faceted-Location").getText();
+	}
+
 }
