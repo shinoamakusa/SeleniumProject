@@ -68,6 +68,20 @@ public class SelectElement extends InputElement {
 		}
 	}
 
+	public void selectOptionByPartialText(final String partialText) {
+		if (this.isSelectTagElement() && element.isEnabled()) {
+			Select listElement = new Select(element);
+			List<BaseElement> options = this.getSelectOptions();
+			for (BaseElement option : options) {
+				String text = option.getText();
+				if (text.toLowerCase().contains(partialText.toLowerCase())) {
+					listElement.selectByVisibleText(text);
+					return;
+				}
+			}
+		}
+	}
+
 	/**
 	 * Selects dropdown list option by value
 	 * 
