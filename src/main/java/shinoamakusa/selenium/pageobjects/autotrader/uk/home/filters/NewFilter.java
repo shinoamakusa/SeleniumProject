@@ -12,7 +12,7 @@ public class NewFilter extends CarOptionsFilter {
 		this.locator = ByLocator.attribute("for", "oneSearchAdBrandNew");
 	}
 	
-	public NewFilter(BrowserDriver driver, By parentLocator) {
+	public NewFilter(final BrowserDriver driver, final By parentLocator) {
 		this(driver);
 		this.locator = new ByChained(parentLocator, this.locator);
 	}

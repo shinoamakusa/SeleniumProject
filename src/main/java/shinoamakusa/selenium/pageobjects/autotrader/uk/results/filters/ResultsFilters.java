@@ -11,7 +11,7 @@ public class ResultsFilters {
 	private SortFilter sortFilter;
 	private CarOptionsFilter carFilters;
 
-	public ResultsFilters(BrowserDriver driver) {
+	public ResultsFilters(final BrowserDriver driver) {
 		countFilter = new TotalCountFilter(driver);
 		radius = new RadiusFilter(driver);
 		postal = new PostalCodeFilter(driver);

@@ -15,7 +15,7 @@ public class SelectElement extends InputElement {
 	public BaseElement getSelectedOption() {
 		if (isSelectTagElement() && element.isEnabled()) {
 			WebElement selected = new Select(element).getFirstSelectedOption();
-			return new BaseElement(selected);
+			return new BaseElement(null, selected);
 
 		} else {
 			return new BaseElement();
@@ -32,7 +32,7 @@ public class SelectElement extends InputElement {
 			List<BaseElement> elementList = new ArrayList<BaseElement>();
 			List<WebElement> list = new Select(element).getOptions();
 			for (WebElement el : list) {
-				elementList.add(new BaseElement(el));
+				elementList.add(new BaseElement(null, el));
 			}
 			return elementList;
 		} else {
@@ -54,20 +54,6 @@ public class SelectElement extends InputElement {
 		}
 	}
 
-	/**
-	 * Selects dropdown list option by visible text
-	 * 
-	 * @param text
-	 *            Option tag visible text
-	 */
-	public void selectOptionByText(final String text) {
-		if (this.isSelectTagElement() && element.isEnabled()) {
-			Select listElement = new Select(element);
-			listElement.selectByVisibleText(text);
-
-		}
-	}
-
 	public void selectOptionByPartialText(final String partialText) {
 		if (this.isSelectTagElement() && element.isEnabled()) {
 			Select listElement = new Select(element);
@@ -79,6 +65,20 @@ public class SelectElement extends InputElement {
 					return;
 				}
 			}
+		}
+	}
+
+	/**
+	 * Selects dropdown list option by visible text
+	 * 
+	 * @param text
+	 *            Option tag visible text
+	 */
+	public void selectOptionByText(final String text) {
+		if (this.isSelectTagElement() && element.isEnabled()) {
+			Select listElement = new Select(element);
+			listElement.selectByVisibleText(text);
+
 		}
 	}
 

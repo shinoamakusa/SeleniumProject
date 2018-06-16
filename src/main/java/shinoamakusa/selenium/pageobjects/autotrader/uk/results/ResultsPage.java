@@ -3,6 +3,8 @@ package shinoamakusa.selenium.pageobjects.autotrader.uk.results;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.SortOrder;
+
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.pagefactory.ByChained;
@@ -17,6 +19,8 @@ import shinoamakusa.selenium.pageobjects.autotrader.uk.results.filters.ResultsFi
 
 public class ResultsPage extends BasePage {
 
+	private static final By RESULTS_DISPLAY_LOCATOR = ByLocator.className("search-page__results");
+	private static final By RESULTS_ENTRY_LOCATOR = ByLocator.attribute("data-standout-type", "");
 	private ResultsFilters filters;
 
 	public ResultsPage(final BrowserDriver driver) {
@@ -28,51 +32,49 @@ public class ResultsPage extends BasePage {
 		closeModal();
 	}
 
-	public boolean carFiltersContain(List<String> compareList) {
+	public List<String> carFilters() {
+		return filters.carFilters().getSelectedFilters();
+	}
+
+	public boolean carFiltersContain(final List<String> compareList) {
 		List<String> list = carFilters();
 		list.removeAll(compareList);
 		return list.isEmpty();
 
 	}
 
-	public boolean countContains(String value) {
-		return filters.countFilter().contains(value);
-	}
-
 	public String count() {
 		return filters.countFilter().value();
 	}
 
-	public String model() {
-		return filters.model().value();
+	public boolean isSortOrder(final SortOrder direction) {
+
+		List<Integer> values = getEntryPrices();
+
+		switch (direction) {
+		case DESCENDING:
+			return Ordering.natural().reverse().isOrdered(values);
+		case ASCENDING:
+			return Ordering.natural().isOrdered(values);
+		default:
+			return false;
+		}
 	}
 
-	public String radius() {
-		return filters.radius().value();
+	public String make() {
+		return filters.make().value();
+	}
+	
+	public String model() {
+		return filters.model().value();
 	}
 
 	public String postalCode() {
 		return filters.postal().value();
 	}
 
-	public String make() {
-		return filters.make().value();
-	}
-
-	public boolean isMakeSelected(String make) {
-		return filters.make().isSelected(make);
-	}
-
-	public boolean isModelSelected(String model) {
-		return filters.model().isSelected(model);
-	}
-
-	public boolean isPostalCode(String postalCode) {
-		return filters.postal().isSelected(postalCode);
-	}
-
-	public boolean isRadiusSelected(String radius) {
-		return filters.radius().isSelected(radius);
+	public String radius() {
+		return filters.radius().value();
 	}
 
 	public void selectMonthlyPriceHighest() {
@@ -83,21 +85,31 @@ public class ResultsPage extends BasePage {
 		filters.sortFilter().select("price-asc");
 	}
 
-	public boolean isSortOrder(String direction) {
-		By containerLocator = ByLocator.className("search-page__results");
-		By locator = ByLocator.attribute("data-standout-type", "");
-
-		if (driver.findByLocator(containerLocator).hasUpdated()) {
-			BaseElement.elementCountEquals(locator, 10);
-		}
-
+	private void closeModal() {
+		// driver.click(driver.findByID("buttonno"));
 		if (this.url.contains("total-price"))
-			locator = new ByChained(locator, ByLocator.className("vehicle-price"));
+			driver.click(driver.findByAttribute("data-label", "finance-search-callout"));
+		driver.click(driver.findByID("js-cookie-alert-close"));
+	}
+
+	private List<BaseElement> findAllEntryPrices()
+	{
+		By locator;
+		if (this.url.contains("total-price"))
+			locator = new ByChained(RESULTS_ENTRY_LOCATOR, ByLocator.className("vehicle-price"));
 		else
-			locator = new ByChained(locator, ByLocator.className("finance-price"));
+			locator = new ByChained(RESULTS_ENTRY_LOCATOR, ByLocator.className("finance-price"));
+		return driver.findAllByLocator(locator);
+	}
+
+	private List<Integer> getEntryPrices() {
+
+		waitForResultsListToUpdate(); 
+	
 
 		List<Integer> values = new ArrayList<Integer>();
-		List<BaseElement> elements = driver.findAllByLocator(locator);
+		List<BaseElement> elements = findAllEntryPrices();
+		
 		for (BaseElement element : elements) {
 			int value;
 			if (this.url.contains("total-price"))
@@ -108,25 +120,13 @@ public class ResultsPage extends BasePage {
 			values.add(value);
 		}
 
-		switch (direction) {
-		case "descending":
-			return Ordering.natural().reverse().isOrdered(values);
-		case "ascending":
-			return Ordering.natural().isOrdered(values);
+		return values;
+	}
+
+	private void waitForResultsListToUpdate() {
+		if (driver.findByLocator(RESULTS_DISPLAY_LOCATOR).hasUpdated()) {
+			BaseElement.elementCountEquals(RESULTS_ENTRY_LOCATOR, 10);
 		}
-		return false;
-
-	}
-
-	private void closeModal() {
-		driver.click(driver.findByID("buttonno"));
-		if (this.url.contains("total-price"))
-			driver.click(driver.findByAttribute("data-label", "finance-search-callout"));
-		driver.click(driver.findByID("js-cookie-alert-close"));
-	}
-
-	public List<String> carFilters() {
-		return filters.carFilters().getSelectedFilters();
 	}
 
 }

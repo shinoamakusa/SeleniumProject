@@ -120,7 +120,7 @@ public class BrowserDriver extends BaseDriver {
 		}
 	}
 
-	public void takeScreenshot(String fileName) {
+	public void takeScreenshot(final String fileName) {
 		TakesScreenshot sDriver = (TakesScreenshot) driver;
 		File src = sDriver.getScreenshotAs(OutputType.FILE);
 		try {
@@ -152,7 +152,7 @@ public class BrowserDriver extends BaseDriver {
 	 * @param container
 	 *            Page container to perform code on
 	 */
-	public void executeJS(final String code, BaseElement element) {
+	public void executeJS(final String code,final BaseElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript(code, element.webElement());
 	}

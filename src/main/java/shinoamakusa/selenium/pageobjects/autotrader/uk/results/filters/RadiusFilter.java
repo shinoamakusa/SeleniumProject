@@ -7,7 +7,7 @@ import shinoamakusa.selenium.core.filters.BaseFilter;
 
 public class RadiusFilter extends BaseFilter {
 
-	public RadiusFilter(BrowserDriver driver) {
+	public RadiusFilter(final BrowserDriver driver) {
 		super(driver);
 		this.locator = ByLocator.attribute("data-field-name", "radius");
 	}

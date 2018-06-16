@@ -13,7 +13,7 @@ public class HomeFilters {
 	private TotalPriceFilter totalPrice;
 	private HomeCarOptions carFilters;
 
-	public HomeFilters(BrowserDriver driver) {
+	public HomeFilters(final BrowserDriver driver) {
 		model = new ModelFilter(driver);
 		make = new MakeFilter(driver);
 		radius = new RadiusFilter(driver);

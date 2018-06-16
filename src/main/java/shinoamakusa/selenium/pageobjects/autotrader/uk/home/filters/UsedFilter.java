@@ -13,7 +13,7 @@ public class UsedFilter extends CarOptionsFilter {
 		this.locator = ByLocator.attribute("for", "oneSearchAdUsed");
 	}
 
-	public UsedFilter(BrowserDriver driver, By parentLocator) {
+	public UsedFilter(final BrowserDriver driver, final By parentLocator) {
 		this(driver);
 		this.locator = new ByChained(parentLocator, this.locator);
 	}

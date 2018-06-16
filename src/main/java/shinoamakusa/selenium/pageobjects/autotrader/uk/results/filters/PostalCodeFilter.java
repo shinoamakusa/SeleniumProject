@@ -7,7 +7,7 @@ import shinoamakusa.selenium.core.filters.BaseFilter;
 
 public class PostalCodeFilter extends BaseFilter {
 
-	public PostalCodeFilter(BrowserDriver driver) {
+	public PostalCodeFilter(final BrowserDriver driver) {
 		super(driver);
 		this.locator = ByLocator.id("postcode");
 	}

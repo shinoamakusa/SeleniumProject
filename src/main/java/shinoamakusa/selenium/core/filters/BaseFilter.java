@@ -14,19 +14,19 @@ public class BaseFilter {
 
 	}
 
-	public BaseFilter(BrowserDriver driver) {
+	public BaseFilter(final BrowserDriver driver) {
 		this.driver = driver;
 	}
 
-	public BaseFilter(BrowserDriver driver, By locator) {
+	public BaseFilter(final BrowserDriver driver, final By locator) {
 		this(locator, driver);
 	}
 
-	public BaseFilter(By locator) {
+	public BaseFilter(final By locator) {
 		this.locator = locator;
 	}
 
-	public BaseFilter(By locator, BrowserDriver driver) {
+	public BaseFilter(final By locator, final BrowserDriver driver) {
 		this.driver = driver;
 		this.locator = locator;
 	}

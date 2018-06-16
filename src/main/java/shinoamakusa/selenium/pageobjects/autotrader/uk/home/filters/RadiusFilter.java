@@ -14,7 +14,7 @@ public class RadiusFilter extends BaseFilter {
 		this.locator = ByLocator.name("radius");
 	}
 
-	public void select(String radius) {
+	public void select(final String radius) {
 		try {
 			SelectElement container = driver.findByLocator(this.locator).toSelectElement();
 			if (container.isClickable()) {

@@ -3,6 +3,8 @@ package shinoamakusa.selenium.autotrader.uk;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+import javax.swing.SortOrder;
+
 import org.testng.annotations.Test;
 
 public class TotalPriceTest extends BaseTest {
@@ -30,7 +32,7 @@ public class TotalPriceTest extends BaseTest {
 		assertEquals(resultsPage.carFilters(), homepage.carFilters());
 
 		resultsPage.selectTotalPriceLowest();
-		assertTrue(resultsPage.isSortOrder("ascending"));
+		assertTrue(resultsPage.isSortOrder(SortOrder.ASCENDING));
 
 		closeBrowser();
 	}

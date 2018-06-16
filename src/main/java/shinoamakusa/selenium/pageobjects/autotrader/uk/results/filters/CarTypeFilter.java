@@ -6,7 +6,7 @@ import shinoamakusa.selenium.core.filters.BaseFilter;
 
 public class CarTypeFilter extends BaseFilter{
 	
-	public CarTypeFilter(BrowserDriver driver) {
+	public CarTypeFilter(final BrowserDriver driver) {
 		super(driver);
 	}
 

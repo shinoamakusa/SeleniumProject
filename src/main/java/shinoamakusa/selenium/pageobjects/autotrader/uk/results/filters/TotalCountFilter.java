@@ -7,12 +7,12 @@ import shinoamakusa.selenium.core.filters.BaseFilter;
 
 public class TotalCountFilter extends BaseFilter {
 
-	public TotalCountFilter(BrowserDriver driver) {
+	public TotalCountFilter(final BrowserDriver driver) {
 		super(driver);
 		this.locator = ByLocator.className("search-form__count");
 	}
 
-	public boolean contains(String text) {
+	public boolean contains(final String text) {
 		BaseElement container = driver.findByLocator(this.locator);
 		return container.textContains(text);
 	}

@@ -15,8 +15,13 @@ public class YearFilter extends PageFilter {
 	}
 
 	public void changeMaxTo(final String year) {
-		selectYearFilter();
-		selectMaxYear(year);
+		try {
+			selectYearFilter();
+			selectMaxYear(year);
+		} catch (WebDriverException e) {
+			checkForModal();
+			changeMaxTo(year);
+		}
 
 	}
 
@@ -24,34 +29,24 @@ public class YearFilter extends PageFilter {
 		BaseElement container = driver.findByLocator(this.locator);
 		return container.findByID("faceted-Year").textContains(year);
 	}
-	
+
 	public String maxYearValue() {
 		BaseElement container = driver.findByLocator(this.locator);
 		return container.findByID("faceted-Year").getText();
 	}
 
 	private void selectYearFilter() {
-		try {
-			BaseElement container = driver.findByLocator(this.locator);
-			driver.click(container);
-		} catch (WebDriverException e) {
-			checkForModal();
-			selectYearFilter();
-		}
+		BaseElement container = driver.findByLocator(this.locator);
+		driver.click(container);
+
 	}
 
 	private void selectMaxYear(final String year) {
-
-		try {
-			BaseElement container = driver.findByLocator(this.locator);
-			menu = new PageFilterMenu(container.findByClass("dropdown-menu"));
-			SelectElement maxYearSelect = new SelectElement(menu.container().findByID("yearHigh"));
-			maxYearSelect.selectOptionByValue(year);
-			driver.click(menu.container().findByID("applyYear"));
-		} catch (WebDriverException e) {
-			checkForModal();
-			selectMaxYear(year);
-		}
+		BaseElement container = driver.findByLocator(this.locator);
+		menu = new PageFilterMenu(container.findByClass("dropdown-menu"));
+		SelectElement maxYearSelect = new SelectElement(menu.container().findByID("yearHigh"));
+		maxYearSelect.selectOptionByValue(year);
+		driver.click(menu.container().findByID("applyYear"));
 
 	}
 

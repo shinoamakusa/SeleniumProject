@@ -119,39 +119,9 @@ public class BaseElement {
 
 	}
 
-	/**
-	 * PageElement class constructor
-	 * 
-	 * @param container
-	 *            Selenium WebElement object
-	 */
-	public BaseElement(final WebElement element) {
+	public BaseElement(final By locator, final WebElement element) {
+		this.locator = locator;
 		this.element = element;
-		if (this.element != null) {
-			this.tag = element.getTagName();
-		}
-	}
-
-	public BaseElement(final WebElement element, final By locator) {
-		this.element = element;
-		if (this.element != null) {
-			this.tag = element.getTagName();
-			this.locator = locator;
-		}
-	}
-
-	/**
-	 * PageElement class constructor
-	 * 
-	 * @param container
-	 *            Selenium WebElement
-	 * @param driver
-	 *            Selenium WebDriver container
-	 */
-	public BaseElement(final WebElement element, final WebDriver driver) {
-		this.element = element;
-		BaseElement.driver = driver;
-		BaseElement.wait = new WebDriverWait(BaseElement.driver, 30);
 		if (this.element != null) {
 			this.tag = element.getTagName();
 		}
@@ -161,19 +131,10 @@ public class BaseElement {
 	 * PageElement class constructor
 	 * 
 	 * @param container
-	 *            Selenium WebElement
-	 * @param driver
-	 *            Selenium WebDriver container
-	 * @param wait
-	 *            Selenium WebDriverWait container
+	 *            Selenium WebElement object
 	 */
-	public BaseElement(final WebElement element, final WebDriver driver, final WebDriverWait wait) {
-		this.element = element;
-		BaseElement.driver = driver;
-		BaseElement.wait = wait;
-		if (this.element != null) {
-			this.tag = element.getTagName();
-		}
+	public BaseElement(final WebElement element) {
+		this(null, element);
 	}
 
 	/**
@@ -557,11 +518,9 @@ public class BaseElement {
 	 *            Attribute name
 	 * @return Attribute value on success or empty string on fail
 	 */
-	public String getAttribute(String name) {
-		if (element != null)
-			return element.getAttribute(name);
-		else
-			return StringUtils.EMPTY;
+	public String getAttribute(final String name) {
+		this.element = (this.element == null && this.locator != null) ? findWebElement() : this.element;
+		return element != null ? element.getAttribute(name) : StringUtils.EMPTY;
 	}
 
 	/**
@@ -579,6 +538,7 @@ public class BaseElement {
 	 * @return Element text value if container exists, empty string otherwise
 	 */
 	public String getText() {
+		this.element = (this.element == null && this.locator != null) ? findWebElement() : this.element;
 		return element != null ? element.getText() : StringUtils.EMPTY;
 	}
 
@@ -654,46 +614,6 @@ public class BaseElement {
 			return false;
 		} catch (NullPointerException e) {
 			return false;
-		}
-	}
-
-	/**
-	 * Checks that given page container is present
-	 * 
-	 * @return True if present, false otherwise
-	 */
-	public boolean isPresent() {
-		WebDriverWait wait = new WebDriverWait(driver, 3);
-		try {
-			if (this.element != null) {
-				return wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(element)));
-			} else {
-				return false;
-			}
-		} catch (TimeoutException t) {
-			return false;
-		} catch (NullPointerException e) {
-			return false;
-		}
-	}
-
-	/**
-	 * Checks that given page container is stale
-	 * 
-	 * @return True if stale, false otherwise
-	 */
-	public boolean isStale() {
-		WebDriverWait wait = new WebDriverWait(driver, 3);
-		try {
-			if (this.element != null) {
-				return wait.until(ExpectedConditions.stalenessOf(element));
-			} else {
-				return true;
-			}
-		} catch (TimeoutException t) {
-			return false;
-		} catch (NullPointerException e) {
-			return true;
 		}
 	}
 
@@ -843,7 +763,7 @@ public class BaseElement {
 				List<WebElement> webList = wait.until(ExpectedConditions
 						.refreshed(ExpectedConditions.presenceOfNestedElementsLocatedBy(this.locator, locator)));
 				for (WebElement element : webList) {
-					list.add(new BaseElement(element, new ByChained(this.locator, locator)));
+					list.add(new BaseElement(new ByChained(this.locator, locator), element));
 				}
 				return list;
 			} catch (TimeoutException t) {
@@ -871,15 +791,19 @@ public class BaseElement {
 			BaseElement element = elementList.get(num - 1);
 			return element;
 		} else
-			return new BaseElement(null);
+			return new BaseElement(null, null);
 	}
 
-	private WebElement findWebElement(final By locator) {
-		if (wait != null && locator != null) {
-			return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-		} else {
-			return null;
+	private WebElement findWebElement() {
+		if (wait != null && this.locator != null) {
+			try {
+				return wait.until(ExpectedConditions.presenceOfElementLocated(this.locator));
+			} catch (TimeoutException t) {
+				return null;
+			}
 		}
+
+		return null;
 	}
 
 }

@@ -16,10 +16,10 @@ public class CarOptionsFilter extends BaseFilter {
 		super();
 	}
 	
-	public CarOptionsFilter(BrowserDriver driver) {
+	public CarOptionsFilter(final BrowserDriver driver) {
 		super(driver);
 	}
-	public CarOptionsFilter(BrowserDriver driver, By parentLocator) {
+	public CarOptionsFilter(final BrowserDriver driver, final By parentLocator) {
 		this(driver);
 		this.locator = new ByChained(parentLocator, this.locator);
 	}
@@ -29,7 +29,7 @@ public class CarOptionsFilter extends BaseFilter {
 
 	}
 	
-	public void select(boolean state) {
+	public void select(final boolean state) {
 		LabelElement container = driver.findByLocator(this.locator).toLabelElement();
 		if (!container.hasSelectedState(state)) {
 			driver.click(container);

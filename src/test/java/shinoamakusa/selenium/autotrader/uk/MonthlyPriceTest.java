@@ -3,6 +3,8 @@ package shinoamakusa.selenium.autotrader.uk;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+import javax.swing.SortOrder;
+
 import org.testng.annotations.Test;
 
 public class MonthlyPriceTest extends BaseTest {
@@ -31,7 +33,7 @@ public class MonthlyPriceTest extends BaseTest {
 		assertEquals(resultsPage.carFilters(), homepage.carFilters());
 
 		resultsPage.selectMonthlyPriceHighest();
-		assertTrue(resultsPage.isSortOrder("descending"));
+		assertTrue(resultsPage.isSortOrder(SortOrder.DESCENDING));
 
 		closeBrowser();
 

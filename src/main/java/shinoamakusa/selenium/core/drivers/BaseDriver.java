@@ -522,7 +522,7 @@ public class BaseDriver {
 				List<BaseElement> list = new ArrayList<BaseElement>();
 				List<WebElement> webList = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
 				for (WebElement element : webList) {
-					list.add(new BaseElement(element, locator));
+					list.add(new BaseElement(locator, element));
 				}
 
 				return list;
