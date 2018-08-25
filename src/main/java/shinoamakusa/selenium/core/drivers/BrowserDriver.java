@@ -69,13 +69,13 @@ public class BrowserDriver extends BaseDriver {
 	public BrowserDriver(final DriverType type, final String driverPath) {
 		switch (type) {
 		case Chrome:
-			WebDriverManager.chromedriver().version("2.40").setup();
+			WebDriverManager.chromedriver().setup();
 			break;
 		case Firefox:
-			WebDriverManager.firefoxdriver().version("0.20.1").setup();
+			WebDriverManager.firefoxdriver().setup();
 			break;
 		case Edge:
-			WebDriverManager.edgedriver().version("6.17134").setup();
+			WebDriverManager.edgedriver().setup();
 			break;
 		default:
 			break;
