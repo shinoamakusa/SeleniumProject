@@ -9,20 +9,20 @@ public class ResultsFilters {
 	private PostalCodeFilter postal;
 	private RadiusFilter radius;
 	private SortFilter sortFilter;
-	private CarFilter carFilters;
+	private CarOptionsFilter carFilters;
 
-	public ResultsFilters(BrowserDriver driver) {
+	public ResultsFilters(final BrowserDriver driver) {
 		countFilter = new TotalCountFilter(driver);
 		radius = new RadiusFilter(driver);
 		postal = new PostalCodeFilter(driver);
 		make = new MakeFilter(driver);
 		model = new ModelFilter(driver);
 		sortFilter = new SortFilter(driver);
-		carFilters = new CarFilter(driver);
+		carFilters = new CarOptionsFilter(driver);
 
 	}
 
-	public CarFilter carFilters() {
+	public CarOptionsFilter carFilters() {
 		return carFilters;
 	}
 

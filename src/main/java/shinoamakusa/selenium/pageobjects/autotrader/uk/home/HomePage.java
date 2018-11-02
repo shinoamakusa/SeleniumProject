@@ -14,26 +14,22 @@ import shinoamakusa.selenium.pageobjects.autotrader.uk.results.ResultsPage;
 public class HomePage extends BasePage {
 
 	private static final By SEARCH_BUTTON_LOCATOR = ByLocator.id("js-search-button");
-	
+
 	private HomeFilters filters;
 	private String searchCount;
 	private List<String> selectedCarFilters;
 
 	public HomePage() {
-		this.urlPart = "autotrader.co.uk";
+		this.partialURL = "autotrader.co.uk";
 	}
 
-	public HomeFilters filters() {
-		return filters;
-	}
-
-	public String searchCount() {
+	public String count() {
 		return searchCount;
 	}
 
 	public void open() {
 		super.open();
-		String homeUrl = new StringBuilder("https://").append(this.urlPart).toString();
+		String homeUrl = new StringBuilder("https://").append(this.partialURL).toString();
 		driver.goTo(homeUrl);
 		this.title = driver.getTitle();
 		this.url = this.driver.getUrl();
@@ -43,56 +39,59 @@ public class HomePage extends BasePage {
 	}
 
 	public void selectMake(final String make) {
-		//driver.waitFor(2);
-		filters().make().select(make);
+		filters.make().select(make);
+		// filters.model().updated();
 	}
 
 	public void selectModel(final String model) {
-		//driver.waitFor(2);
-		filters().model().select(model);
+		filters.model().select(model);
 	}
 
 	public void selectMonthlyPrice() {
 
-		filters().monthlyPrice().select();
+		if (!filters.monthlyPrice().isSelected()) {
+			filters.monthlyPrice().select();
+			filters.model().updated();
+		}
 	}
-	
+
 	public void selectTotalPrice() {
 
-		filters().totalPrice().select();
+		if (!filters.totalPrice().isSelected()) {
+			filters.totalPrice().select();
+			filters.model().updated();
+		}
 	}
 
 	public void selectNearlyNew(final boolean state) {
-		filters().carFilters().nearlyNewFilter().select(state);
+		filters.carFilters().nearlyNewFilter().select(state);
 	}
 
 	public void selectNew(final boolean state) {
-		filters().carFilters().newFilter().select(state);
+		filters.carFilters().newFilter().select(state);
 
 	}
 
 	public void selectRadius(final String radius) {
-		filters().radius().select(radius);
+		filters.radius().select(radius);
 	}
 
 	public ResultsPage submitSearch() {
-		selectedCarFilters = filters().carFilters().getSelectedFilters();
+		selectedCarFilters = filters.carFilters().getSelectedFilters();
 
-		//driver.waitFor(3);
 		ButtonElement searchButton = driver.findByLocator(SEARCH_BUTTON_LOCATOR).toButtonElement();
-		if (searchButton.textContains(filters().model().getCount()) && searchButton.isClickable()) {
+		if (searchButton.textContains(filters.model().getCount()) && searchButton.isClickable()) {
 			searchCount = searchButton.getText().split(" ")[1];
 			driver.click(searchButton);
 		}
 		return new ResultsPage(driver);
 	}
 
-	public void typePostalCode(String postalCode) {
-		filters().postal().enterValue(postalCode);
+	public void typePostalCode(final String postalCode) {
+		filters.postal().enterValue(postalCode);
 	}
-	
-	public List<String> selectedCarFilters()
-	{
+
+	public List<String> carFilters() {
 		return selectedCarFilters;
 	}
 

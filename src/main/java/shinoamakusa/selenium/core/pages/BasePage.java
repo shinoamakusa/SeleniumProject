@@ -8,7 +8,7 @@ public class BasePage {
 	protected String sourceHTML;
 	protected String title;
 	protected String url;
-	protected String urlPart;
+	protected String partialURL;
 
 	public BasePage() {
 		driver = new BrowserDriver(DriverType.Chrome);
@@ -31,8 +31,8 @@ public class BasePage {
 	 * 
 	 * @return True on success, false otherwise
 	 */
-	public boolean isValidPage() {
-		return driver.urlContains(this.urlPart);
+	public boolean isLoaded() {
+		return driver.urlContains(this.partialURL);
 	}
 
 	/**

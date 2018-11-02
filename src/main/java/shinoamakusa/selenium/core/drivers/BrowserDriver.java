@@ -1,9 +1,14 @@
 package shinoamakusa.selenium.core.drivers;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashSet;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,6 +18,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import shinoamakusa.selenium.core.elements.BaseElement;
 import shinoamakusa.selenium.core.elements.ButtonElement;
 import shinoamakusa.selenium.core.elements.TextInputElement;
@@ -24,21 +30,6 @@ import shinoamakusa.selenium.core.elements.TextInputElement;
  *
  */
 public class BrowserDriver extends BaseDriver {
-
-	/**
-	 * Default ChromeDriver location
-	 */
-	private static final String CHROME_DRIVER_PATH = "D:\\Projects\\Selenium\\Drivers\\chromedriver.exe";
-
-	/**
-	 * Default EdgeDriver location
-	 */
-	private static final String EDGE_DRIVER_PATH = "D:\\Projects\\Selenium\\Drivers\\MicrosoftWebDriver.exe";
-
-	/**
-	 * Default FirefoxDriver location
-	 */
-	private static final String FIREFOX_DRIVER_PATH = "D:\\Projects\\Selenium\\Drivers\\geckodriver.exe";
 
 	/**
 	 * Page navigation history
@@ -78,16 +69,13 @@ public class BrowserDriver extends BaseDriver {
 	public BrowserDriver(final DriverType type, final String driverPath) {
 		switch (type) {
 		case Chrome:
-			System.setProperty("webdriver.chrome.driver",
-					StringUtils.isBlank(driverPath) ? CHROME_DRIVER_PATH : driverPath);
+			WebDriverManager.chromedriver().setup();
 			break;
 		case Firefox:
-			System.setProperty("webdriver.gecko.driver",
-					StringUtils.isBlank(driverPath) ? FIREFOX_DRIVER_PATH : driverPath);
+			WebDriverManager.firefoxdriver().setup();
 			break;
 		case Edge:
-			System.setProperty("webdriver.edge.driver",
-					StringUtils.isBlank(driverPath) ? EDGE_DRIVER_PATH : driverPath);
+			WebDriverManager.edgedriver().setup();
 			break;
 		default:
 			break;
@@ -132,6 +120,18 @@ public class BrowserDriver extends BaseDriver {
 		}
 	}
 
+	public void takeScreenshot(final String fileName) {
+		TakesScreenshot sDriver = (TakesScreenshot) driver;
+		File src = sDriver.getScreenshotAs(OutputType.FILE);
+		try {
+			FileUtils.copyFile(src, new File(fileName));
+		} catch (IOException e)
+
+		{
+			System.out.println(e.getMessage());
+		}
+	}
+
 	/**
 	 * Executes Javascript code
 	 * 
@@ -152,7 +152,7 @@ public class BrowserDriver extends BaseDriver {
 	 * @param container
 	 *            Page container to perform code on
 	 */
-	public void executeJS(final String code, BaseElement element) {
+	public void executeJS(final String code,final BaseElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript(code, element.webElement());
 	}
@@ -193,6 +193,8 @@ public class BrowserDriver extends BaseDriver {
 		case Edge:
 			initialize(new EdgeDriver());
 			break;
+		default:
+			break;
 
 		}
 		if (driver != null) {
@@ -221,6 +223,8 @@ public class BrowserDriver extends BaseDriver {
 				break;
 			case Edge:
 				initialize(new EdgeDriver()); // No way to run Edge inPrivate from WD yet so open normal window
+				break;
+			default:
 				break;
 
 			}

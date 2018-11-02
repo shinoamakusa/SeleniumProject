@@ -6,7 +6,7 @@ public class TextInputElement extends InputElement {
 		super(pageElement);
 	}
 
-	public void enterText(String text) {
+	public void enterText(final String text) {
 		if (this.isTextInputElement() && this.isClickable() && element.isEnabled()) {
 			element.click();
 			element.clear();

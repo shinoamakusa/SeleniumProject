@@ -8,8 +8,8 @@ import shinoamakusa.selenium.core.elements.ByLocator;
 import shinoamakusa.selenium.core.elements.BaseElement;
 import shinoamakusa.selenium.core.filters.BaseFilter;
 
-public class CarFilter extends BaseFilter {
-	public CarFilter(BrowserDriver driver) {
+public class CarOptionsFilter extends BaseFilter {
+	public CarOptionsFilter(final BrowserDriver driver) {
 		super(driver);
 		this.locator = ByLocator.className("options-button__values");
 	}

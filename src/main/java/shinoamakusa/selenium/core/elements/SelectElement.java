@@ -15,7 +15,7 @@ public class SelectElement extends InputElement {
 	public BaseElement getSelectedOption() {
 		if (isSelectTagElement() && element.isEnabled()) {
 			WebElement selected = new Select(element).getFirstSelectedOption();
-			return new BaseElement(selected);
+			return new BaseElement(null, selected);
 
 		} else {
 			return new BaseElement();
@@ -32,7 +32,7 @@ public class SelectElement extends InputElement {
 			List<BaseElement> elementList = new ArrayList<BaseElement>();
 			List<WebElement> list = new Select(element).getOptions();
 			for (WebElement el : list) {
-				elementList.add(new BaseElement(el));
+				elementList.add(new BaseElement(null, el));
 			}
 			return elementList;
 		} else {
@@ -51,6 +51,20 @@ public class SelectElement extends InputElement {
 			Select listElement = new Select(element);
 			listElement.selectByIndex(num);
 
+		}
+	}
+
+	public void selectOptionByPartialText(final String partialText) {
+		if (this.isSelectTagElement() && element.isEnabled()) {
+			Select listElement = new Select(element);
+			List<BaseElement> options = this.getSelectOptions();
+			for (BaseElement option : options) {
+				String text = option.getText();
+				if (text.toLowerCase().contains(partialText.toLowerCase())) {
+					listElement.selectByVisibleText(text);
+					return;
+				}
+			}
 		}
 	}
 

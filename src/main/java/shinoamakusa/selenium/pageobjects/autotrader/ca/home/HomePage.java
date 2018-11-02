@@ -18,12 +18,12 @@ public class HomePage extends BasePage {
 	private static final By POSTAL_CODE_LOCATOR = ByLocator.id("locationAddress");
 
 	public HomePage() {
-		this.urlPart = "autotrader.ca";
+		this.partialURL = "autotrader.ca";
 	}
 
 	public void open() {
 		super.open();
-		String homeUrl = new StringBuilder("https://").append(this.urlPart).toString();
+		String homeUrl = new StringBuilder("https://").append(this.partialURL).toString();
 		driver.goTo(homeUrl);
 		this.title = driver.getTitle();
 

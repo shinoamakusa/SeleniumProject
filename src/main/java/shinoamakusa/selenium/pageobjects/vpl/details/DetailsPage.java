@@ -21,7 +21,7 @@ public class DetailsPage extends BasePage {
 
 	public DetailsPage(BrowserDriver driver) {
 		this.driver = driver;
-		this.urlPart = driver.getUrl();
+		this.partialURL = driver.getUrl();
 		this.title = driver.getTitle();
 	}
 
@@ -59,7 +59,7 @@ public class DetailsPage extends BasePage {
 	}
 
 	public boolean visitedBefore() {
-		return driver.getHistory().contains(this.urlPart);
+		return driver.getHistory().contains(this.partialURL);
 	}
 
 }

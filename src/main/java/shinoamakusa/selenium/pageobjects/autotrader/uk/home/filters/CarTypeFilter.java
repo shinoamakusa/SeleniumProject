@@ -9,17 +9,22 @@ import shinoamakusa.selenium.core.elements.SelectElement;
 import shinoamakusa.selenium.core.filters.BaseFilter;
 
 public class CarTypeFilter extends BaseFilter {
-	public CarTypeFilter(BrowserDriver driver) {
+	public CarTypeFilter(final BrowserDriver driver) {
 		super(driver);
 	}
 	
 	public String getCount() {
 		BaseElement container = driver.findByLocator(locator);
-		container.hasUpdated();
 		return StringUtils.substringBetween(new SelectElement(container).getSelectedOption().getText(), "(", ")");
 	}
+	
+	public boolean updated()
+	{
+		BaseElement container = driver.findByLocator(locator);
+		return container.hasUpdated();
+	}
 
-	public void select(String value) {
+	public void select(final String value) {
 		try {
 			SelectElement container = driver.findByLocator(this.locator).toSelectElement();
 			container.hasUpdated();

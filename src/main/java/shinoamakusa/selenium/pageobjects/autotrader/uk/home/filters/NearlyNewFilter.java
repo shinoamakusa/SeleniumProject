@@ -13,7 +13,7 @@ public class NearlyNewFilter extends CarOptionsFilter {
 		this.locator = ByLocator.attribute("for", "oneSearchAdNearlyNew");
 	}
 	
-	public NearlyNewFilter(BrowserDriver driver, By parentLocator) {
+	public NearlyNewFilter(final BrowserDriver driver, final By parentLocator) {
 		this(driver);
 		this.locator = new ByChained(parentLocator, this.locator);
 	}

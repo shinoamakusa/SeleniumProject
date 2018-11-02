@@ -94,4 +94,15 @@ public final class ByLocator {
 		return By.xpath(new StringBuilder("//*[text() = '").append(value).append("']").toString());
 	}
 
+	/**
+	 * Gets a XPath locator
+	 * 
+	 * @param value
+	 *            XPath value
+	 * @return XPath locator
+	 */
+	public static final By xpath(final String value) {
+		return By.xpath(value);
+	}
+
 }

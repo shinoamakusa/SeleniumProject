@@ -7,12 +7,12 @@ import shinoamakusa.selenium.core.elements.SelectElement;
 import shinoamakusa.selenium.core.filters.BaseFilter;
 
 public class SortFilter extends BaseFilter {
-	public SortFilter(BrowserDriver driver) {
+	public SortFilter(final BrowserDriver driver) {
 		super(driver);
 		this.locator = ByLocator.className("js-sort-options");
 	}
 
-	public void select(String value) {
+	public void select(final String value) {
 
 		SelectElement container = driver.findByLocator(this.locator).toSelectElement();
 		BaseElement sortOption = container.findByAttribute("value", value);

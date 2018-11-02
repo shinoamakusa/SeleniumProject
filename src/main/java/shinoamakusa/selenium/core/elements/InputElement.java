@@ -33,8 +33,7 @@ public class InputElement extends BaseElement {
 		}
 	}
 
-	public CheckboxElement toCheckboxElement()
-	{
+	public CheckboxElement toCheckboxElement() {
 		return new CheckboxElement(this);
 	}
 
@@ -45,17 +44,17 @@ public class InputElement extends BaseElement {
 	public SelectElement toSelectElement() {
 		return new SelectElement(this);
 	}
-	
+
 	public TextInputElement toTextInputElement() {
 		return new TextInputElement(this);
 	}
-	
+
 	protected boolean isCheckboxElement() {
-		return element != null ? tag.equalsIgnoreCase("input") && this.hasAttribute("type", "checkbox") : false;
+		return element != null ? tag.equalsIgnoreCase("input") && this.getAttribute("type").equalsIgnoreCase("checkbox")  : false;
 	}
 
 	protected boolean isRadioElement() {
-		return element != null ? tag.equalsIgnoreCase("input") && this.hasAttribute("type", "radio") : false;
+		return element != null ? tag.equalsIgnoreCase("input") && this.getAttribute("type").equalsIgnoreCase("radio")  : false;
 	}
 
 	/**
@@ -68,9 +67,12 @@ public class InputElement extends BaseElement {
 	protected boolean isSelectTagElement() {
 		return element != null ? tag.equalsIgnoreCase("select") : false;
 	}
-	
+
 	protected boolean isTextInputElement() {
-		return element != null ? tag.equalsIgnoreCase("input") && this.hasAttribute("type", "text") : false;
+		return element != null
+				? tag.equalsIgnoreCase("input")
+						&& (this.getAttribute("type").equalsIgnoreCase("text") || this.getAttribute("type").equalsIgnoreCase("search"))
+				: false;
 	}
 
 }

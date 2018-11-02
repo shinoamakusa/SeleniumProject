@@ -1,5 +1,6 @@
 package shinoamakusa.selenium.autotrader.ca;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 import org.testng.annotations.Test;
@@ -12,23 +13,27 @@ public class SearchTestWithFilters extends BaseTest {
 		String make = "Ford";
 		String model = "Mustang";
 		String maxYear = "2016";
+		
+		openHomepage();
 
 		resultsPage = homepage.search(postalCode);
-		assertTrue(resultsPage.isValidPage());
+		assertTrue(resultsPage.isLoaded());
 		assertTrue(resultsPage.hasResults());
-		assertTrue(resultsPage.filters().postalCode().isSelected(postalCode));
+		assertEquals(resultsPage.postalCode(), postalCode);
 
-		resultsPage.filters().make().changeTo(make);
+		resultsPage.changeMakeTo(make);
 		assertTrue(resultsPage.makeCountsEqual());
-		assertTrue(resultsPage.filters().make().isSelected(make));
+		assertEquals(resultsPage.make(), make);
 
-		resultsPage.filters().model().changeTo(model);
+		resultsPage.changeModelTo(model);
 		assertTrue(resultsPage.modelCountsEqual());
-		assertTrue(resultsPage.filters().model().isSelected(model));
+		assertEquals(resultsPage.model(), model);
 
-		resultsPage.filters().year().changeMaxTo(maxYear);
+		resultsPage.changeMaxYearTo(maxYear);
 		assertTrue(resultsPage.isYearCountLess());
-		assertTrue(resultsPage.filters().year().isSelected(maxYear));
+		assertEquals(resultsPage.maxYear(), maxYear);
+		
+		closeBrowser();
 	}
 
 }

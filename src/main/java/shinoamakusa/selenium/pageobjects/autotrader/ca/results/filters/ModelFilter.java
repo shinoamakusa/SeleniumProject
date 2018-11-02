@@ -25,6 +25,11 @@ public class ModelFilter extends PageFilter {
 		return container.findByID("faceted-Model").getText().equalsIgnoreCase(model);
 	}
 
+	public String value() {
+		BaseElement container = driver.findByLocator(this.locator);
+		return container.findByID("faceted-Model").getText();
+	}
+
 	private void selectModelFilter() {
 
 		try {

@@ -1,6 +1,9 @@
 package shinoamakusa.selenium.autotrader.uk;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+
+import javax.swing.SortOrder;
 
 import org.testng.annotations.Test;
 
@@ -9,6 +12,7 @@ public class MonthlyPriceTest extends BaseTest {
 	@Test(invocationCount = 1)
 	public void monthlyPriceTest() {
 
+		openHomepage();
 		homepage.typePostalCode(postalCode);
 		homepage.selectRadius(radius);
 		homepage.selectNearlyNew(selectNearlyNew);
@@ -19,17 +23,19 @@ public class MonthlyPriceTest extends BaseTest {
 
 		resultsPage = homepage.submitSearch();
 
-		assertTrue(resultsPage.isValidPage());
-		assertTrue(resultsPage.countContains(homepage.searchCount()));
-		assertTrue(resultsPage.isRadiusSelected(radius));
-		assertTrue(resultsPage.isPostalCode(postalCode));
-		assertTrue(resultsPage.isMakeSelected(make));
-		assertTrue(resultsPage.isModelSelected(model));
+		assertTrue(resultsPage.isLoaded());
+		assertEquals(resultsPage.count(), homepage.count());
+		assertEquals(resultsPage.radius(), radius);
+		assertEquals(resultsPage.postalCode(), postalCode.replaceAll(" ", "").toLowerCase());
+		assertEquals(resultsPage.make(), make);
+		assertEquals(resultsPage.model().toUpperCase(), model);
 
-		assertTrue(resultsPage.carFiltersContain(homepage.selectedCarFilters()));
+		assertEquals(resultsPage.carFilters(), homepage.carFilters());
 
 		resultsPage.selectMonthlyPriceHighest();
-		assertTrue(resultsPage.isSortOrderDescending(true));
+		assertTrue(resultsPage.isSortOrder(SortOrder.DESCENDING));
+
+		closeBrowser();
 
 	}
 

@@ -10,6 +10,12 @@ public class TotalPriceFilter extends BaseFilter {
 		super(driver);
 		this.locator = ByLocator.attribute("for", "searchVehiclesPriceTypeTotal");
 	}
+	
+	public boolean isSelected() {
+		BaseElement container = driver.findByLocator(this.locator);
+		return container.findByID("searchVehiclesPriceTypeTotal").toRadioElement().hasSelectedState(true);
+
+	}
 
 	public void select() {
 		BaseElement container = driver.findByLocator(this.locator);

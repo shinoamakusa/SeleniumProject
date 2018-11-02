@@ -119,39 +119,9 @@ public class BaseElement {
 
 	}
 
-	/**
-	 * PageElement class constructor
-	 * 
-	 * @param container
-	 *            Selenium WebElement object
-	 */
-	public BaseElement(final WebElement element) {
+	public BaseElement(final By locator, final WebElement element) {
+		this.locator = locator;
 		this.element = element;
-		if (this.element != null) {
-			this.tag = element.getTagName();
-		}
-	}
-
-	public BaseElement(final WebElement element, final By locator) {
-		this.element = element;
-		if (this.element != null) {
-			this.tag = element.getTagName();
-			this.locator = locator;
-		}
-	}
-
-	/**
-	 * PageElement class constructor
-	 * 
-	 * @param container
-	 *            Selenium WebElement
-	 * @param driver
-	 *            Selenium WebDriver container
-	 */
-	public BaseElement(final WebElement element, final WebDriver driver) {
-		this.element = element;
-		BaseElement.driver = driver;
-		BaseElement.wait = new WebDriverWait(BaseElement.driver, 30);
 		if (this.element != null) {
 			this.tag = element.getTagName();
 		}
@@ -161,19 +131,10 @@ public class BaseElement {
 	 * PageElement class constructor
 	 * 
 	 * @param container
-	 *            Selenium WebElement
-	 * @param driver
-	 *            Selenium WebDriver container
-	 * @param wait
-	 *            Selenium WebDriverWait container
+	 *            Selenium WebElement object
 	 */
-	public BaseElement(final WebElement element, final WebDriver driver, final WebDriverWait wait) {
-		this.element = element;
-		BaseElement.driver = driver;
-		BaseElement.wait = wait;
-		if (this.element != null) {
-			this.tag = element.getTagName();
-		}
+	public BaseElement(final WebElement element) {
+		this(null, element);
 	}
 
 	/**
@@ -191,6 +152,17 @@ public class BaseElement {
 	 */
 	public boolean exists() {
 		return element != null;
+	}
+
+	/**
+	 * Finds all page elements by attribute
+	 * 
+	 * @param attributeName
+	 *            Attribute name
+	 * @return List of page elements matched
+	 */
+	public List<BaseElement> findAllByAttribute(final String attributeName) {
+		return findAll(ByLocator.attribute(attributeName));
 	}
 
 	/**
@@ -281,6 +253,41 @@ public class BaseElement {
 	 */
 	public List<BaseElement> findAllByText(final String value) {
 		return findAll(ByLocator.text(value));
+	}
+
+	/**
+	 * Finds all page elements by text value
+	 * 
+	 * @param value
+	 *            Element text value
+	 * @return List of page elements matched
+	 */
+	public List<BaseElement> findAllByXPath(final String value) {
+		return findAll(ByLocator.xpath(value));
+	}
+
+	/**
+	 * Finds first page container by attribute
+	 * 
+	 * @param attributeName
+	 *            Attribute name
+	 * @return First page container matched
+	 */
+	public BaseElement findByAttribute(final String attributeName) {
+		return findByAttribute(attributeName, 1);
+	}
+
+	/**
+	 * Finds a page container by attribute
+	 * 
+	 * @param attributeName
+	 *            Attribute name
+	 * @param num
+	 *            Number in the list of all elements matched
+	 * @return Page container matched
+	 */
+	public BaseElement findByAttribute(final String attributeName, final int num) {
+		return findBy(ByLocator.attribute(attributeName), num);
 	}
 
 	/**
@@ -481,17 +488,39 @@ public class BaseElement {
 	}
 
 	/**
+	 * Finds first page container by XPath
+	 * 
+	 * @param value
+	 *            XPath value
+	 * @return First page container matched
+	 */
+	public BaseElement findByXPath(final String value) {
+		return findByXPath(value, 1);
+	}
+
+	/**
+	 * Finds a page container by XPath
+	 * 
+	 * @param value
+	 *            XPath value
+	 * @param num
+	 *            Number in the list off all elements matched
+	 * @return List of page elements matched
+	 */
+	public BaseElement findByXPath(final String value, final int num) {
+		return findBy(ByLocator.xpath(value), num);
+	}
+
+	/**
 	 * Gets value of specified attribute
 	 * 
 	 * @param name
 	 *            Attribute name
 	 * @return Attribute value on success or empty string on fail
 	 */
-	public String getAttribute(String name) {
-		if (element != null)
-			return element.getAttribute(name);
-		else
-			return StringUtils.EMPTY;
+	public String getAttribute(final String name) {
+		this.element = (this.element == null && this.locator != null) ? findWebElement() : this.element;
+		return element != null ? element.getAttribute(name) : StringUtils.EMPTY;
 	}
 
 	/**
@@ -509,6 +538,7 @@ public class BaseElement {
 	 * @return Element text value if container exists, empty string otherwise
 	 */
 	public String getText() {
+		this.element = (this.element == null && this.locator != null) ? findWebElement() : this.element;
 		return element != null ? element.getText() : StringUtils.EMPTY;
 	}
 
@@ -541,12 +571,8 @@ public class BaseElement {
 
 	public boolean hasUpdated() {
 		try {
-			String html;
-			WebDriverWait wait = new WebDriverWait(driver, 5);
-
-			if (this.element == null && this.locator != null)
-				this.element = findWebElement(this.locator);
-			html = element.getAttribute("innerHTML");
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			String html = element != null ? element.getAttribute("innerHTML") : StringUtils.EMPTY;
 
 			if (this.locator != null) {
 				return wait.until(ExpectedConditions.not(ExpectedConditions.or(
@@ -588,46 +614,6 @@ public class BaseElement {
 			return false;
 		} catch (NullPointerException e) {
 			return false;
-		}
-	}
-
-	/**
-	 * Checks that given page container is present
-	 * 
-	 * @return True if present, false otherwise
-	 */
-	public boolean isPresent() {
-		WebDriverWait wait = new WebDriverWait(driver, 3);
-		try {
-			if (this.element != null) {
-				return wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(element)));
-			} else {
-				return false;
-			}
-		} catch (TimeoutException t) {
-			return false;
-		} catch (NullPointerException e) {
-			return false;
-		}
-	}
-
-	/**
-	 * Checks that given page container is stale
-	 * 
-	 * @return True if stale, false otherwise
-	 */
-	public boolean isStale() {
-		WebDriverWait wait = new WebDriverWait(driver, 3);
-		try {
-			if (this.element != null) {
-				return wait.until(ExpectedConditions.stalenessOf(element));
-			} else {
-				return true;
-			}
-		} catch (TimeoutException t) {
-			return false;
-		} catch (NullPointerException e) {
-			return true;
 		}
 	}
 
@@ -723,6 +709,34 @@ public class BaseElement {
 		}
 	}
 
+	public ButtonElement toButtonElement() {
+		return new ButtonElement(this);
+	}
+
+	public CheckboxElement toCheckboxElement() {
+		return toInputElement().toCheckboxElement();
+	}
+
+	public InputElement toInputElement() {
+		return new InputElement(this);
+	}
+
+	public LabelElement toLabelElement() {
+		return new LabelElement(this);
+	}
+
+	public RadioElement toRadioElement() {
+		return toInputElement().toRadioElement();
+	}
+
+	public SelectElement toSelectElement() {
+		return toInputElement().toSelectElement();
+	}
+
+	public TextInputElement toTextInputElement() {
+		return toInputElement().toTextInputElement();
+	}
+
 	/**
 	 * Gets a WebElement object
 	 * 
@@ -749,7 +763,7 @@ public class BaseElement {
 				List<WebElement> webList = wait.until(ExpectedConditions
 						.refreshed(ExpectedConditions.presenceOfNestedElementsLocatedBy(this.locator, locator)));
 				for (WebElement element : webList) {
-					list.add(new BaseElement(element, new ByChained(this.locator, locator)));
+					list.add(new BaseElement(new ByChained(this.locator, locator), element));
 				}
 				return list;
 			} catch (TimeoutException t) {
@@ -777,46 +791,19 @@ public class BaseElement {
 			BaseElement element = elementList.get(num - 1);
 			return element;
 		} else
-			return new BaseElement(null);
+			return new BaseElement(null, null);
 	}
 
-	private WebElement findWebElement(final By locator) {
-		if (wait != null && locator != null) {
-			return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-		} else {
-			return null;
+	private WebElement findWebElement() {
+		if (wait != null && this.locator != null) {
+			try {
+				return wait.until(ExpectedConditions.presenceOfElementLocated(this.locator));
+			} catch (TimeoutException t) {
+				return null;
+			}
 		}
-	}
 
-	public SelectElement toSelectElement() {
-		return toInputElement().toSelectElement();
-	}
-
-	public TextInputElement toTextInputElement() {
-		return toInputElement().toTextInputElement();
-	}
-
-	public ButtonElement toButtonElement() {
-		return new ButtonElement(this);
-	}
-
-	public RadioElement toRadioElement() {
-		return toInputElement().toRadioElement();
-	}
-	
-	public CheckboxElement toCheckboxElement()
-	{
-		return toInputElement().toCheckboxElement();
-	}
-	
-	public InputElement toInputElement()
-	{
-		return new InputElement(this);
-	}
-	
-	public LabelElement toLabelElement()
-	{
-		return new LabelElement(this);
+		return null;
 	}
 
 }

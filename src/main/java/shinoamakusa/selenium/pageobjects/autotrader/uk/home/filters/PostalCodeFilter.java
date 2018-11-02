@@ -11,7 +11,7 @@ public class PostalCodeFilter extends BaseFilter {
 		this.locator = ByLocator.name("postcode");
 	}
 
-	public void enterValue(String value) {
+	public void enterValue(final String value) {
 		TextInputElement container = driver.findByLocator(this.locator).toTextInputElement();
 		driver.typeInto(container, value);
 	}

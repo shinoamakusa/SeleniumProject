@@ -14,26 +14,31 @@ public class BaseFilter {
 
 	}
 
-	public BaseFilter(BrowserDriver driver) {
+	public BaseFilter(final BrowserDriver driver) {
 		this.driver = driver;
 	}
 
-	public BaseFilter(BrowserDriver driver, By locator) {
+	public BaseFilter(final BrowserDriver driver, final By locator) {
 		this(locator, driver);
 	}
 
-	public BaseFilter(By locator) {
+	public BaseFilter(final By locator) {
 		this.locator = locator;
 	}
 
-	public BaseFilter(By locator, BrowserDriver driver) {
+	public BaseFilter(final By locator, final BrowserDriver driver) {
 		this.driver = driver;
 		this.locator = locator;
 	}
-	
+
 	public String getText() {
 		BaseElement container = driver.findByLocator(this.locator);
 		return container.getText();
+	}
+
+	public String value() {
+		BaseElement container = driver.findByLocator(this.locator);
+		return container.getAttribute("value");
 	}
 
 }

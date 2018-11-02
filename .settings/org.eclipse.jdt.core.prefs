@@ -6,4 +6,8 @@ org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
 org.eclipse.jdt.core.compiler.problem.enumIdentifier=error
 org.eclipse.jdt.core.compiler.problem.forbiddenReference=warning
 org.eclipse.jdt.core.compiler.release=enabled
+<<<<<<< HEAD
 org.eclipse.jdt.core.compiler.source=11
+=======
+org.eclipse.jdt.core.compiler.source=10
+>>>>>>> branch 'master' of https://github.com/shinoamakusa/SeleniumProject.git

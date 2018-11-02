@@ -2,9 +2,6 @@ package shinoamakusa.selenium.autotrader.ca;
 
 import static org.testng.Assert.assertTrue;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-
 import shinoamakusa.selenium.pageobjects.autotrader.ca.home.HomePage;
 import shinoamakusa.selenium.pageobjects.autotrader.ca.results.ResultsPage;
 
@@ -12,16 +9,14 @@ public class BaseTest {
 	protected HomePage homepage;
 	protected ResultsPage resultsPage;
 	
-	@AfterMethod
-	public void after() {
+	public void closeBrowser() {
 		resultsPage.close();
 	}
 
-	@BeforeMethod
-	public void before() {
+	public void openHomepage() {
 		homepage = new HomePage();
 		homepage.open();
-		assertTrue(homepage.isValidPage());
+		assertTrue(homepage.isLoaded());
 	}
 
 }

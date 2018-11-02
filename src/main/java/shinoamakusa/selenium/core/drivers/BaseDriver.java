@@ -41,6 +41,17 @@ public class BaseDriver {
 	}
 
 	/**
+	 * Finds all page elements by attribute
+	 * 
+	 * @param attributeName
+	 *            Attribute name
+	 * @return List of page elements matched
+	 */
+	public List<BaseElement> findAllByAttribute(final String attributeName) {
+		return findAll(ByLocator.attribute(attributeName));
+	}
+
+	/**
 	 * Finds all page elements by attribute value
 	 * 
 	 * @param attributeName
@@ -128,6 +139,41 @@ public class BaseDriver {
 	 */
 	public List<BaseElement> findAllByText(final String value) {
 		return findAll(ByLocator.text(value));
+	}
+
+	/**
+	 * Finds all page elements by text value
+	 * 
+	 * @param value
+	 *            Element text value
+	 * @return List of page elements matched
+	 */
+	public List<BaseElement> findAllByXPath(final String value) {
+		return findAll(ByLocator.xpath(value));
+	}
+
+	/**
+	 * Finds first page container by attribute
+	 * 
+	 * @param attributeName
+	 *            Attribute name
+	 * @return First page container matched
+	 */
+	public BaseElement findByAttribute(final String attributeName) {
+		return findByAttribute(attributeName, 1);
+	}
+
+	/**
+	 * Finds a page container by attribute
+	 * 
+	 * @param attributeName
+	 *            Attribute name
+	 * @param num
+	 *            Number in the list of all elements matched
+	 * @return Page container matched
+	 */
+	public BaseElement findByAttribute(final String attributeName, final int num) {
+		return findBy(ByLocator.attribute(attributeName), num);
 	}
 
 	/**
@@ -328,6 +374,30 @@ public class BaseDriver {
 	}
 
 	/**
+	 * Finds first page container by XPath
+	 * 
+	 * @param value
+	 *            XPath value
+	 * @return First page container matched
+	 */
+	public BaseElement findByXPath(final String value) {
+		return findByXPath(value, 1);
+	}
+
+	/**
+	 * Finds a page container by XPath
+	 * 
+	 * @param value
+	 *            XPath value
+	 * @param num
+	 *            Number in the list off all elements matched
+	 * @return List of page elements matched
+	 */
+	public BaseElement findByXPath(final String value, final int num) {
+		return findBy(ByLocator.xpath(value), num);
+	}
+
+	/**
 	 * Gets page title
 	 * 
 	 * @return Page title
@@ -352,15 +422,57 @@ public class BaseDriver {
 	}
 
 	/**
+	 * Determines if correct page has been loaded based on partial Title
+	 * 
+	 * @param partialTitle
+	 *            Part of title that must exist in full page title
+	 * @return true if correct page is loaded, false otherwise
+	 */
+	public boolean titleContains(final String partialTitle) {
+		if (wait != null && !StringUtils.isBlank(partialTitle)) {
+			try {
+				return wait.until(ExpectedConditions.titleContains(partialTitle));
+			} catch (TimeoutException t) {
+				return false;
+			}
+
+		}
+		return false;
+	}
+
+	/**
+	 * Determines if current page Title is equal to expected one
+	 * 
+	 * @param title
+	 *            Full expected page title
+	 * @return true if correct page is loaded, false otherwise
+	 */
+	public boolean titleIs(final String title) {
+		if (wait != null && !StringUtils.isBlank(title)) {
+			try {
+				return wait.until(ExpectedConditions.titleIs(title));
+			} catch (TimeoutException t) {
+				return false;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * Determines if correct page has been loaded based on Url part
 	 * 
-	 * @param urlPart
+	 * @param partialURL
 	 *            Part of Url that must exist in full Url
 	 * @return true if correct page is loaded, false otherwise
 	 */
-	public boolean urlContains(final String urlPart) {
-		if (wait != null && !StringUtils.isBlank(urlPart)) {
-			return wait.until(ExpectedConditions.urlContains(urlPart));
+	public boolean urlContains(final String partialURL) {
+		if (wait != null && !StringUtils.isBlank(partialURL)) {
+			try {
+				return wait.until(ExpectedConditions.urlContains(partialURL));
+			} catch (TimeoutException t) {
+				return false;
+			}
+
 		}
 		return false;
 	}
@@ -374,7 +486,11 @@ public class BaseDriver {
 	 */
 	public boolean urlIs(final String url) {
 		if (wait != null && !StringUtils.isBlank(url)) {
-			return wait.until(ExpectedConditions.urlToBe(url));
+			try {
+				return wait.until(ExpectedConditions.urlToBe(url));
+			} catch (TimeoutException t) {
+				return false;
+			}
 		}
 		return false;
 	}
@@ -406,7 +522,7 @@ public class BaseDriver {
 				List<BaseElement> list = new ArrayList<BaseElement>();
 				List<WebElement> webList = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
 				for (WebElement element : webList) {
-					list.add(new BaseElement(element, locator));
+					list.add(new BaseElement(locator, element));
 				}
 
 				return list;

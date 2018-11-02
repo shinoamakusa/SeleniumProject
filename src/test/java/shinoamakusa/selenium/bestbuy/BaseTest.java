@@ -24,9 +24,9 @@ public class BaseTest {
 	public void before() {
 		homepage = new HomePage();
 		homepage.open();
-		assertTrue(homepage.isValidPage());
+		assertTrue(homepage.isLoaded());
 		resultsPage = homepage.searchFor(query);
-		assertTrue(resultsPage.isValidPage());
+		assertTrue(resultsPage.isLoaded());
 	}
 
 }

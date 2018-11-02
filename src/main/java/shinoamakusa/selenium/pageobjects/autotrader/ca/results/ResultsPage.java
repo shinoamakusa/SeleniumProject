@@ -10,16 +10,24 @@ public class ResultsPage extends BasePage {
 	private int lastTotalResults;
 
 	public ResultsPage(final BrowserDriver driver) {
-		this.urlPart = "autotrader.ca/cars";
+		this.partialURL = "autotrader.ca/cars";
 		this.driver = driver;
 		this.title = this.driver.getTitle();
 		filters = new ResultsFilters(driver);
 	}
 
-	public ResultsFilters filters() {
-		return this.filters;
+	public void changeMakeTo(String make) {
+		filters.make().changeTo(make);
 	}
-	
+
+	public void changeMaxYearTo(String year) {
+		filters.year().changeMaxTo(year);
+	}
+
+	public void changeModelTo(String model) {
+		filters.model().changeTo(model);
+	}
+
 	public boolean hasResults() {
 		lastTotalResults = filters.totalCount().getValue();
 		return lastTotalResults > 0;
@@ -30,6 +38,10 @@ public class ResultsPage extends BasePage {
 		return filters.totalCount().changedFrom(String.format("%,d", lastTotalResults))
 				&& filters.totalCount().getValue() < lastTotalResults;
 
+	}
+
+	public String make() {
+		return filters.make().value();
 	}
 
 	public boolean makeCountsEqual() {
@@ -43,6 +55,14 @@ public class ResultsPage extends BasePage {
 		return countsEqual;
 	}
 
+	public String maxYear() {
+		return filters.year().maxYearValue().trim().substring(2);
+	}
+
+	public String model() {
+		return filters.model().value();
+	}
+
 	public boolean modelCountsEqual() {
 
 		boolean countsEqual = filters.totalCount()
@@ -52,6 +72,10 @@ public class ResultsPage extends BasePage {
 			lastTotalResults = filters.model().getMenuOptionResultsCount();
 		}
 		return countsEqual;
+	}
+
+	public String postalCode() {
+		return filters.postalCode().value();
 	}
 
 }

@@ -25,7 +25,7 @@ public class ResultsPage extends BasePage {
 
 	public ResultsPage(BrowserDriver driver) {
 		this.driver = driver;
-		this.urlPart = "vpl.bibliocommons.com";
+		this.partialURL = "vpl.bibliocommons.com";
 		this.title = this.driver.getTitle();
 	}
 
