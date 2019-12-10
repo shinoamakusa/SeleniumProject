@@ -87,6 +87,9 @@ public class ResultsPage extends BasePage {
 		case 2:
 			element = element.findByLocator(BESTBUY_ONLY_TAB_LOCATOR);
 			break;
+				
+		default:
+			break;
 		}
 		return element.hasAttribute("class", "active");
 	}
